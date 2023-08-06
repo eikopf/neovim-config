@@ -14,6 +14,7 @@ require("transparent").setup({
 
 -- configure treesitter
 -- see `:help nvim-treesitter`
+-- large parts of this config are from tj devries' kickstart.nvim
 require('nvim-treesitter.configs').setup {
   ensure_installed = { 'c', 'lua', 'python', 'rust', 'julia', 'java', 'zig', 'odin' },
   auto_install = false,

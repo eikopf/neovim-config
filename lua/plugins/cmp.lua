@@ -10,5 +10,17 @@ return {
 
     -- Adds a number of user-friendly snippets
     'rafamadriz/friendly-snippets',
+
+    -- julia config
+    "kdheepak/cmp-latex-symbols",
+  },
+
+  sources = {
+    {
+      name = "latex_symbols",
+      option = {
+        strategy = 0,
+      },
+    },
   },
 }
