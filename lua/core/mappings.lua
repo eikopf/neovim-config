@@ -29,22 +29,10 @@ require("which-key").register({
         P = { "<cmd>Gitsigns preview_hunk<cr>", "Preview" },
       },
       l = { "<cmd>Git log<cr>", "Log" },
+      o = { "<cmd>GBrowse<cr>", "Jump to Github" },
       p = { "<cmd>Git push<cr>", "Push" },
       r = { "<cmd>Git reset<cr>", "Reset" },
       t = { "<cmd>Flog<cr>", "Show Tree" },
-    },
-
-    l = { 
-      name = "+lsp",
-      a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-      d = { "<cmd>Telescope diagnostics bufnr=0<cr>", "Diagnostics" },
-      f = { "<cmd>lua vim.lsp.buf.format{async=true}<cr>", "Format Buffer" },
-      i = { "<cmd>LspInfo<cr>", "Info" },
-      q = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
-      r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename"},
-      R = { "<cmd>LspRestart<cr>", "Restart Server" },
-      s = { "<cmd>Telescope lsp_document_symbols<cr>", "Local Symbols" },
-      S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
     },
 
     m = {

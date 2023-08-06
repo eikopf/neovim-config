@@ -4,4 +4,5 @@
 return {
   "folke/neodev.nvim",
   'xiyaowong/transparent.nvim',
+  'tpope/vim-rhubarb',
 }
