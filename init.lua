@@ -78,35 +78,7 @@ require('nvim-treesitter.configs').setup {
 
 -- configure LSP
 -- this function runs when an LSP attaches to a buffer
-local on_attach = function(_, bufnr)
-  require("which-key").register {
-    ["<leader>"] = {
-      l = {
-        name = "+lsp",
-        a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-        d = { "<cmd>Telescope diagnostics bufnr=0<cr>", "Diagnostics" },
-        f = { "<cmd>lua vim.lsp.buf.format{async=true}<cr>", "Format Buffer" },
-        i = { "<cmd>LspInfo<cr>", "Info" },
-        q = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
-        r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename"},
-        R = { "<cmd>LspRestart<cr>", "Restart Server" },
-        s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
-        S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
-      },
-
-    g = {
-      name = "+goto",
-      d = {"<cmd>lua vim.lsp.buf.definition<cr>", "Goto Definition"},
-      D = {"<cmd>lua vim.lsp.buf.declaration<cr>", "Goto Declaration"},
-      I = {"<cmd>lua vim.lsp.buf.implementation<cr>", "Goto Implementation"},
-      r = {"<cmd>lua require('telescope.builtin').lsp_references<cr>", "Goto References"},
-    },
-
-    K = {"<cmd>lua vim.lsp.buf.hover<cr>", "Hover Documentation"},
-    }
-  }
-
-end
+local on_attach = function(_, bufnr) end
 
 -- define enabled language servers
 local servers = {
