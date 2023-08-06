@@ -6,7 +6,7 @@ require("core.options")
 -- https://github.com/xiyaowong/transparent.nvim
 require("transparent").setup({
 	groups = {
-		'Normal', 
+		'Normal',
 		'EndOfBuffer',
 		'NormalNC',
 	},
@@ -79,10 +79,9 @@ require('nvim-treesitter.configs').setup {
 -- configure LSP
 -- this function runs when an LSP attaches to a buffer
 local on_attach = function(_, bufnr)
-  
   require("which-key").register {
     ["<leader>"] = {
-      l = { 
+      l = {
         name = "+lsp",
         a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
         d = { "<cmd>Telescope diagnostics bufnr=0<cr>", "Diagnostics" },
@@ -128,6 +127,9 @@ local servers = {
 
 -- setup neovim-specific lua config
 require('neodev').setup()
+
+-- setup neoconf (MUST BE PRIOR TO LSP ACTIVATION)
+require("neoconf").setup()
 
 -- broadcast nvim-cmp's additional capabilities to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()

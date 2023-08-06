@@ -15,7 +15,7 @@ require("which-key").register({
 
     f = { name = "+file", },
 
-    g = { 
+    g = {
       name = "+git",
       A = { "<cmd>Git add -A<cr>", "Stage All" },
       c = { "<cmd>Telescope git_branches<cr>", "Checkout" },
@@ -41,7 +41,7 @@ require("which-key").register({
       u = { "<cmd>MasonUpdate<cr>", "Update" },
     },
 
-    o = { 
+    o = {
       name = "+open",
       f = { "<cmd>Flog<cr>", "Flog" },
       g = { "<cmd>Git<cr>", "Fugitive" },
@@ -51,7 +51,7 @@ require("which-key").register({
       t = { "<cmd>terminal<cr>", "Terminal" },
     },
 
-    s = { 
+    s = {
       name = "+search",
       b = { "<cmd>Telescope buffers<cr>", "Buffers" },
       c = { "<cmd>Telescope commands<cr>", "Commands" },
