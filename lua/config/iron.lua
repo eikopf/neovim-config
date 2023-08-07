@@ -20,6 +20,10 @@ iron.setup {
       julia = {
         command = {"julia"}
       },
+
+      r = {
+        command = {"R", "--quiet" }
+      },
     },
 
     repl_open_cmd = require('iron.view').split.vertical.botright(0.5),

@@ -114,6 +114,14 @@ require("which-key").register({
       },
     },
 
+    r = {
+      name = "+repl",
+      j = { "<cmd>IronFocus julia<cr>", "Julia" },
+      l = { "<cmd>IronFocus lua<cr>", "Lua" },
+      p = { "<cmd>IronFocus python<cr>", "Python" },
+      r = { "<cmd>IronFocus r<cr>", "R" },
+    },
+
     s = {
       name = "+search",
       b = { "<cmd>Telescope buffers<cr>", "Buffers" },
