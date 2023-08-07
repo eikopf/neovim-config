@@ -26,6 +26,15 @@ require("which-key").register({
       s = {"<cmd>Telescope current_buffer_fuzzy_find<cr>", "Search in Buffer"},
     },
 
+    d = {
+      name = "+debug",
+      i = { "<cmd>DapStepInto<cr>", "Step Into" },
+      k = { "<cmd>DapTerminate<cr>", "Kill Debugger" },
+      o = { "<cmd>DapStepOver<cr>", "Step Over" },
+      p = { "<cmd>DapStepOut<cr>", "Step Out" }, -- chosen because iop is continuous in QWERTY
+      t = { "<cmd>DapToggleBreakpoint<cr>", "Toggle Breakpoint" },
+    },
+
     f = { name = "+file", },
 
     g = {

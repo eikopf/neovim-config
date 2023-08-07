@@ -30,6 +30,23 @@ mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers)
 }
 
+local rust_tools_config = {
+  dap = function ()
+    local install_root_dir = vim.fn.stdpath "data" .. "/mason"
+	local extension_path = install_root_dir .. "/packages/codelldb/extension/"
+	local codelldb_path = extension_path .. "adapter/codelldb"
+	local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+
+	return {
+	  adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
+	}
+  end,
+
+  hover_actions = {
+    auto_focus = true,
+  },
+}
+
 mason_lspconfig.setup_handlers {
   function(server_name)
     require('lspconfig')[server_name].setup {
@@ -42,6 +59,14 @@ mason_lspconfig.setup_handlers {
 
   -- default handlers
   ["rust_analyzer"] = function()
-    require("rust-tools").setup {}
+    local rt = require("rust-tools")
+    rt.setup {
+      tools = rust_tools_config,
+      server = {
+        on_attach = function (_, bufnr)
+          vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
+        end
+      }
+    }
   end,
 }
