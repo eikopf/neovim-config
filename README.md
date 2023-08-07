@@ -15,3 +15,9 @@ This repository is for my own personal Neovim configuration: *use it at your per
 - `lazy.nvim`: at least it isn't Packer.
 - `mason.nvim`: basically essential for LSP integration.
 - `cmp-latex-symbols`: Julia-style latex-unicode substitutions.
+
+## TODOs
+- Configure Typst support
+- Set Julia to use a precompiled LanguageServer.jl binary
+- Make more keybindings
+- Add specific run commands for different languages
