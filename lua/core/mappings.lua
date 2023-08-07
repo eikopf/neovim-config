@@ -5,7 +5,7 @@ vim.g.mapleader = " " -- map <leader> to spacebar
 -- which-key is the primary interface for mapping in this config
 -- refer to the docs with <leader>sh
 require("which-key").register({
-  ["-"] = { "<cmd>Ex<cr>", "Open NetRW" },
+  ["-"] = { "<cmd>lua require('oil').open()<cr>", "Oil" },
 
   g = {
       name = "+goto",
@@ -16,11 +16,14 @@ require("which-key").register({
   },
 
   K = {"<cmd>lua vim.lsp.buf.hover()<cr>", "Hover Documentation"},
+
   ["<leader>"] = {
     ["."] = { "<cmd>Telescope find_files<cr>", "Search Files" },
     [","] = { "<cmd>Telescope buffers<cr>", "Search Buffers" },
+
     b = {
       name = "+buffer",
+      s = {"<cmd>Telescope current_buffer_fuzzy_find<cr>", "Search in Buffer"},
     },
 
     f = { name = "+file", },
@@ -38,11 +41,10 @@ require("which-key").register({
         p = { "<cmd>Gitsigns prev_hunk<cr>", "Previous" },
         P = { "<cmd>Gitsigns preview_hunk<cr>", "Preview" },
       },
-      l = { "<cmd>Git log<cr>", "Log" },
-      o = { "<cmd>GBrowse<cr>", "Jump to Github" },
+      H = { "<cmd>GBrowse<cr>", "Jump to Github" },
+      l = { "<cmd>Flog<cr>", "Log" },
       p = { "<cmd>Git push<cr>", "Push" },
       r = { "<cmd>Git reset<cr>", "Reset" },
-      t = { "<cmd>Flog<cr>", "Show Tree" },
     },
 
     l = {
@@ -70,8 +72,17 @@ require("which-key").register({
       g = { "<cmd>Git<cr>", "Fugitive" },
       l = { "<cmd>Lazy<cr>", "Lazy" },
       m = { "<cmd>Mason<cr>", "Mason" },
+      O = { "<cmd>ObsidianOpen<cr>", "Obsidian" },
       p = { "<cmd>Telescope projects<cr>", "Projects" },
       t = { "<cmd>terminal<cr>", "Terminal" },
+    },
+
+    p = {
+      name = "+preview",
+      m = {
+        name = "+markdown",
+        g = {"<cmd>Glow<cr>", "Glow"},
+      },
     },
 
     s = {
@@ -83,6 +94,7 @@ require("which-key").register({
       g = { "<cmd>Telescope live_grep<cr>", "Grep in CWD" },
       h = { "<cmd>Telescope help_tags<cr>", "Help" },
       k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+      o = { "<cmd>ObsidianSearch<cr>", "Obsidian" },
       p = { "<cmd>Telescope projects<cr>", "Projects" },
     },
 

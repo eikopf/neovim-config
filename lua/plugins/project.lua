@@ -11,7 +11,7 @@ return {
         "build.zig"
       },
 
-      silent_chdir = false,
+      silent_chdir = true, -- false makes this useful but annoying
     }
     require('telescope').load_extension('projects')
   end,
