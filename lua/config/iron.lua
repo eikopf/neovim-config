@@ -24,6 +24,10 @@ iron.setup {
       r = {
         command = {"radian"} -- still don't know how to suppress warnings
       },
+
+      lua = {
+        command = {"croissant"} -- weird luarocks behaviour on macOS
+      },
     },
 
     repl_open_cmd = require('iron.view').split.vertical.botright(0.5),
