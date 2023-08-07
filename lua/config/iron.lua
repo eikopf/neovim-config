@@ -22,7 +22,7 @@ iron.setup {
       },
 
       r = {
-        command = {"R", "--quiet" }
+        command = {"radian"} -- still don't know how to suppress warnings
       },
     },
 
