@@ -75,6 +75,26 @@ require("which-key").register({
       u = { "<cmd>MasonUpdate<cr>", "Update" },
     },
 
+    n = {
+      name = "+neorg",
+
+      w = {
+        name = "+workspaces",
+        j = { "<cmd>Neorg workspace journal<cr>", "Goto ~/notes/journal" },
+        n = { "<cmd>Neorg workspace notes<cr>", "Goto ~/notes" },
+        p = { "<cmd>Neorg workspace projects<cr>", "Goto ~/notes/projects" },
+      },
+
+      j = {
+        name = "+journal",
+        o = { "<cmd>Neorg journal toc open", "Open Table of Contents" },
+        t = { "<cmd>Neorg journal today<cr>", "Create/Open Today" },
+        T = { "<cmd>Neorg journal tomorrow<cr>", "Create/Open Tomorrow" },
+        u = { "<cmd>Neorg journal toc update", "Update Table of Contents" },
+        y = { "<cmd>Neorg jounal yesterday<cr>", "Create/Open Yesterday" },
+      },
+    },
+
     o = {
       name = "+open",
       f = { "<cmd>Flog<cr>", "Flog" },
