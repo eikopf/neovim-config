@@ -4,17 +4,12 @@
 return {
   "m4xshen/smartcolumn.nvim",
   opts = {
-    colorcolumn = "80",
+    colorcolumn = "1000", -- fuck off
 
     disabled_filetypes = {
       "help",
       "text",
       "markdown",
-    },
-
-    custom_colorcolumn = {
-      java = "180",
-      rust = "120",
     },
 
     scope = "file",

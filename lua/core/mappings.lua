@@ -116,6 +116,7 @@ require("which-key").register({
 
     r = {
       name = "+repl",
+      f = { "<cmd>IronFocus fish<cr>", "Fish" },
       j = { "<cmd>IronFocus julia<cr>", "Julia" },
       l = { "<cmd>IronFocus lua<cr>", "Lua" },
       p = { "<cmd>IronFocus python<cr>", "Python" },
@@ -136,9 +137,9 @@ require("which-key").register({
     },
 
     t = {
-      name = "+terminal",
-      f = { "<cmd>IronRepl fish<cr>", "Fish Split" },
-      s = { "<cmd>IronRepl sh<cr>", "Sh Split" },
+      name = "+toggle",
+      m = { "<cmd>MinimapToggle<cr>", "Minimap" },
+      t = { "<cmd>TransparentToggle<cr>", "Transparency" },
     },
 
     w = {
