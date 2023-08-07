@@ -140,6 +140,7 @@ require("which-key").register({
       j = { "<cmd>wincmd j<cr>", "Go Down" },
       k = { "<cmd>wincmd k<cr>", "Go Up" },
       l = { "<cmd>wincmd l<cr>", "Go Right" },
+      q = { "<cmd>q<cr>", "Quit" },
       s = { "<cmd>split<cr>", "Horizontal Split" },
       v = { "<cmd>vsplit<cr>", "Vertical Split" },
     },

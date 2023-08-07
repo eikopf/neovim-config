@@ -15,6 +15,7 @@ require("config.mason")
 require("config.cmp")
 require("config.dap")
 require("config.iron")
+require("config.headlines")
 
 -- fix terminal mode by making <Esc> work again
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
