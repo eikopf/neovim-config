@@ -110,5 +110,15 @@ require("which-key").register({
     t = {
       name = "+terminal",
     },
+
+    w = {
+      name = "+window",
+      h = { "<cmd>wincmd h<cr>", "Go Left" },
+      j = { "<cmd>wincmd j<cr>", "Go Down" },
+      k = { "<cmd>wincmd k<cr>", "Go Up" },
+      l = { "<cmd>wincmd l<cr>", "Go Right" },
+      s = { "<cmd>split<cr>", "Horizontal Split" },
+      v = { "<cmd>vsplit<cr>", "Vertical Split" },
+    },
   }
 })

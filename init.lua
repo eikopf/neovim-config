@@ -14,6 +14,10 @@ require("config.treesitter")
 require("config.mason")
 require("config.cmp")
 require("config.dap")
+require("config.iron")
+
+-- fix terminal mode
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
 
 -- modeline
 -- vim: ts=2 sts=2 sw=2 et
