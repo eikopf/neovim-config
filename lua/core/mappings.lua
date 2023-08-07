@@ -109,10 +109,13 @@ require("which-key").register({
 
     t = {
       name = "+terminal",
+      f = { "<cmd>IronRepl fish<cr>", "Fish Split" },
+      s = { "<cmd>IronRepl sh<cr>", "Sh Split" },
     },
 
     w = {
       name = "+window",
+      f = { "<cmd>only<cr>", "Close Other Windows" },
       h = { "<cmd>wincmd h<cr>", "Go Left" },
       j = { "<cmd>wincmd j<cr>", "Go Down" },
       k = { "<cmd>wincmd k<cr>", "Go Up" },

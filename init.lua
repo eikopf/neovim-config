@@ -16,8 +16,11 @@ require("config.cmp")
 require("config.dap")
 require("config.iron")
 
--- fix terminal mode
+-- fix terminal mode by making <Esc> work again
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
+
+-- choose colorscheme at startup
+vim.cmd("colorscheme doom-one")
 
 -- modeline
 -- vim: ts=2 sts=2 sw=2 et
