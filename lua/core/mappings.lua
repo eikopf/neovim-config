@@ -105,17 +105,18 @@ require("which-key").register({
       l = { "<cmd>Lazy<cr>", "Lazy" },
       m = { "<cmd>Mason<cr>", "Mason" },
       O = { "<cmd>ObsidianOpen<cr>", "Obsidian" },
-      p = { "<cmd>Telescope projects<cr>", "Projects" },
+      p = {
+        name = "+preview",
+        g = { "<cmd>Glow<cr>", "Glow" },
+      },
       t = { "<cmd>:split | terminal<cr>", "Terminal Split" },
       T = { "<cmd>terminal<cr>", "Terminal" },
     },
 
     p = {
-      name = "+preview",
-      m = {
-        name = "+markdown",
-        g = {"<cmd>Glow<cr>", "Glow"},
-      },
+      name = "+projects",
+      n = { "<cmd>NewProjectPrompt<cr>", "New" },
+      s = { "<cmd>Telescope projects<cr>", "Search" },
     },
 
     r = {
