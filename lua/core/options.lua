@@ -28,10 +28,6 @@ vim.opt.scrolloff = 8
 vim.opt.number = true
 -- vim.opt.numberwidth = 3
 vim.opt.relativenumber = false
--- vim.opt.signcolumn = 'yes:2'
-vim.opt.signcolumn = 'yes'
-vim.opt.cursorline = false
-vim.opt.colorcolumn = '80,120'
 
 -- Makes neovim and host OS clipboard play nicely with each other
 vim.opt.clipboard = 'unnamedplus'
@@ -52,4 +48,8 @@ vim.opt.undodir = vim.fn.stdpath('data') .. 'undo'
 
 -- Remember 1000 items in commandline history
 vim.opt.history = 1000
+
+-- window options
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 

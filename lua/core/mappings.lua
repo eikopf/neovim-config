@@ -93,6 +93,9 @@ require("which-key").register({
         u = { "<cmd>Neorg journal toc update", "Update Table of Contents" },
         y = { "<cmd>Neorg jounal yesterday<cr>", "Create/Open Yesterday" },
       },
+
+      g = { "<cmd>lua require('telescope.builtin').live_grep({ search_dirs = { '~/notes' })<cr>", "Grep" },
+      s = { "<cmd>lua require('telescope.builtin').find_files({ search_dirs = { '~/notes' } })<cr>", "Search" },
     },
 
     o = {
@@ -103,7 +106,8 @@ require("which-key").register({
       m = { "<cmd>Mason<cr>", "Mason" },
       O = { "<cmd>ObsidianOpen<cr>", "Obsidian" },
       p = { "<cmd>Telescope projects<cr>", "Projects" },
-      t = { "<cmd>terminal<cr>", "Terminal" },
+      t = { "<cmd>:split | terminal<cr>", "Terminal Split" },
+      T = { "<cmd>terminal<cr>", "Terminal" },
     },
 
     p = {
@@ -132,13 +136,16 @@ require("which-key").register({
       g = { "<cmd>Telescope live_grep<cr>", "Grep in CWD" },
       h = { "<cmd>Telescope help_tags<cr>", "Help" },
       k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+      n = { "<cmd>lua require('telescope.builtin').find_files({ search_dirs = { '~/notes' } })<cr>", "Neorg" },
       o = { "<cmd>ObsidianSearch<cr>", "Obsidian" },
       p = { "<cmd>Telescope projects<cr>", "Projects" },
     },
 
     t = {
       name = "+toggle",
+      l = { "<cmd>set number!<cr>", "Line Numbers" },
       m = { "<cmd>MinimapToggle<cr>", "Minimap" },
+      n = { "<cmd>set relativenumber!<cr>", "Relative Line Numbers" },
       t = { "<cmd>TransparentToggle<cr>", "Transparency" },
     },
 
