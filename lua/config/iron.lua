@@ -14,7 +14,7 @@ iron.setup {
       },
 
       python = {
-        command = {"bpython"}
+        command = {"python", "-m", "bpython"}
       },
 
       julia = {
