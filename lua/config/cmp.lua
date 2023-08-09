@@ -46,5 +46,6 @@ cmp.setup {
     { name = 'crates' },
     { name = 'obsidian' },
     { name = 'latex_symbols' },
+    { name = 'otter' },
   }),
 }

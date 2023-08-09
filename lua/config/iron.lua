@@ -6,27 +6,27 @@ iron.setup {
 
     repl_definition = {
       sh = {
-        command = {"zsh"}
+        command = {"sh", "-c", "zsh || sh"}
       },
 
       fish = {
-        command = {"fish"}
+        command = {"sh", "-c", "fish || echo 'fish not installed'"}
       },
 
       python = {
-        command = {"python", "-m", "bpython"}
+        command = {"sh", "-c", "python -m bpython || ipython || python"}
       },
 
       julia = {
-        command = {"julia"}
+        command = {"sh", "-c", "julia || echo 'julia not installed'"}
       },
 
       r = {
-        command = {"radian"} -- still don't know how to suppress warnings
+        command = {"sh", "-c", "python -m radian || r"}
       },
 
       lua = {
-        command = {"croissant"} -- weird luarocks behaviour on macOS
+        command = {"sh", "-c", "croissant || lua"} -- weird luarocks behaviour on macOS
       },
     },
 

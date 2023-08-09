@@ -6,7 +6,7 @@ return {
     vim.g.doom_one_italic_comments = false
     vim.g.doom_one_enable_treesitter = true
     vim.g.doom_one_diagnostics_text_color = false
-    vim.g.doom_one_transparent_background = false
+    vim.g.doom_one_transparent_background = vim.g.transparent_enabled
     vim.g.doom_one_pumblend_enable = false
     vim.g.doom_one_pumblend_transparency = 20
 

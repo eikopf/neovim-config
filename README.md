@@ -17,7 +17,12 @@ This repository is for my own personal Neovim configuration: *use it at your per
 - `cmp-latex-symbols`: Julia-style latex-unicode substitutions.
 
 ## TODOs
-- Configure Typst support
 - Set Julia to use a precompiled LanguageServer.jl binary
 - Make more keybindings
+    - Set `<leader>q*` bindings to quit operations
+    - Set `<leader>
 - Add specific run commands for different languages
+
+## Notes
+- I want to add Typst support, but typst.nvim seems to be dead :(
+- The devil is real, and his name is vimscript.

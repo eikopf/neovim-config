@@ -1,10 +1,13 @@
 require('core.lazy') -- init plugins so we can create mappings
 
 vim.g.mapleader = " " -- map <leader> to spacebar
+local wk = require('which-key')
 
 -- which-key is the primary interface for mapping in this config
 -- refer to the docs with <leader>sh
-require("which-key").register({
+--
+-- normal mode mappings
+wk.register({
   ["-"] = { "<cmd>lua require('oil').open()<cr>", "Oil" },
 
   g = {
@@ -108,9 +111,10 @@ require("which-key").register({
       p = {
         name = "+preview",
         g = { "<cmd>Glow<cr>", "Glow" },
+        q = { "<cmd>QuartoPreview<cr>", "Quarto" },
       },
-      t = { "<cmd>:split | terminal<cr>", "Terminal Split" },
-      T = { "<cmd>terminal<cr>", "Terminal" },
+      t = { "<cmd>:split | terminal<cr>i", "Terminal Split" },
+      T = { "<cmd>terminal<cr>i", "Terminal" },
     },
 
     p = {
@@ -119,13 +123,28 @@ require("which-key").register({
       s = { "<cmd>Telescope projects<cr>", "Search" },
     },
 
+    q = {
+      name = "+quarto",
+      a = { "<cmd>QuartoActivate<cr>", "Activate" },
+      e = { "<cmd><cmd>lua require('otter').export()<cr>", "Export" },
+      E = { "<cmd>lua require('otter').export(true)<cr>", "Export & Overwrite" },
+      p = { "<cmd>QuartoPreview<cr>", "Preview" },
+      q = { "<cmd>lua require('quarto').quartoClosePreview()<cr>", "Close" },
+      r = {
+        name = "+run",
+        a = { "<cmd>QuartoSendAll<cr>", "Run All" },
+        r = { "<cmd>QuartoSendAbove<cr>", "Run to Cursor" }
+      },
+      s = { "<cmd>SlimeSend<cr>", "Send Code Chunk" },
+    },
+
     r = {
       name = "+repl",
-      f = { "<cmd>IronFocus fish<cr>", "Fish" },
-      j = { "<cmd>IronFocus julia<cr>", "Julia" },
-      l = { "<cmd>IronFocus lua<cr>", "Lua" },
-      p = { "<cmd>IronFocus python<cr>", "Python" },
-      r = { "<cmd>IronFocus r<cr>", "R" },
+      f = { "<cmd>IronFocus fish<cr>i", "Fish" },
+      j = { "<cmd>IronFocus julia<cr>i", "Julia" },
+      l = { "<cmd>IronFocus lua<cr>i", "Lua" },
+      p = { "<cmd>IronFocus python<cr>i", "Python" },
+      r = { "<cmd>IronFocus r<cr>i", "R" },
     },
 
     s = {
@@ -163,3 +182,17 @@ require("which-key").register({
     },
   }
 })
+
+-- visual mode mappings
+wk.register({
+  ["<leader>"] = {
+    q = {
+      name = "+quarto",
+      s = { "<cmd>SlimeRegionSend<cr>", "Send Code Region" },
+    },
+  },
+}, { mode = "v" })
+
+-- insert mode mappings
+wk.register({
+}, { mode = "i" })

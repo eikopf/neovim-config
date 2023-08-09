@@ -13,6 +13,9 @@ return {
 
     -- julia config
     "kdheepak/cmp-latex-symbols",
+
+    -- quarto config
+    "jmbuhr/otter.nvim",
   },
 
   sources = {

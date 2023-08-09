@@ -16,7 +16,7 @@ require("config.cmp")
 require("config.dap")
 require("config.iron")
 require("config.headlines")
-require("config.quarto")
+require("config.glow")
 
 -- custom components
 require("custom.projects")
