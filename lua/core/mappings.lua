@@ -10,6 +10,9 @@ local wk = require('which-key')
 wk.register({
   ["-"] = { "<cmd>lua require('oil').open()<cr>", "Oil" },
 
+  ["[["] = { "<cmd>bprevious<cr>", "Last Buffer" },
+  ["]]"] = { "<cmd>bnext<cr>", "Next Buffer" },
+
   g = {
       name = "+goto",
       d = {"<cmd>lua vim.lsp.buf.definition()<cr>", "Goto Definition"},
@@ -151,6 +154,7 @@ wk.register({
       name = "+search",
       b = { "<cmd>Telescope buffers<cr>", "Buffers" },
       c = { "<cmd>Telescope commands<cr>", "Commands" },
+      C = { "<cmd>lua require('telescope.builtin').find_files({ search_dirs = { '~/.config/nvim' } })<cr>", "Config" },
       d = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
       f = { "<cmd>Telescope find_files<cr>", "Files" },
       g = { "<cmd>Telescope live_grep<cr>", "Grep in CWD" },
@@ -159,6 +163,7 @@ wk.register({
       n = { "<cmd>lua require('telescope.builtin').find_files({ search_dirs = { '~/notes' } })<cr>", "Neorg" },
       o = { "<cmd>ObsidianSearch<cr>", "Obsidian" },
       p = { "<cmd>Telescope projects<cr>", "Projects" },
+      P = { "<cmd>lua require('telescope.builtin').find_files({ search_dirs = { '~/projects' } })<cr>", "Project Files" },
     },
 
     t = {

@@ -1,3 +1,8 @@
+local function pwd()
+  -- returns path relative to home dir
+  return vim.fn.expand("%:~")
+end
+
 return {
   -- Set lualine as statusline
   'nvim-lualine/lualine.nvim',
@@ -14,7 +19,7 @@ return {
       lualine_a = { 'mode' },
       lualine_b = { 'branch', 'diff', 'diagnostics' },
       lualine_c = { 'filename' },
-      lualine_x = { 'encoding', 'filetype' },
+      lualine_x = { pwd, 'encoding', 'filetype' },
       lualine_y = {},
       lualine_z = { 'location' },
     },

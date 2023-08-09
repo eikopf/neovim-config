@@ -11,12 +11,6 @@ return {
       },
     },
     ft = "quarto",
-    keys = {
-      { "<leader>ctr", ":split term://R<cr>", desc = "terminal: R" },
-      { "<leader>cti", ":split term://ipython<cr>", desc = "terminal: ipython" },
-      { "<leader>ctp", ":split term://python<cr>", desc = "terminal: python" },
-      { "<leader>ctj", ":split term://julia<cr>", desc = "terminal: julia" },
-    },
   },
 
   {
