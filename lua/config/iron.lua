@@ -26,7 +26,7 @@ iron.setup {
       },
 
       lua = {
-        command = {"sh", "-c", "croissant || lua"} -- weird luarocks behaviour on macOS
+        command = {"sh", "-c", "croissant || lua"}
       },
     },
 
