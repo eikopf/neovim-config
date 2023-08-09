@@ -3,6 +3,17 @@ local function pwd()
   return vim.fn.expand("%:~")
 end
 
+local battery = require("battery")
+battery.setup({})
+
+local nvimbattery = {
+  function()
+    return battery.get_status_line()
+  end,
+
+  icon = nil,
+}
+
 return {
   -- Set lualine as statusline
   'nvim-lualine/lualine.nvim',
@@ -18,8 +29,8 @@ return {
     sections = {
       lualine_a = { 'mode' },
       lualine_b = { 'branch', 'diff', 'diagnostics' },
-      lualine_c = { 'filename' },
-      lualine_x = { pwd },
+      lualine_c = { 'filename', pwd },
+      lualine_x = { nvimbattery },
       lualine_y = { 'encoding', 'filetype' },
       lualine_z = { 'location' },
     },
