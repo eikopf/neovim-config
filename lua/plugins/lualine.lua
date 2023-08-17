@@ -1,6 +1,6 @@
 local function pwd()
   -- returns path relative to home dir
-  return vim.fn.expand("%:~")
+  return vim.fn.expand("%:~:h")
 end
 
 local battery = require("battery")

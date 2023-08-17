@@ -6,7 +6,7 @@
 require("transparent").setup({
   groups = {
     'Normal',
-	'EndOfBuffer',
+    'EndOfBuffer',
     'NormalNC',
     'NonText',
     'LineNr',

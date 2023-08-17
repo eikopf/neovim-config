@@ -17,6 +17,7 @@ require("config.dap")
 require("config.iron")
 require("config.headlines")
 require("config.glow")
+require("config.octo")
 
 -- custom components
 require("custom.projects")

@@ -53,3 +53,8 @@ vim.opt.history = 1000
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
+-- folding options: recommended by nvim-ufo
+vim.o.foldcolumn = '1'
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true

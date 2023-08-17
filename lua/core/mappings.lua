@@ -13,6 +13,11 @@ wk.register({
   ["[["] = { "<cmd>bprevious<cr>", "Last Buffer" },
   ["]]"] = { "<cmd>bnext<cr>", "Next Buffer" },
 
+  ["<C-h>"] = { "<cmd>TmuxNavigateLeft<cr>", "Window Left (Tmux)" },
+  ["<C-j>"] = { "<cmd>TmuxNavigateDown<cr>", "Window Down (Tmux)" },
+  ["<C-k>"] = { "<cmd>TmuxNavigateUp<cr>", "Window Up (Tmux)" },
+  ["<C-l>"] = { "<cmd>TmuxNavigateRight<cr>", "Window Right (Tmux)" },
+
   g = {
       name = "+goto",
       d = {"<cmd>lua vim.lsp.buf.definition()<cr>", "Goto Definition"},
@@ -158,6 +163,12 @@ wk.register({
       d = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
       f = { "<cmd>Telescope find_files<cr>", "Files" },
       g = { "<cmd>Telescope live_grep<cr>", "Grep in CWD" },
+      G = {
+        name = "+github",
+        i = { "<cmd>Octo issue list<cr>", "Issues" },
+        p = { "<cmd>Octo pr list<cr>", "PRs" },
+        r = { "<cmd>Octo repo list<cr>", "Repos" },
+      },
       h = { "<cmd>Telescope help_tags<cr>", "Help" },
       k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
       n = { "<cmd>lua require('telescope.builtin').find_files({ search_dirs = { '~/notes' } })<cr>", "Neorg" },
