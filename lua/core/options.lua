@@ -58,3 +58,7 @@ vim.o.foldcolumn = '1'
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
+
+-- neovide-specific options
+vim.o.guifont = "FiraCode Nerd Font:h11"
+vim.g.neovide_fullscreen = true

@@ -9,7 +9,7 @@ require("core.options")
 require("config.neodev")
 require("config.oneliners")
 require("config.transparent")
-require("config.obsidian")
+--require("config.obsidian") -- i (currently) don't use obsidian on windows
 require("config.treesitter")
 require("config.mason")
 require("config.cmp")

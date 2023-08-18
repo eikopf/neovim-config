@@ -159,7 +159,7 @@ wk.register({
       name = "+search",
       b = { "<cmd>Telescope buffers<cr>", "Buffers" },
       c = { "<cmd>Telescope commands<cr>", "Commands" },
-      C = { "<cmd>lua require('telescope.builtin').find_files({ search_dirs = { '~/.config/nvim' } })<cr>", "Config" },
+      C = { "<cmd>lua require('telescope.builtin').find_files({ search_dirs = { '~/AppData/Local/nvim' } })<cr>", "Config" },
       d = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
       f = { "<cmd>Telescope find_files<cr>", "Files" },
       g = { "<cmd>Telescope live_grep<cr>", "Grep in CWD" },
