@@ -11,11 +11,15 @@ require("transparent").setup({
     'NonText',
     'LineNr',
     'SignColumn',
+    'Comment',
   },
 
   extra_groups = {
     "WhichKeyBorder",
     "FloatBorder",
+    "WinSeparator",
+    "Folded",
+    "FoldColumn",
   },
 
   exclude_groups = { "WhichKeyGroup", }, -- :h which-key.nvim-which-key-colors

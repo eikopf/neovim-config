@@ -67,6 +67,10 @@ wk.register({
       r = { "<cmd>Git reset<cr>", "Reset" },
     },
 
+    j = {
+      name = "+journal",
+    },
+
     l = {
       name = "+lsp",
       a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
@@ -84,29 +88,6 @@ wk.register({
       name = "+mason",
       o = { "<cmd>Mason<cr>", "Open" },
       u = { "<cmd>MasonUpdate<cr>", "Update" },
-    },
-
-    n = {
-      name = "+neorg",
-
-      w = {
-        name = "+workspaces",
-        j = { "<cmd>Neorg workspace journal<cr>", "Goto ~/notes/journal" },
-        n = { "<cmd>Neorg workspace notes<cr>", "Goto ~/notes" },
-        p = { "<cmd>Neorg workspace projects<cr>", "Goto ~/notes/projects" },
-      },
-
-      j = {
-        name = "+journal",
-        o = { "<cmd>Neorg journal toc open", "Open Table of Contents" },
-        t = { "<cmd>Neorg journal today<cr>", "Create/Open Today" },
-        T = { "<cmd>Neorg journal tomorrow<cr>", "Create/Open Tomorrow" },
-        u = { "<cmd>Neorg journal toc update", "Update Table of Contents" },
-        y = { "<cmd>Neorg jounal yesterday<cr>", "Create/Open Yesterday" },
-      },
-
-      g = { "<cmd>lua require('telescope.builtin').live_grep({ search_dirs = { '~/notes' })<cr>", "Grep" },
-      s = { "<cmd>lua require('telescope.builtin').find_files({ search_dirs = { '~/notes' } })<cr>", "Search" },
     },
 
     o = {
@@ -181,7 +162,7 @@ wk.register({
       name = "+toggle",
       l = { "<cmd>set number!<cr>", "Line Numbers" },
       m = { "<cmd>MinimapToggle<cr>", "Minimap" },
-      n = { "<cmd>set relativenumber!<cr>", "Relative Line Numbers" },
+      r = { "<cmd>set relativenumber!<cr>", "Relative Line Numbers" },
       t = { "<cmd>TransparentToggle<cr>", "Transparency" },
     },
 
