@@ -28,6 +28,10 @@ iron.setup {
       lua = {
         command = {"sh", "-c", "croissant || lua"}
       },
+
+      matlab = {
+        command = {"sh", "-c", "matlab -nodisplay || octave"}
+      },
     },
 
     repl_open_cmd = require('iron.view').split.vertical.botright(0.5),

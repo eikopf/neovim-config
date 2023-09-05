@@ -132,6 +132,7 @@ wk.register({
       f = { "<cmd>IronFocus fish<cr>i", "Fish" },
       j = { "<cmd>IronFocus julia<cr>i", "Julia" },
       l = { "<cmd>IronFocus lua<cr>i", "Lua" },
+      m = { "<cmd>IronFocus matlab<cr>i", "Matlab" },
       p = { "<cmd>IronFocus python<cr>i", "Python" },
       r = { "<cmd>IronFocus r<cr>i", "R" },
     },
