@@ -69,6 +69,7 @@ wk.register({
 
     j = {
       name = "+journal",
+      s = { "<cmd>lua require('telescope.builtin').find_files({ search_dirs = {require('custom.journal').dir}})<cr>", "Search Entries"}
     },
 
     l = {
