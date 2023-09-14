@@ -42,6 +42,22 @@ M.get_next_week_path = function()
   return as_markdown_path(date.calculate_dates(nil, 1).isoprevweek)
 end
 
+M.search_journal = function()
+  telescope.find_files({ search_dirs = {M.dir} })
+end
+
+M.grep_journal = function()
+  telescope.live_grep({ search_dirs = {M.dir} })
+end
+
+M.search_weeks = function()
+  telescope.find_files({ search_dirs = {M.dir}, search_file = "-W"})
+end
+
+M.grep_weeks = function()
+  telescope.live_grep({ search_dirs = {M.dir}, glob_pattern = "*-W*.md", "--glob" })
+end
+
 -- lists path functions with corresponding canonical names
 local path_functions = {
   { M.get_today_path, "Today" },
@@ -71,5 +87,10 @@ for _, func in ipairs(path_functions) do
     print("Journal: Deleted " .. path)
   end, {})
 end
+
+vim.api.nvim_create_user_command('JournalSearchAll', M.search_journal, {})
+vim.api.nvim_create_user_command('JournalSearchWeeks', M.search_weeks, {})
+vim.api.nvim_create_user_command('JournalGrepAll', M.grep_journal, {})
+vim.api.nvim_create_user_command('JournalGrepWeeks', M.grep_weeks, {})
 
 return M -- return module

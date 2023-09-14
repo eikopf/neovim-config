@@ -9,7 +9,7 @@ if vim.g.neovide then
 end
 
 -- plugin configurations
--- this can't really be abbreviate to 'require(config)',
+-- this can't really be abbreviated to 'require(config)',
 -- since the specific order matters
 require("config.neodev")
 require("config.oneliners")
