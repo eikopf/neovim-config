@@ -1,5 +1,5 @@
 -- this module provides functionality for using
--- a folder of markdown files as a journal
+-- a folder of markdown files as daily/weekly notes
 
 -- a lot of the date functionality here is taken from
 -- renerocksai's telekasten.nvim.
@@ -10,7 +10,7 @@ local telescope = require("telescope.builtin")
 local M = {} -- init module
 
 -- module constants
-M.dir = "~/journal"
+M.dir = "~/notes"
 
 -- helper functions
 local function as_markdown_path(filename)
@@ -42,11 +42,11 @@ M.get_next_week_path = function()
   return as_markdown_path(date.calculate_dates(nil, 1).isoprevweek)
 end
 
-M.search_journal = function()
+M.search_notes = function()
   telescope.find_files({ search_dirs = {M.dir} })
 end
 
-M.grep_journal = function()
+M.grep_notes = function()
   telescope.live_grep({ search_dirs = {M.dir} })
 end
 
@@ -74,23 +74,23 @@ for _, func in ipairs(path_functions) do
   local name = func[2]
 
   -- define edit commands
-  vim.api.nvim_create_user_command('JournalEdit' .. name, function ()
+  vim.api.nvim_create_user_command('NotesEdit' .. name, function ()
     local path = path_function()
     vim.cmd("edit " .. path)
     vim.cmd("cd " .. M.dir)
   end, {})
 
   -- define deletion commands
-  vim.api.nvim_create_user_command('JournalRm' .. name, function ()
+  vim.api.nvim_create_user_command('NotesRm' .. name, function ()
     local path = path_function()
     vim.cmd("silent !rm " .. path)
-    print("Journal: Deleted " .. path)
+    print("Notes: Deleted " .. path)
   end, {})
 end
 
-vim.api.nvim_create_user_command('JournalSearchAll', M.search_journal, {})
-vim.api.nvim_create_user_command('JournalSearchWeeks', M.search_weeks, {})
-vim.api.nvim_create_user_command('JournalGrepAll', M.grep_journal, {})
-vim.api.nvim_create_user_command('JournalGrepWeeks', M.grep_weeks, {})
+vim.api.nvim_create_user_command('NotesSearchAll', M.search_notes, {})
+vim.api.nvim_create_user_command('NotesSearchWeeks', M.search_weeks, {})
+vim.api.nvim_create_user_command('NotesGrepAll', M.grep_notes, {})
+vim.api.nvim_create_user_command('NotesGrepWeeks', M.grep_weeks, {})
 
 return M -- return module

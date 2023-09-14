@@ -25,7 +25,7 @@ require("config.transparent")
 
 -- custom components
 require("custom.projects")
-require("custom.journal")
+require("custom.notes")
 
 -- fix terminal mode by making <Esc> work again
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
