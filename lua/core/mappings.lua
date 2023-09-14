@@ -69,7 +69,12 @@ wk.register({
 
     j = {
       name = "+journal",
-      s = { "<cmd>lua require('telescope.builtin').find_files({ search_dirs = {require('custom.journal').dir}})<cr>", "Search Entries"}
+      g = { "<cmd>JournalGrepAll<cr>", "Grep Over All Entries" },
+      G = { "<cmd>JournalGrepWeeks<cr>", "Grep Over Weekly Entries" },
+      s = { "<cmd>JournalSearchAll<cr>", "Search All Entries" },
+      S = { "<cmd>JournalSearchWeeks<cr>", "Search Weekly Entries" },
+      t = { "<cmd>JournalEditToday<cr>", "Open Today's Entry" },
+      w = { "<cmd>JournalEditWeek<cr>", "Open Current Weekly Entry"},
     },
 
     l = {
