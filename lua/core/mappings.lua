@@ -67,7 +67,7 @@ wk.register({
       r = { "<cmd>Git reset<cr>", "Reset" },
     },
 
-    j = {
+    n = {
       name = "+notes",
       g = { "<cmd>NotesGrepAll<cr>", "Grep Over All Entries" },
       G = { "<cmd>NotesGrepWeeks<cr>", "Grep Over Weekly Entries" },
