@@ -21,6 +21,7 @@ require("config.dap")
 require("config.iron")
 require("config.glow")
 require("config.octo")
+require("config.zk")
 require("config.transparent")
 
 -- custom components
