@@ -1,0 +1,3 @@
+return {
+  "ashinkarov/nvim-agda",
+}

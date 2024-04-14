@@ -43,6 +43,7 @@ cmp.setup {
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = 'ultisnips' },
     { name = 'crates' },
     { name = 'obsidian' },
     { name = 'latex_symbols' },

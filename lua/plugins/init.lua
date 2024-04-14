@@ -2,6 +2,7 @@
 -- this file should only contain plugins with no configuration details
 
 return {
+  "nvim-neotest/nvim-nio",
   "folke/neodev.nvim",
   'xiyaowong/transparent.nvim',
   'tpope/vim-rhubarb',
@@ -10,4 +11,5 @@ return {
   'wfxr/minimap.vim', -- requires code-minimap to be installed via cargo
   { 'christoomey/vim-tmux-navigator', -- for tmux integration
     lazy = false },
+  "ChrisWellsWood/roc.vim",
 }

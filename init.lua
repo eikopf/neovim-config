@@ -13,7 +13,6 @@ end
 -- since the specific order matters
 require("config.neodev")
 require("config.oneliners")
-require("config.obsidian")
 require("config.treesitter")
 require("config.mason")
 require("config.cmp")

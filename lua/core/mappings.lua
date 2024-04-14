@@ -18,6 +18,7 @@ wk.register({
   ["<C-k>"] = { "<cmd>TmuxNavigateUp<cr>", "Window Up (Tmux)" },
   ["<C-l>"] = { "<cmd>TmuxNavigateRight<cr>", "Window Right (Tmux)" },
 
+  -- GOTO
   g = {
       name = "+goto",
       d = {"<cmd>lua vim.lsp.buf.definition()<cr>", "Goto Definition"},
@@ -26,17 +27,21 @@ wk.register({
       r = {"<cmd>lua require('telescope.builtin').lsp_references()<cr>", "Goto References"},
   },
 
+  -- LSP HOVER
   K = {"<cmd>lua vim.lsp.buf.hover()<cr>", "Hover Documentation"},
 
+  -- LEADER BINDINGS
   ["<leader>"] = {
     ["."] = { "<cmd>Telescope find_files<cr>", "Search Files" },
     [","] = { "<cmd>Telescope buffers<cr>", "Search Buffers" },
 
+    -- BUFFER
     b = {
       name = "+buffer",
       s = {"<cmd>Telescope current_buffer_fuzzy_find<cr>", "Search in Buffer"},
     },
 
+    -- DEBUG
     d = {
       name = "+debug",
       i = { "<cmd>DapStepInto<cr>", "Step Into" },
@@ -46,8 +51,10 @@ wk.register({
       t = { "<cmd>DapToggleBreakpoint<cr>", "Toggle Breakpoint" },
     },
 
+    -- FILE
     f = { name = "+file", },
 
+    -- GIT
     g = {
       name = "+git",
       A = { "<cmd>Git add -A<cr>", "Stage All" },
@@ -67,6 +74,47 @@ wk.register({
       r = { "<cmd>Git reset<cr>", "Reset" },
     },
 
+    -- IDRIS2
+    -- idris gets its own keymap namespace because the actions associated with a dependently
+    -- typed language are so different from other kinds of languages. in future, this could
+    -- be generalised to use the same keymaps for other languages like Agda and Coq.
+    i = {
+      name = "+idris2",
+      a = {
+        name = "+action",
+        a = {"<cmd>lua require('idris2.code_action').add_clause()<cr>", "Add Declaration Clause"},
+        C = {"<cmd>lua require('idris2.code_action').make_case()<cr>", "Replace Metavar With Case Block"},
+        f = {"<cmd>lua require('idris2.code_action').expr_search()<cr>", "Fill Metavar"},
+        F = {"<cmd>lua require('idris2.code_action').intro()<cr>", "Fill Metavar With Valid Constructors"},
+        G = {"<cmd>lua require('idris2.code_action').generate_def()<cr>", "Generate Definition"},
+        L = {"<cmd>lua require('idris2.code_action').make_lemma()<cr>", "Replace Metavar With Lemma"},
+        s = {"<cmd>lua require('idris2.code_action').case_split()<cr>", "Case Split on LHS"},
+        r = {"<cmd>lua require('idris2.code_action').refine_hole()<cr>", "Refine Hole"},
+        R = {"<cmd>lua require('idris2.code_action').expr_search_hints()<cr>", "Refine Hole With Names"},
+        W = {"<cmd>lua require('idris2.code_action').make_with()<cr>", "Replace Metavar With With Block"},
+      },
+      b = {"<cmd>lua require('idris2.browse').browse()<cr>", "Browse Namespace"},
+      C = {
+        name = "+config",
+        i = {"<cmd>lua require('idris2').show_implicits()<cr>", "Show Implicits In Hovers"},
+        I = {"<cmd>lua require('idris2').hide_implicits()<cr>", "Hide Implicits In Hovers"},
+        m = {"<cmd>lua require('idris2').show_machine_names()<cr>", "Show Machine Names In Hovers"},
+        M = {"<cmd>lua require('idris2').hide_machine_names()<cr>", "Hide Machine Names In Hovers"},
+        n = {"<cmd>lua require('idris2').full_namespace()<cr>", "Show Full Namespaces In Hovers"},
+        N = {"<cmd>lua require('idris2').hide_namespace()<cr>", "Hide Full Namespaces In Hovers"},
+      },
+      e = {"<cmd>lua require('idris2.repl').evaluate()<cr>", "Evaluate Expression"},
+      M = {"<cmd>lua require('idris2.metavars').request_all()<cr>", "List Metavars"},
+      ["]"] = {"<cmd>lua require('idris2.metavars').goto_next()<cr>", "Next Metavar"},
+      ["["] = {"<cmd>lua require('idris2.metavars').goto_prev()<cr>", "Previous Metavar"},
+    },
+
+    k = {
+      name = "+keymaps",
+      R = {"<cmd>source ~/.config/nvim/lua/core/mappings.lua<cr>", "Reload Keymaps"},
+    },
+
+    -- NOTES
     n = {
       name = "+notes",
       g = { "<cmd>NotesGrepAll<cr>", "Grep Over All Entries" },
