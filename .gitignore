@@ -1,0 +1,3 @@
+# ignore the top-level lua dir, since it's
+# just a bucket for compiled .fnl files
+/lua
