@@ -1,3 +1,6 @@
 # ignore the top-level lua dir, since it's
 # just a bucket for compiled .fnl files
 /lua
+
+# the one exception is lua/plugins/nfnl.lua, since it installs the fennel compiler (via nfnl)
+!/lua/plugins/nfnl.lua
