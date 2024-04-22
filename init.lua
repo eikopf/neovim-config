@@ -1,46 +1,39 @@
 -- fix terminal mode by making <Esc> work again
 --vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
 
--- choose colorscheme at startup
---if vim.g.neovide then
-  --vim.cmd("colorscheme onedark")
---else
-  --vim.cmd("colorscheme doom-one")
---end
---
--- TANGERINE & HIBISCUS BOOTSTRAP
+-- this file was derived from https://github.com/rafaeldelboni/cajus-nfnl/tree/main
 
--- using lazy.nvim as the package manager
-local pack = "lazy"
+-- installation prefix for lazy.nvim
+local lazy_prefix = vim.fn.stdpath("data") .. "/lazy"
 
--- bootstrapping procedure
-local function bootstrap(url, ref)
-    local name = url:gsub(".*/", "")
-    local path
+-- installation directory for lazy.nvim itself
+local lazy_install_path = lazy_prefix .. "/lazy.nvim"
 
-    if pack == "lazy" then
-        path = vim.fn.stdpath("data") .. "/lazy/" .. name
-        vim.opt.rtp:prepend(path)
-    else
-        path = vim.fn.stdpath("data") .. "/site/pack/".. pack .. "/start/" .. name
-    end
-
-    if vim.fn.isdirectory(path) == 0 then
-        print(name .. ": installing in data dir...")
-
-        vim.fn.system {"git", "clone", url, path}
-        if ref then
-            vim.fn.system {"git", "-C", path, "checkout", ref}
-        end
-
-        vim.cmd "redraw"
-        print(name .. ": finished installing")
-    end
+-- if lazy isn't installed, then install the latest stable version
+if not (vim.uv or vim.loop).fs_stat(lazy_install_path) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazy_install_path,
+  })
 end
 
--- bootstrap stable version of tangerine, pinning at v2.8 by default
-bootstrap("https://github.com/udayvir-singh/tangerine.nvim", "v2.8")
+-- prepend lazy.nvim's install path to the runtime path
+vim.opt.rtp:prepend(lazy_install_path)
 
--- bootstrap stable version of hibiscus, pinning at v1.7 by default
-bootstrap("https://github.com/udayvir-singh/hibiscus.nvim", "v1.7")
+-- enable jit compilation
+vim.loader.enable()
 
+-- define leader keys before lazy invocation
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
+
+-- invoke lazy with the plugins module as the spec
+-- in particular, lazy sources and loads nfnl.lua to compile .fnl files
+require("lazy").setup("plugins")
+
+-- bootstrapping is complete, so control passes to fnl/config/init.fnl
+require("config")
