@@ -12,3 +12,12 @@
 
 ;; basic navigation
 (map :n "-" "<cmd>Oil<cr>" { :desc "Open parent directory" })
+
+;; terminal mode
+(map :t "<Esc>" :<C-\><C-n>) ;; use <esc> to exit terminal mode
+
+;; lazy.nvim bindings
+(map :n "<leader>ol" "<cmd>Lazy<cr>" { :desc "Open Lazy" })
+
+;; telescope.nvim bindings
+(map :n :<leader>sf "<cmd>Telescope find_files<cr>" { :desc "Search files" })

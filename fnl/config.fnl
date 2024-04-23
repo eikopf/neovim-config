@@ -3,7 +3,7 @@
 
 ;; core configuration
 (require :core.options)     ;; basic neovim settings, mostly using vim.opt
-(require :core.keymaps)     ;; all global keymaps (plugin-specific mappings are defined by their respective files)
+(require :core.keymaps)     ;; global (i.e. persistent) keymaps
 
 ;; load colorscheme
 (vim.cmd.colorscheme :catppuccin-macchiato)

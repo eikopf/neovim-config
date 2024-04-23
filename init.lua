@@ -1,6 +1,3 @@
--- fix terminal mode by making <Esc> work again
---vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
-
 -- this file was derived in part from https://github.com/rafaeldelboni/cajus-nfnl/tree/main
 
 -- define leader keys (otherwise plugins will use the default leader key)
@@ -31,14 +28,13 @@ vim.opt.rtp:prepend(lazy_install_path)
 -- enable jit compilation
 vim.loader.enable()
 
+-- TODO: lazy seems to ignore this directive
 -- additional lazy configuration
 local opts = {
-  ui = {
-    change_detection = {
-      enabled = true, -- make lazy reload config when any config files change
-      notify = false, -- don't explicitly notify the user about config changes
-    },
-  }
+  change_detection = {
+    enabled = true, -- make lazy reload config when any config files change
+    notify = false, -- don't explicitly notify the user about config changes
+  },
 }
 
 -- invoke lazy by pulling all plugin specs from the plugins module,
