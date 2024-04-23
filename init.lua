@@ -1,7 +1,11 @@
 -- fix terminal mode by making <Esc> work again
 --vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
 
--- this file was derived from https://github.com/rafaeldelboni/cajus-nfnl/tree/main
+-- this file was derived in part from https://github.com/rafaeldelboni/cajus-nfnl/tree/main
+
+-- define leader keys (otherwise plugins will use the default leader key)
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 -- installation prefix for lazy.nvim
 local lazy_prefix = vim.fn.stdpath("data") .. "/lazy"
@@ -27,13 +31,17 @@ vim.opt.rtp:prepend(lazy_install_path)
 -- enable jit compilation
 vim.loader.enable()
 
--- define leader keys before lazy invocation
-vim.g.mapleader = " "
-vim.g.maplocalleader = ","
+-- additional lazy configuration
+opts = {
+  change_detection = {
+    enabled = true, -- make lazy reload config when any config files change
+    notify = false, -- don't explicitly notify the user about config changes
+  }
+}
 
 -- invoke lazy with the plugins module as the spec
 -- in particular, lazy sources and loads nfnl.lua to compile .fnl files
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", opts)
 
--- bootstrapping is complete, so control passes to fnl/config/init.fnl
+-- bootstrapping is complete, so control passes to fnl/config.fnl
 require("config")

@@ -1,6 +1,8 @@
+;; PLUGIN -- the onedark colorscheme
+
 (fn config []
   (vim.cmd.colorscheme :onedark))
 
 { 1 "navarasu/onedark.nvim"
-  :priority 1000
-  :config config }
+  ;; :config config         ;; uncommenting this line would cause onedark to be loaded by default
+  :priority 1000 }
