@@ -32,10 +32,12 @@ vim.opt.rtp:prepend(lazy_install_path)
 vim.loader.enable()
 
 -- additional lazy configuration
-opts = {
-  change_detection = {
-    enabled = true, -- make lazy reload config when any config files change
-    notify = false, -- don't explicitly notify the user about config changes
+local opts = {
+  ui = {
+    change_detection = {
+      enabled = true, -- make lazy reload config when any config files change
+      notify = false, -- don't explicitly notify the user about config changes
+    },
   }
 }
 
