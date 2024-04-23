@@ -1,23 +1,50 @@
 ;; GLOBAL KEYMAPS
+;; keymaps are bound and documented with which-key.nvim
+;; following the doom emacs convention, prefix names begin with a + (e.g. +open, +find)
+(local wk (require :which-key))
 
-;; simple helper function for defining keybindings
-;; mode => string or list of strings
-;; binding => string
-;; command => string or function
-;; opts => a table (refer to :help nvim_set_keymap for keys)
-(lambda map [mode binding command ?opts]
-  "Calls vim.keymap.set with the given arguments."
-  (let [bind _G.vim.keymap.set]
-    (bind mode binding command opts)))
+;; NORMAL MODE <LEADER> KEYMAPS
 
-;; basic navigation
-(map :n "-" "<cmd>Oil<cr>" { :desc "Open parent directory" })
+;; keymaps for fuzzy finding -- under the <leader>f namespace
+(local find-keymaps { :name :+find 
+                      :f    [ "<cmd>Telescope find_files<cr>" "Find files" ] 
+                      :g    [ "<cmd>Telescope live_grep<cr>"  "Grep files" ]
+                      :b    [ "<cmd>Telescope buffers<cr>"  "Find buffers" ]})
 
-;; terminal mode
-(map :t "<Esc>" :<C-\><C-n>) ;; use <esc> to exit terminal mode
+;; keymaps for git -- under the <leader>g namespace
+(local git-keymaps { :name :+git 
+                     :A    [ "<cmd>Git add -A<cr>"                 "Stage all" ]
+                     :c    [ "<cmd>Git commit<cr>"                    "Commit" ]
+                     :d    [ "<cmd>Git diff<cr>"                        "Diff" ]
+                     :g    [ "<cmd>Git<cr>"                           "Status" ]
+                     :p    [ "<cmd>Git push<cr>"                        "Push" ]
+                     :s    [ "<cmd>Telescope git_branches<cr>" "Switch branch" ]
+                     :u    [ "<cmd>Git reset<cr>"                "Unstage all" ]})
 
-;; lazy.nvim bindings
-(map :n "<leader>ol" "<cmd>Lazy<cr>" { :desc "Open Lazy" })
+;; keymaps for lazy.nvim -- under the <leader>l namespace
+(local lazy-keymaps { :name :+lazy })
 
-;; telescope.nvim bindings
-(map :n :<leader>sf "<cmd>Telescope find_files<cr>" { :desc "Search files" })
+;; keymaps for opening operations -- under the <leader>o namespace
+(local open-keymaps { :name :+open 
+                      :l    [ "<cmd>Lazy<cr>"                                     "Open lazy" ]
+                      :t    [ "<cmd>split | resize -10 | terminal<cr>i" "Open terminal split" ]
+                      :T    [ "<cmd>terminal<cr>i"                       "Open terminal here" ]})
+
+;; leader-namespaced keymaps are properly bound and prefixed at this bound
+(wk.register 
+  { :f find-keymaps
+    :g  git-keymaps
+    :l lazy-keymaps 
+    :o open-keymaps } 
+  { :mode   :n 
+    :prefix :<leader> })
+
+;; OTHER NORMAL MODE KEYMAPS
+
+;; non-namespaced normal mode keymaps are defined seperately
+(wk.register { :- [ "<cmd>Oil<cr>" "Open enclosing directory" ] } { :mode :n })
+
+;; TERMINAL MODE KEYMAPS
+
+;; define and document the terminal mode <Esc> fix
+(wk.register { :<Esc> [ :<C-\><C-n> "Exit terminal mode" ] } { :mode :t })
