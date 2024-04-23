@@ -41,9 +41,18 @@ local opts = {
   }
 }
 
--- invoke lazy with the plugins module as the spec
--- in particular, lazy sources and loads nfnl.lua to compile .fnl files
-require("lazy").setup("plugins", opts)
+-- invoke lazy by pulling all plugin specs from the plugins module,
+-- loading nfnl beforehand to compile .fnl files as necessary
+--
+-- NOTE: on a fresh installation, nfnl will be the only plugin loaded
+require("lazy").setup({
+  spec = {
+    { 
+      { import = "plugins" }, 
+      { "Olical/nfnl", ft = "fennel" },
+    }
+  }
+}, opts)
 
 -- bootstrapping is complete, so control passes to fnl/config.fnl
 require("config")
