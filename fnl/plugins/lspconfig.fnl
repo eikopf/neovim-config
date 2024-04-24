@@ -30,10 +30,14 @@
                ;;:typstfmt ])     ;; typst formatter
 
 { 1 :neovim/nvim-lspconfig
-  :dependencies [ { 1 :williamboman/mason.nvim :config true }
-                  { 1 :williamboman/mason-lspconfig.nvim
+  :dependencies [ ;; mason manages installs of the different language servers
+                  { 1       :williamboman/mason.nvim :config true }
+                  ;; mason-lspconfig integrates mason with nvim-lspconfig
+                  { 1       :williamboman/mason-lspconfig.nvim
                     :config (fn [] 
                               (let [mason (require :mason-lspconfig)] 
                                 (mason.setup {:ensure_installed servers}))) }
-                  { 1 :j-hui/fidget.nvim :tag :legacy :opts {} }
-                  :folke/neodev.nvim ]}
+                  ;; fidget adds a small ui element with lsp status info
+                  { 1       :j-hui/fidget.nvim 
+                    :tag    :legacy 
+                    :opts   {}                  }]}

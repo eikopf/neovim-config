@@ -32,10 +32,11 @@
 ;; keymaps for opening operations -- under the <leader>o namespace
 (local open-keymaps { :name :+open 
                       :l    [ "<cmd>Lazy<cr>"                              "Open lazy" ]
+                      :m    [ "<cmd>Mason<cr>"                            "Open mason" ]
                       :t    [ (fn []
                                 (let [ cmd vim.cmd
                                        map vim.keymap.set ]
-                                  (cmd :15split)    ;; create new horizontal split with 15 rows
+                                  (cmd :15split)
                                   (cmd :terminal)
                                   (map
                                     :t 

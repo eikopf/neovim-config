@@ -35,6 +35,12 @@
 ;; vim commandline options
 (set opt.history 1000)
 
+;; history options
+(set opt.backup false)
+(set opt.writebackup false)
+(set opt.undofile true)
+(set opt.swapfile false)
+
 ;; window options
 (set opt.splitbelow true)
 (set opt.splitright true)

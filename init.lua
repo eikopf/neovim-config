@@ -28,27 +28,22 @@ vim.opt.rtp:prepend(lazy_install_path)
 -- enable jit compilation
 vim.loader.enable()
 
--- TODO: lazy seems to ignore this directive
--- additional lazy configuration
-local opts = {
-  change_detection = {
-    enabled = true, -- make lazy reload config when any config files change
-    notify = false, -- don't explicitly notify the user about config changes
-  },
-}
-
--- invoke lazy by pulling all plugin specs from the plugins module,
--- loading nfnl beforehand to compile .fnl files as necessary
---
--- NOTE: on a fresh installation, nfnl will be the only plugin loaded
-require("lazy").setup({
-  spec = {
-    { 
+-- the plugin spec defines the set of plugins that lazy loads.
+-- in this case, all files under the plugin module are merged
+-- into a plugin spec, and nfnl is explicitly added
+local plugin_spec = {{
+    {
       { import = "plugins" }, 
       { "Olical/nfnl", ft = "fennel" },
     }
+}}
+
+-- finally, we invoke lazy by passing the plugin spec and some options
+require("lazy").setup(plugin_spec, {
+  change_detection = {
+    notify = false -- this disables the "Config Change Detected..." messages
   }
-}, opts)
+})
 
 -- bootstrapping is complete, so control passes to fnl/config.fnl
 require("config")
