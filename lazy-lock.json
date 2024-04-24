@@ -1,5 +1,6 @@
 {
   "catpuccin": { "branch": "main", "commit": "a1439ad7c584efb3d0ce14ccb835967f030450fe" },
+  "conform.nvim": { "branch": "master", "commit": "4660e534bf7678ee0f85879aa75fdcb6855612c2" },
   "doom-one.nvim": { "branch": "main", "commit": "76595eec15896a5da7f4e39ceeded6ffb0f4dc38" },
   "fidget.nvim": { "branch": "main", "commit": "0ba1e16d07627532b6cae915cc992ecac249fb97" },
   "lazy.nvim": { "branch": "main", "commit": "3f13f080434ac942b150679223d54f5ca91e0d52" },
