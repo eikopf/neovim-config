@@ -26,8 +26,9 @@
                      :s    [ "<cmd>Telescope git_branches<cr>" "Switch branch" ]
                      :u    [ "<cmd>Git reset<cr>"                "Unstage all" ]})
 
-;; keymaps for lazy.nvim -- under the <leader>l namespace
-(local lazy-keymaps { :name :+lazy })
+;; lsp keymaps -- under the <leader>l namespace
+(local lsp-keymaps { :name :+lsp 
+                     :i    [ "<cmd>LspInfo<cr>"     "Show LSP info"]})
 
 ;; keymaps for opening operations -- under the <leader>o namespace
 (local open-keymaps { :name :+open 
@@ -68,7 +69,7 @@
   ;; table of immediate subnamespaces
   { :f   find-keymaps
     :g    git-keymaps
-    :l   lazy-keymaps 
+    :l   lsp-keymaps 
     :o   open-keymaps 
     :t toggle-keymaps
     :w window-keymaps } 
