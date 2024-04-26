@@ -1,7 +1,7 @@
 ;; LSP configuration
 
 ;; other non-LSP tools to install with mason
-(local tools [:codelldb :jq :ruff :sql-formatter :typstfmt])
+(local _tools [:codelldb :jq :ruff :sql-formatter :typstfmt])
 
 {1 :neovim/nvim-lspconfig
  :dependencies [;; mason manages installs of the different language servers
