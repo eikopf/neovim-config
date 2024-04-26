@@ -17,7 +17,8 @@
                 :marksman {}
                 :phpactor {}
                 :ruff_lsp {}
-                :rust_analyzer {}
+                ;; rust_analyzer is omitted, since plugins/rustaceanvim.fnl configures it separately
+                ;; :rust_analyzer {}
                 :sqlls {}
                 :tsserver {}
                 :typst_lsp {}
@@ -37,4 +38,6 @@
   ;; do lsp[server]["setup"]
   ((. lsp server :setup) ;; pass settings to setup function through coq to broadcast capabilities
                          (coq.lsp_ensure_capabilities settings)))
+
+;; blah blah blah
 

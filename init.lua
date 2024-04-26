@@ -34,7 +34,10 @@ vim.loader.enable()
 local plugin_spec = { {
 	{
 		{ import = "plugins" },
-		{ "Olical/nfnl", ft = "fennel" },
+		{
+			"Olical/nfnl",
+			ft = "fennel",
+		},
 	},
 } }
 
@@ -44,6 +47,16 @@ require("lazy").setup(plugin_spec, {
 		notify = false, -- this disables the "Config Change Detected..." messages
 	},
 })
+
+-- at this point, it's possible that the lua/ directory does not exist,
+-- typically because the repo has just been cloned
+local target_dir = vim.fn.stdpath("config") .. "/lua"
+if vim.fn.glob(target_dir) == "" then
+	-- we do the dumbest possible thing here: compile the .fnl files and immediately exit
+	-- then the next time the user opens neovim, it should just behave as normal
+	require("nfnl.api")["compile-all-files"](target_dir)
+	os.exit()
+end
 
 -- bootstrapping is complete, so control passes to fnl/config.fnl
 require("config")
