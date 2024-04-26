@@ -39,8 +39,8 @@
         :l [:<cmd>Lazy<cr> "Open lazy"]
         :m [:<cmd>Mason<cr> "Open mason"]
         :t [(fn []
-              (let [cmd vim.cmd
-                    map vim.keymap.set]
+              (let [cmd _G.vim.cmd
+                    map _G.vim.keymap.set]
                 (cmd :15split)
                 (cmd :terminal)
                 (map :t :<Esc> :<cmd>q<cr> {:buffer true})
@@ -80,6 +80,14 @@
 
 ;; OTHER NORMAL MODE KEYMAPS
 
+;; top-level keymaps for "goto" actions (e.g. goto definition
+(local go-keymaps {:name :+goto
+                   :d ["<cmd>lua vim.lsp.buf.definition()<cr>"
+                       "Goto definition"]})
+
 ;; non-namespaced normal mode keymaps are defined seperately
-(wk.register {:- [:<cmd>Oil<cr> "Open enclosing directory"]} {:mode :n})
+(wk.register {:- [:<cmd>Oil<cr> "Open enclosing directory"]
+              :g go-keymaps
+              :K ["<cmd>lua vim.lsp.buf.hover()<cr>" "LSP hover"]}
+             {:mode :n})
 

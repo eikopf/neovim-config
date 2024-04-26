@@ -12,14 +12,14 @@ local lazy_install_path = lazy_prefix .. "/lazy.nvim"
 
 -- if lazy isn't installed, then install the latest stable version
 if not (vim.uv or vim.loop).fs_stat(lazy_install_path) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazy_install_path,
-  })
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazy_install_path,
+	})
 end
 
 -- prepend lazy.nvim's install path to the runtime path
@@ -31,18 +31,18 @@ vim.loader.enable()
 -- the plugin spec defines the set of plugins that lazy loads.
 -- in this case, all files under the plugin module are merged
 -- into a plugin spec, and nfnl is explicitly added
-local plugin_spec = {{
-    {
-      { import = "plugins" }, 
-      { "Olical/nfnl", ft = "fennel" },
-    }
-}}
+local plugin_spec = { {
+	{
+		{ import = "plugins" },
+		{ "Olical/nfnl", ft = "fennel" },
+	},
+} }
 
 -- finally, we invoke lazy by passing the plugin spec and some options
 require("lazy").setup(plugin_spec, {
-  change_detection = {
-    notify = false -- this disables the "Config Change Detected..." messages
-  }
+	change_detection = {
+		notify = false, -- this disables the "Config Change Detected..." messages
+	},
 })
 
 -- bootstrapping is complete, so control passes to fnl/config.fnl
