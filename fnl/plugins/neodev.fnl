@@ -1,6 +1,5 @@
 ;; neodev.nvim -- neovim-specific configuration for the lua language server
 
-{1 :folke/neodev.nvim
- ;; only loaded within lua files
- :ft :lua}
+;; not lazy-loaded, since it needs to be setup before lua_ls is configured
+{1 :folke/neodev.nvim :opts {}}
 
