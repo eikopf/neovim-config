@@ -4,6 +4,7 @@
 ;; refer to :help lspconfig-setup for valid settings keys
 (local servers {:beancount {}
                 :clangd {}
+                :cssls {}
                 :fennel_ls {}
                 :gradle_ls {}
                 :hls {}

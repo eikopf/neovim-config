@@ -31,6 +31,7 @@
 (local lsp-keymaps {:name :+lsp
                     :f ["<cmd>lua require(\"conform\").format({lsp_fallback = true}, nil)<cr>"
                         "Format buffer"]
+                    :r ["<cmd>lua vim.lsp.buf.rename()<cr>" :Rename]
                     :i [:<cmd>LspInfo<cr> "Show LSP info"]})
 
 ;; keymaps for opening operations -- under the <leader>o namespace
