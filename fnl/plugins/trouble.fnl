@@ -10,5 +10,7 @@
 
 ;; INFO: further details here: https://github.com/folke/trouble.nvim
 
-{1 :folke/trouble.nvim :dependencies [:nvim-tree/nvim-web-devicons] :opts {}}
+{1 :folke/trouble.nvim
+ :dependencies [:nvim-tree/nvim-web-devicons]
+ :opts {:auto_close true}}
 
