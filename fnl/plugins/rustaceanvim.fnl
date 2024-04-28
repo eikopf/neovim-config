@@ -8,8 +8,7 @@
      {:server {:on_attach (fn []
                             (let [wk (require :which-key)
                                   bufnr (_G.vim.api.nvim_get_current_buf)]
-                              (wk.register {:name :+code
-                                            :a ["<cmd>:RustLsp codeAction<cr>"
+                              (wk.register {:a ["<cmd>:RustLsp codeAction<cr>"
                                                 "Code actions"]
                                             :r ["<cmd>:RustLsp run<cr>" :Run]
                                             :t ["<cmd>:RustLsp testables<cr>1<cr>"

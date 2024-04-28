@@ -12,7 +12,7 @@
 {1 :stevearc/conform.nvim
  :event [:BufWritePre]
  :cmd [:ConformInfo]
- :keys [:<leader>lf]
  ;; defined in core/keymaps.fnl
+ :keys [:<leader>cf]
  : opts}
 

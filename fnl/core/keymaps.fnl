@@ -10,12 +10,23 @@
 
 ;; NORMAL MODE <LEADER> KEYMAPS
 
-;; keymaps for fuzzy finding -- under the <leader>f namespace
-(local find-keymaps
-       {:name :+find
-        :f ["<cmd>Telescope find_files<cr>" "Find files"]
-        :g ["<cmd>Telescope live_grep<cr>" "Grep files"]
-        :b ["<cmd>Telescope buffers<cr>" "Find buffers"]})
+;; general code keymaps -- under the <leader>c namespace
+(local code-keymaps
+       {:name :+code
+        :d ["<cmd>Trouble document_diagnostics<cr>"
+            "Show document diagnostics"]
+        :D ["<cmd>Trouble workspace_diagnostics<cr>"
+            "Show workspace diagnostics"]
+        :f ["<cmd>lua require(\"conform\").format({async=true, lsp_fallback=true})<cr>"
+            "Format buffer"]
+        :R ["<cmd>lua vim.lsp.buf.rename()<cr>" "Rename symbol"]})
+
+;; (quick)fixing keymaps -- under the <leader>f namespace
+(local fix-keymaps
+       {:name :+fix
+        :h ["<cmd>TodoTrouble keywords=HACK<cr>" "Fix HACKs"]
+        :t ["<cmd>TodoTrouble keywords=TODO<cr>" "Fix TODOs"]
+        :q ["<cmd>Trouble quickfix<cr>" "Fix quickfix items"]})
 
 ;; keymaps for git -- under the <leader>g namespace
 (local git-keymaps {:name :+git
@@ -29,9 +40,8 @@
 
 ;; lsp keymaps -- under the <leader>l namespace
 (local lsp-keymaps {:name :+lsp
-                    :f ["<cmd>lua require(\"conform\").format({lsp_fallback = true}, nil)<cr>"
-                        "Format buffer"]
-                    :r ["<cmd>lua vim.lsp.buf.rename()<cr>" :Rename]
+                    :r [:<cmd>LspRestart<cr> "Restart server"]
+                    :l [:<cmd>LspLog<cr> "Show server logs"]
                     :i [:<cmd>LspInfo<cr> "Show LSP info"]})
 
 ;; keymaps for opening operations -- under the <leader>o namespace
@@ -39,6 +49,7 @@
        {:name :+open
         :l [:<cmd>Lazy<cr> "Open lazy"]
         :m [:<cmd>Mason<cr> "Open mason"]
+        ;; opens a short horizontal split and binds <Esc> to :q
         :t [(fn []
               (let [cmd _G.vim.cmd
                     map _G.vim.keymap.set]
@@ -48,6 +59,15 @@
                 (cmd :startinsert)))
             "Open terminal split"]
         :T [:<cmd>terminal<cr>i "Open terminal here"]})
+
+;; keymaps for searching -- under the <leader>s namespace
+(local search-keymaps
+       {:name :+search
+        :t ["<cmd>TodoTelescope keywords=TODO<cr>" "Search TODOs"]
+        :c [:<cmd>TodoTelescope<cr> "Search labelled comments"]
+        :f ["<cmd>Telescope find_files<cr>" "Search files"]
+        :g ["<cmd>Telescope live_grep<cr>" "Grep files"]
+        :b ["<cmd>Telescope buffers<cr>" "Search buffers"]})
 
 ;; keymaps for toggling settings -- under the <leader>t namespace
 (local toggle-keymaps
@@ -70,10 +90,12 @@
 
 ;; leader-namespaced keymaps are properly bound and prefixed at this bound
 (wk.register ;; table of immediate subnamespaces
-             {:f find-keymaps
+             {:c code-keymaps
+              :f fix-keymaps
               :g git-keymaps
               :l lsp-keymaps
               :o open-keymaps
+              :s search-keymaps
               :t toggle-keymaps
               :w window-keymaps}
              ;; options passed with these keymaps
