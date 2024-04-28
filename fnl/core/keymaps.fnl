@@ -11,15 +11,17 @@
 ;; NORMAL MODE <LEADER> KEYMAPS
 
 ;; general code keymaps -- under the <leader>c namespace
-(local code-keymaps
-       {:name :+code
-        :d ["<cmd>Trouble document_diagnostics<cr>"
-            "Show document diagnostics"]
-        :D ["<cmd>Trouble workspace_diagnostics<cr>"
-            "Show workspace diagnostics"]
-        :f ["<cmd>lua require(\"conform\").format({async=true, lsp_fallback=true})<cr>"
-            "Format buffer"]
-        :R ["<cmd>lua vim.lsp.buf.rename()<cr>" "Rename symbol"]})
+(local code-keymaps {:name :+code
+                     :d ["<cmd>Trouble document_diagnostics<cr>"
+                         "Show document diagnostics"]
+                     :D ["<cmd>Trouble workspace_diagnostics<cr>"
+                         "Show workspace diagnostics"]
+                     :f ["<cmd>lua require(\"conform\").format({async=true, lsp_fallback=true})<cr>"
+                         "Format buffer"]
+                     :r ["<cmd>lua vim.lsp.buf.rename()<cr>" "Rename symbol"]
+                     :R ["<cmd>Trouble lsp_references<cr>" "Show references"]
+                     :t "Run tests"
+                     :x :Execute})
 
 ;; (quick)fixing keymaps -- under the <leader>f namespace
 (local fix-keymaps
