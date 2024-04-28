@@ -11,7 +11,7 @@
                               (wk.register {:a ["<cmd>:RustLsp codeAction<cr>"
                                                 "Code actions"]
                                             :r ["<cmd>:RustLsp run<cr>" :Run]
-                                            :t ["<cmd>:RustLsp testables<cr>1<cr>"
+                                            :t ["<cmd>:RustLsp testables<cr>"
                                                 "Select and run testable"]}
                                            {:mode :n
                                             :prefix :<leader>c

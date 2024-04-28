@@ -12,6 +12,7 @@
 
 ;; general code keymaps -- under the <leader>c namespace
 (local code-keymaps {:name :+code
+                     :a "Code actions"
                      :d ["<cmd>Trouble document_diagnostics<cr>"
                          "Show document diagnostics"]
                      :D ["<cmd>Trouble workspace_diagnostics<cr>"
