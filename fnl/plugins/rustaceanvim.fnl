@@ -1,6 +1,7 @@
 ;; rustaceanvim -- additional rust tooling, forked from rust-tools.nvim
 
 ;; keymaps to be bound when rust-analyzer attaches
+;; BUG: the :r and :t bindings don't work when the rust file is open in a split
 (local bindings {:a [#(_G.vim.cmd.RustLsp :codeAction) "Code actions"]
                  :r [#(_G.vim.cmd.RustLsp :run) "Run item"]
                  :t [(fn []

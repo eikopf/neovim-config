@@ -8,7 +8,6 @@
                 :nvim-lua/plenary.nvim
                 :antoinemadec/FixCursorHold.nvim
                 :nvim-treesitter/nvim-treesitter
-                ;; naming rustaceanvim ensures that rustaceanvim.fnl is already required
                 :rustaceanvim]
  : opts}
 

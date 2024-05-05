@@ -76,6 +76,8 @@
 (local toggle-keymaps
        {:name :+toggle
         :l ["<cmd>set number!<cr>" "Toggle line numbers"]
+        :t ["<cmd>lua require(\"neotest\").summary.toggle()<cr>"
+            "Toggle test summary"]
         :r ["<cmd>set relativenumber!<cr>" "Toggle relative line numbers"]})
 
 ;; keymaps for window operations -- under the <leader>w namespace
