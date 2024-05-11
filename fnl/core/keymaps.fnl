@@ -113,7 +113,7 @@
                    :d ["<cmd>lua vim.lsp.buf.definition()<cr>"
                        "Goto definition"]})
 
-;; non-namespaced normal mode keymaps are defined seperately
+;; non-namespaced normal mode keymaps
 (wk.register {:- [:<cmd>Oil<cr> "Open enclosing directory"]
               :g go-keymaps
               :K ["<cmd>lua vim.lsp.buf.hover()<cr>" "LSP hover"]}

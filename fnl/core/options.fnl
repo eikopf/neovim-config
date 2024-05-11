@@ -1,64 +1,49 @@
 ;; VIM OPTIONS
-;; NOTE: the _G prefix is required to access global mutable state
-;; assigning values to keys in this table is equivalent to invoking <Cmd>set {key} {value}<cr>
-(local opt _G.vim.opt)
+(lambda set! [key ?value]
+  "Assigns `value` to `vim.opt.key`, or `true` if `value` is omitted."
+  (tset _G.vim.opt key (if (= ?value nil) true ?value)))
 
 ;; reasonable defaults
-(set opt.backspace :2)
-(set opt.showcmd true)
-(set opt.laststatus 2)
-;; auto-load file changes from outside of vim
-(set opt.autoread true)
+(set! :backspace :2)
+(set! :showcmd true)
+(set! :laststatus 2)
+(set! :autoread true)
 
 ;; tab behaviour
-;; use four spaces for tabs
-(set opt.tabstop 4)
-;; number of spaces used during autoindent
-(set opt.shiftwidth 2)
-;; round indents to an integer multiple of the shiftwidth
-(set opt.shiftround true)
-;; convert tabs into spaces (number is defined by tabstop)
-(set opt.expandtab true)
+(set! :tabstop 4)
+(set! :shiftwidth 2)
+(set! :shiftround true)
+(set! :expandtab true)
 
 ;; decrease update times
-(set opt.timeoutlen 500)
-(set opt.updatetime 50)
+(set! :timeoutlen 500)
+(set! :updatetime 50)
 
 ;; ui options
-;; the number of lines to keep above/below cursor where possible
-(set opt.scrolloff 3)
-;; use line numbers
-(set opt.number true)
-;; don't use relative numbers
-(set opt.relativenumber false)
+(set! :scrolloff 3)
+(set! :number true)
+(set! :relativenumber false)
+(set! :wrap true)
 
 ;; make the neovim clipboard play nicely with the OS's clipboard
-(set opt.clipboard :unnamedplus)
+(set! :clipboard :unnamedplus)
 
 ;; search options
-;; case-insensitive search by default
-(set opt.ignorecase true)
-;; if search includes a capital letter, then search with case
-(set opt.smartcase true)
-;; highlight search results
-(set opt.hlsearch true)
+(set! :ignorecase true)
+(set! :smartcase true)
+(set! :hlsearch true)
 
 ;; vim commandline options
-(set opt.history 1000)
+(set! :history 1000)
 
 ;; history options
-(set opt.backup false)
-(set opt.writebackup false)
-(set opt.undofile true)
-(set opt.swapfile false)
+(set! :backup false)
+(set! :writebackup false)
+(set! :undofile true)
+(set! :swapfile false)
 
 ;; window options
-(set opt.splitbelow true)
-(set opt.splitright true)
-
-;; text wrapping options
-;; disable linewrapping, equivalent to (set nowrap true)
-(set opt.wrap false)
-;; make scrolling long lines faster
-(set opt.sidescroll 5)
+(set! :splitbelow true)
+(set! :splitright true)
+(set! :sidescroll 5)
 

@@ -1,5 +1,4 @@
 ;; configuration entrypoint
-;; > invoked immediately after init.lua is run
 
 ;; core configuration
 (require :core.options)

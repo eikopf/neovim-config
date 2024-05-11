@@ -40,5 +40,3 @@
   ((. lsp server :setup) ;; pass settings to setup function through coq to broadcast capabilities
                          (coq.lsp_ensure_capabilities settings)))
 
-;; blah blah blah
-

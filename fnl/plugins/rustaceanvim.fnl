@@ -1,9 +1,8 @@
 ;; rustaceanvim -- additional rust tooling, forked from rust-tools.nvim
 
 ;; keymaps to be bound when rust-analyzer attaches
-;; BUG: the :r and :t bindings don't work when the rust file is open in a split
 (local bindings {:a [#(_G.vim.cmd.RustLsp :codeAction) "Code actions"]
-                 :r [#(_G.vim.cmd.RustLsp :run) "Run item"]
+                 :x [#(_G.vim.cmd.RustLsp :run) "Execute item"]
                  :t [(fn []
                        ((. (require :neotest) :run :run) (_G.vim.fn.expand "%")))
                      "Test file"]})
@@ -20,15 +19,15 @@
                   :features :all
                   :completions {:termSearch {:enable true}}}
           :hover {:actions {:implementations {:enable true}}
-                  :memoryLayout {:niches true :size :hexadecimal}
+                  :memoryLayout {:niches true
+                                 :size :decimal
+                                 :alignment :hexadecimal}
                   :show {:enumVariants show-item-count
                          :fields show-item-count
                          :traitAssocItems show-item-count}}
           :procMacro {:enable true :attributes {:enable true}}}))
 
-;; the primary configuration interface for rustaceanvim is
-;; the vim.g.rustaceanvim variable, which is a callback
-;; returning a table of configuration values
+;; the primary configuration interface for rustaceanvim
 (set _G.vim.g.rustaceanvim
      (fn []
        {:server {:on_attach (fn []
