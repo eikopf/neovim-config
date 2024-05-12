@@ -46,6 +46,10 @@ require("lazy").setup(plugin_spec, {
 	change_detection = {
 		notify = false, -- this disables the "Config Change Detected..." messages
 	},
+
+	rtp = {
+		paths = { "/opt/homebrew/lib/lua/5.4" },
+	},
 })
 
 -- at this point, it's possible that the lua/ directory does not exist,

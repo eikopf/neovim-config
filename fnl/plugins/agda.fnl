@@ -1,6 +1,4 @@
-;; ashinkarov/nvim-agda -- an Agda interaction plugin for Neovim
+;; isti115/agda.nvim -- an Agda interaction plugin for Neovim
 
-(set _G.vim.g.nvim_agda_settings {:agda :/opt/homebrew/bin/agda})
-
-{1 :ashinkarov/nvim-agda :ft :agda}
+{1 :isti115/agda.nvim :ft :agda}
 
