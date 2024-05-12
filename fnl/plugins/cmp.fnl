@@ -1,5 +1,25 @@
 ;; hrsh7th/nvim-cmp -- a neovim completion engine
 
+(fn mappings []
+  (let [cmp (require :cmp)
+        snip (require :luasnip)]
+    {:<C-n> (cmp.mapping.select_next_item)
+     :<C-p> (cmp.mapping.select_prev_item)
+     :<C-d> (cmp.mapping.scroll_docs -4)
+     :<C-f> (cmp.mapping.scroll_docs 4)
+     :<C-Space> (cmp.mapping.complete {})
+     :<CR> (cmp.mapping.confirm {:behavior cmp.ConfirmBehavior.Replace
+                                 :select true})
+     :<Tab> (cmp.mapping (fn [fallback]
+                           (if (cmp.visible) (cmp.select_next_item)
+                               (snip.expand_or_locally_jumpable) (snip.expand_or_jump)
+                               (fallback))) [:i :s])
+     :<S-Tab> (cmp.mapping (fn [fallback]
+                             (if (cmp.visible) (cmp.select_prev_item)
+                                 (snip.locally_jumpable -1) (snip.jump -1)
+                                 (fallback)))
+                           [:i :s])}))
+
 (fn config []
   (let [cmp (require :cmp)
         snip (require :luasnip)
@@ -9,13 +29,7 @@
       (snip.config.setup {})
       (cmp.setup {:snippet {:expand (fn [args]
                                       (snip.lsp_expand args.body))}
-                  :mapping (cmp.mapping.preset.insert {:<C-n> (cmp.mapping.select_next_item)
-                                                       :<C-p> (cmp.mapping.select_prev_item)
-                                                       :<C-d> (cmp.mapping.scroll_docs -4)
-                                                       :<C-f> (cmp.mapping.scroll_docs 4)
-                                                       :<C-Space> (cmp.mapping.complete {})
-                                                       :<CR> (cmp.mapping.confirm {:behavior cmp.ConfirmBehavior.Replace
-                                                                                   :select true})})
+                  :mapping (cmp.mapping.preset.insert (mappings))
                   :sources (cmp.config.sources [{:name :nvim_lsp}
                                                 {:name :luasnip}
                                                 {:name :ultisnips}

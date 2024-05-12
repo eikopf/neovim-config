@@ -1,10 +1,17 @@
 ;; nvim-autopairs -- multicharacter bracket completion
 
-;; the README for nvim-autopairs lists some config details
-;; for coq_nvim users -- refer to this if coq and autopairs
-;; interactly weirdly
-
 {1 :windwp/nvim-autopairs
  :event :InsertEnter
- :opts {:disable_filetype [:TelescopePrompt :vim]}}
+ ;; lisps are ignored in favor of using nvim-parinfer
+ :opts {:disable_filetype [:TelescopePrompt
+                           :clojure
+                           :scheme
+                           :lisp
+                           :racket
+                           :hy
+                           :fennel
+                           :janet
+                           :carp
+                           :wast
+                           :yuck]}}
 
