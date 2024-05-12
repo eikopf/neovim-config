@@ -31,12 +31,9 @@
 
 ;; load lspconfig and coq
 (local lsp (require :lspconfig))
-(local coq (require :coq))
+(local capabilities (let [cmp (require :cmp_nvim_lsp)]
+                      (cmp.default_capabilities)))
 
-;; for each server, pass its settings to lsp.server.setup
-;; and then get coq to broadcast the resulting lsp capabilities
 (each [server settings (pairs servers)]
-  ;; do lsp[server]["setup"]
-  ((. lsp server :setup) ;; pass settings to setup function through coq to broadcast capabilities
-                         (coq.lsp_ensure_capabilities settings)))
+  ((. lsp server :setup) {: capabilities}))
 
