@@ -1,4 +1,5 @@
-;; GLOBAL KEYMAPS
+;; KEYMAPS
+
 ;; keymaps are bound and documented with which-key.nvim
 ;; following the doom emacs convention, prefix names begin with a + (e.g. +open, +find)
 (local wk (require :which-key))
@@ -63,6 +64,10 @@
             "Open terminal split"]
         :T [:<cmd>terminal<cr>i "Open terminal here"]})
 
+;; keymaps for proof assistants -- under the <leader>p namespace
+;; this is mostly here to mark <leader>p as reserved
+(local proof-keymaps {:name :+proof})
+
 ;; keymaps for searching -- under the <leader>s namespace
 (local search-keymaps
        {:name :+search
@@ -100,6 +105,7 @@
               :g git-keymaps
               :l lsp-keymaps
               :o open-keymaps
+              :p proof-keymaps
               :s search-keymaps
               :t toggle-keymaps
               :w window-keymaps}
