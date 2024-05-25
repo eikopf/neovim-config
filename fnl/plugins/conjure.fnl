@@ -2,7 +2,7 @@
 
 ;; some of this config was derived from a lua equivalent in https://github.com/Olical/conjure
 {1 :Olical/conjure
- :ft [:clojure :fennel :python :julia :lua :racket]
+ :ft [:clojure :fennel :racket]
  :dependencies [{1 :PaterJason/cmp-conjure
                  :config (fn []
                            (let [cmp (require :cmp)
