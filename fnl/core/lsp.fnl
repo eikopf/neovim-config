@@ -18,7 +18,7 @@
                 :marksman {}
                 :phpactor {}
                 :ruff_lsp {}
-                ;; rust_analyzer is omitted, since plugins/rustaceanvim.fnl configures it separately
+                ;; rust_analyzer is omitted – rustaceanvim configures it separately
                 ;; :rust_analyzer {}
                 :sqlls {}
                 :tsserver {}
@@ -29,11 +29,15 @@
 (local mason (require :mason-lspconfig))
 (mason.setup {:ensure_installed (_G.vim.tbl_keys servers)})
 
-;; load lspconfig and coq
+;; load lspconfig and cmp capabilities
 (local lsp (require :lspconfig))
 (local capabilities (let [cmp (require :cmp_nvim_lsp)]
                       (cmp.default_capabilities)))
 
+;; initialize the servers
 (each [server settings (pairs servers)]
-  ((. lsp server :setup) {: capabilities}))
+  ((. lsp server :setup) (do
+                           ;; insert capabilities into the settings
+                           (tset settings :capabilities capabilities)
+                           settings)))
 
