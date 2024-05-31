@@ -9,5 +9,6 @@
                 :antoinemadec/FixCursorHold.nvim
                 :nvim-treesitter/nvim-treesitter
                 :rustaceanvim]
- : opts}
+ : opts
+ :lazy true}
 
