@@ -11,7 +11,7 @@
 ;; refer to https://rust-analyzer.github.io/manual.html#configuration
 ;;
 ;; NOTE: this table is implicitly passed to rust-analyzer with the InitializeParams
-;; message, so wrapping this table under the :initialization_options key is unnecessary
+;; message, so wrapping it with the :initialization_options key is unnecessary
 (local rust-analyzer
        (let [show-item-count 16]
          {:cargo {:features :all}
@@ -28,7 +28,7 @@
           :procMacro {:enable true :attributes {:enable true}}}))
 
 ;; the primary configuration interface for rustaceanvim
-(set _G.vim.g.rustaceanvim
+(set vim.g.rustaceanvim
      (fn []
        {:server {:on_attach (fn []
                               (let [wk (require :which-key)

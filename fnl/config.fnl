@@ -6,5 +6,5 @@
 (require :core.lsp)
 
 ;; load colorscheme
-(_G.vim.cmd.colorscheme :catppuccin-macchiato)
+(vim.cmd.colorscheme :catppuccin-macchiato)
 
