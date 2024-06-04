@@ -5,7 +5,14 @@
 (local servers {:beancount {}
                 :clangd {}
                 :cssls {}
-                :fennel_ls {}
+                :fennel_ls {:cmd [(.. (vim.fn.stdpath :data)
+                                      :/mason/bin/fennel-ls)]
+                            :root_dir #(. (vim.fs.find [:fnl :git]
+                                                       {:upward true
+                                                        :type :directory
+                                                        :path $})
+                                          1)
+                            :settings {:fennel-ls {:extra-globals :vim}}}
                 :gradle_ls {}
                 :hls {}
                 :html {}

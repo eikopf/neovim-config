@@ -43,6 +43,7 @@ local plugins = { "rktjmp/hotpot.nvim" }
 -- configure hotpot
 require("hotpot").setup({
 	provide_require_fennel = true,
+	enable_hotpot_diagnostics = false,
 })
 
 -- manually glob files from plugin dir
