@@ -1,17 +1,11 @@
--- this file was derived in part from https://github.com/rafaeldelboni/cajus-nfnl/tree/main
-
 -- define leader keys (otherwise plugins will use the default leader key)
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
--- installation prefix for lazy.nvim
+-- bootstrap lazy.nvim
 local lazy_prefix = vim.fn.stdpath("data") .. "/lazy"
-
--- installation directory for lazy.nvim itself
 local lazy_install_path = lazy_prefix .. "/lazy.nvim"
-
--- if lazy isn't installed, then install the latest stable version
-if not (vim.uv or vim.loop).fs_stat(lazy_install_path) then
+if not vim.loop.fs_stat(lazy_install_path) then
 	vim.fn.system({
 		"git",
 		"clone",
@@ -22,22 +16,36 @@ if not (vim.uv or vim.loop).fs_stat(lazy_install_path) then
 	})
 end
 
--- prepend lazy.nvim's install path to the runtime path
-vim.opt.rtp:prepend(lazy_install_path)
+-- bootstrap hotpot.nvim (fennel compiler plugin)
+local hotpot_path = lazy_prefix .. "/hotpot.nvim"
+if not vim.loop.fs_stat(hotpot_path) then
+	vim.notify("bootstrapping hotpot.nvim...", vim.log.levels.INFO)
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"--single-branch",
+		"--branch=v0.12.0",
+		"https://github.com/rktjmp/hotpot.nvim.git",
+		hotpot_path,
+	})
+end
+
+-- prepend lazy and hotpot to the runtime path
+vim.opt.rtp:prepend({ hotpot_path, lazy_install_path })
 
 -- enable jit compilation
 vim.loader.enable()
 
--- the plugin spec defines the set of plugins that lazy loads.
--- in this case, all files under the plugin module are merged
--- into a plugin spec, and nfnl is explicitly added
+-- load hotpot
+require("hotpot").setup({
+	provide_require_fennel = true,
+})
+
 local plugin_spec = { {
 	{
 		{ import = "plugins" },
-		{
-			"Olical/nfnl",
-			ft = "fennel",
-		},
+		{ "rktjmp/hotpot.nvim" },
 	},
 } }
 
@@ -46,21 +54,7 @@ require("lazy").setup(plugin_spec, {
 	change_detection = {
 		notify = false, -- this disables the "Config Change Detected..." messages
 	},
-
-	rtp = {
-		paths = { "/opt/homebrew/lib/lua/5.4" },
-	},
 })
-
--- at this point, it's possible that the lua/ directory does not exist,
--- typically because the repo has just been cloned
-local target_dir = vim.fn.stdpath("config") .. "/lua"
-if vim.fn.glob(target_dir) == "" then
-	-- we do the dumbest possible thing here: compile the .fnl files and immediately exit
-	-- then the next time the user opens neovim, it should just behave as normal
-	require("nfnl.api")["compile-all-files"](target_dir)
-	os.exit()
-end
 
 -- bootstrapping is complete, so control passes to fnl/config.fnl
 require("config")
