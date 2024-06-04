@@ -3,7 +3,7 @@
 ;; callback invoked when the idris2 LSP attaches to a buffer
 (fn on_attach [_client]
   (let [wk (require :which-key)
-        bufnr (_G.vim.api.nvim_get_current_buf)
+        bufnr (vim.api.nvim_get_current_buf)
         action (require :idris2.code_action)
         repl (require :idris2.repl)
         metavar (require :idris2.metavars)]
@@ -27,7 +27,7 @@
 
 (local opts {:autostart_semantic true
              ;; immediately write the buffer after LSP actions
-             :code_action_post_hook (fn [] (_G.vim.cmd "silent write"))
+             :code_action_post_hook (fn [] (vim.cmd "silent write"))
              :server {: on_attach}})
 
 {1 :ShinKage/idris2-nvim

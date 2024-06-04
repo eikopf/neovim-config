@@ -4,5 +4,5 @@
  :cmd [:MarkdownPreviewToggle :MarkdownPreview :MarkdownPreviewStop]
  :ft [:markdown]
  :build (fn []
-          ((. _G.vim.fn "mkdp#util#install")))}
+          ((. vim.fn "mkdp#util#install")))}
 

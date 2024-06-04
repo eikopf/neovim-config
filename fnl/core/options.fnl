@@ -1,7 +1,7 @@
 ;; VIM OPTIONS
 (lambda set! [key ?value]
   "Assigns `value` to `vim.opt.key`, or `true` if `value` is omitted."
-  (tset _G.vim.opt key (if (= ?value nil) true ?value)))
+  (tset vim.opt key (if (= ?value nil) true ?value)))
 
 ;; reasonable defaults
 (set! :backspace :2)

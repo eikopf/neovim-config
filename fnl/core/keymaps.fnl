@@ -55,8 +55,8 @@
         :m [:<cmd>Mason<cr> "Open mason"]
         ;; opens a short horizontal split and binds <Esc> to :q
         :t [(fn []
-              (let [cmd _G.vim.cmd
-                    map _G.vim.keymap.set]
+              (let [cmd vim.cmd
+                    map vim.keymap.set]
                 (cmd :15split)
                 (cmd :terminal)
                 (map :t :<Esc> :<cmd>q<cr> {:buffer true})

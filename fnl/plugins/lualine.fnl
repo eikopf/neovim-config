@@ -4,7 +4,7 @@
   "
   Returns current path relative to user's home directory.
   "
-  (_G.vim.fn.expand "%:~:h"))
+  (vim.fn.expand "%:~:h"))
 
 ;; refer to :help lualine.txt for all options
 (local options {:icons_enabled true
