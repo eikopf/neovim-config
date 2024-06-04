@@ -16,43 +16,45 @@ if not vim.loop.fs_stat(lazy_install_path) then
 	})
 end
 
--- bootstrap hotpot.nvim (fennel compiler plugin)
+-- bootstrap hotpot.nvim
 local hotpot_path = lazy_prefix .. "/hotpot.nvim"
 if not vim.loop.fs_stat(hotpot_path) then
-	vim.notify("bootstrapping hotpot.nvim...", vim.log.levels.INFO)
+	vim.notify("Bootstrapping hotpot.nvim...", vim.log.levels.INFO)
 	vim.fn.system({
 		"git",
 		"clone",
 		"--filter=blob:none",
 		"--single-branch",
-		"--branch=v0.12.0",
 		"https://github.com/rktjmp/hotpot.nvim.git",
 		hotpot_path,
 	})
 end
 
 -- prepend lazy and hotpot to the runtime path
-vim.opt.rtp:prepend({ hotpot_path, lazy_install_path })
+vim.opt.rtp:prepend(lazy_install_path)
+vim.opt.rtp:prepend(lazy_prefix .. "/hotpot.nvim")
 
--- enable jit compilation
 vim.loader.enable()
 
--- load hotpot
-local hotpot = require("hotpot")
-hotpot.setup({
+-- refer to https://github.com/rktjmp/hotpot.nvim/issues/97
+local plugins = { "rktjmp/hotpot.nvim" }
+
+-- configure hotpot
+require("hotpot").setup({
 	provide_require_fennel = true,
 })
 
--- define plugins
-local plugin_spec = { {
-	{
-		{ import = "plugins" },
-		{ "rktjmp/hotpot.nvim" },
-	},
-} }
+-- manually glob files from plugin dir
+local plugin_dir = vim.fn.stdpath("config") .. "/fnl/plugins"
+if vim.loop.fs_stat(plugin_dir) then
+	for file in vim.fs.dir(plugin_dir) do
+		file = file:match("^(.*)%.fnl$")
+		plugins[#plugins + 1] = require("plugins." .. file)
+	end
+end
 
--- finally, we invoke lazy by passing the plugin spec and some options
-require("lazy").setup(plugin_spec, {
+-- load lazy
+require("lazy").setup(plugins, {
 	change_detection = {
 		notify = false, -- this disables the "Config Change Detected..." messages
 	},
