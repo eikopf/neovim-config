@@ -4,15 +4,15 @@ vim.g.maplocalleader = ","
 
 -- bootstrap lazy.nvim
 local lazy_prefix = vim.fn.stdpath("data") .. "/lazy"
-local lazy_install_path = lazy_prefix .. "/lazy.nvim"
-if not vim.loop.fs_stat(lazy_install_path) then
+local lazy_path = lazy_prefix .. "/lazy.nvim"
+if not vim.loop.fs_stat(lazy_path) then
 	vim.fn.system({
 		"git",
 		"clone",
 		"--filter=blob:none",
 		"https://github.com/folke/lazy.nvim.git",
 		"--branch=stable", -- latest stable release
-		lazy_install_path,
+		lazy_path,
 	})
 end
 
@@ -31,9 +31,10 @@ if not vim.loop.fs_stat(hotpot_path) then
 end
 
 -- prepend lazy and hotpot to the runtime path
-vim.opt.rtp:prepend(lazy_install_path)
-vim.opt.rtp:prepend(lazy_prefix .. "/hotpot.nvim")
+vim.opt.rtp:prepend(lazy_path)
+vim.opt.rtp:prepend(hotpot_path)
 
+-- enable bytecode caching
 vim.loader.enable()
 
 -- refer to https://github.com/rktjmp/hotpot.nvim/issues/97
