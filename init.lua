@@ -38,10 +38,12 @@ vim.opt.rtp:prepend({ hotpot_path, lazy_install_path })
 vim.loader.enable()
 
 -- load hotpot
-require("hotpot").setup({
+local hotpot = require("hotpot")
+hotpot.setup({
 	provide_require_fennel = true,
 })
 
+-- define plugins
 local plugin_spec = { {
 	{
 		{ import = "plugins" },
