@@ -42,5 +42,6 @@
                 :hrsh7th/cmp-nvim-lsp
                 :rafamadriz/friendly-snippets
                 :kdheepak/cmp-latex-symbols]
- : config}
+ : config
+ :event :InsertEnter}
 

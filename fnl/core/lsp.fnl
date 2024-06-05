@@ -2,8 +2,7 @@
 
 ;; servers to install with mason-lspconfig and their corresponding settings
 ;; refer to :help lspconfig-setup for valid settings keys
-(local servers {:beancount {}
-                :clangd {}
+(local servers {:clangd {}
                 :cssls {}
                 :fennel_ls {:cmd [(.. (vim.fn.stdpath :data)
                                       :/mason/bin/fennel-ls)]
@@ -13,23 +12,18 @@
                                                         :path $})
                                           1)
                             :settings {:fennel-ls {:extra-globals :vim}}}
-                :gradle_ls {}
                 :hls {}
                 :html {}
                 :jdtls {}
                 :jsonls {}
-                :jqls {}
                 :julials {}
-                :kotlin_language_server {}
                 :lua_ls {}
                 :marksman {}
-                :phpactor {}
                 :ruff_lsp {}
-                ;; rust_analyzer is omitted – rustaceanvim configures it separately
-                ;; :rust_analyzer {}
+                ;; rust_analyzer is configured by rustaceanvim
                 :sqlls {}
-                :tsserver {}
-                :typst_lsp {}
+                ;;:tsserver {}
+                ;;:typst_lsp {}
                 :zls {}})
 
 ;; require mason-lspconfig and ensure that the necessary servers are installed
