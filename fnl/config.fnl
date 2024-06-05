@@ -13,5 +13,8 @@
 ;; TODO: add nvim-orgmode/orgmode
 ;; TODO: update README
 ;; TODO: finish configuring rustaceanvim (i.e. DAP + keybindings)
-;; TODO: add plugin support for haskell
+;; TODO: add plugin support for haskell (haskell-tools.nvim?)
+;; TODO: replace vim-startify (maybe dashboard-nvim?)
+;; TODO: remove unused plugins, particularly themes
+;; TODO: add a plugin for resolving merge conflicts
 
