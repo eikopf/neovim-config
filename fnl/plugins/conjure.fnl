@@ -1,7 +1,8 @@
 ;; Olical/conjure.nvim -- interactive evaluation within neovim
 
-;; callback for evaluating fennel expressions in the commandline
 (fn eval-fennel-in-commandline [tbl]
+  "Evaluates the Fennel expression passed as `tbl.args`, 
+   and prints the result to the commandline."
   (let [eval (require :conjure.eval)
         client (require :conjure.client)]
     (client.with-filetype :fennel
