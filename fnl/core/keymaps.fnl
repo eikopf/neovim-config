@@ -57,8 +57,7 @@
         :t [(fn []
               (let [cmd vim.cmd
                     map vim.keymap.set]
-                (cmd :15split)
-                (cmd :terminal)
+                (cmd :ToggleTerm)
                 (map :t :<Esc> :<cmd>q<cr> {:buffer true})
                 (cmd :startinsert)))
             "Open terminal split"]
