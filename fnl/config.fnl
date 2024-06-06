@@ -14,4 +14,8 @@
 ;; TODO: finish configuring rustaceanvim (i.e. DAP + keybindings)
 ;; TODO: add plugin support for haskell (haskell-tools.nvim?)
 ;; TODO: add a plugin for resolving merge conflicts
+;; TODO: try out stevearc/overseer.nvim
+;; TODO: try out karb94/neoscroll.nvim
+
+;; very much on the backburner, but possibly give nyoom.nvim a try?
 
