@@ -9,7 +9,6 @@
 (vim.cmd.colorscheme :catppuccin-macchiato)
 
 ;; todos
-;; TODO: add nvim-orgmode/orgmode
 ;; TODO: update README
 ;; TODO: add plugin support for haskell (haskell-tools.nvim?)
 ;; TODO: add a plugin for resolving merge conflicts
