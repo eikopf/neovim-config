@@ -34,7 +34,8 @@
                                                 {:name :luasnip}
                                                 {:name :ultisnips}
                                                 {:name :crates}
-                                                {:name :latex_symbols}])}))))
+                                                {:name :latex_symbols}
+                                                {:name :orgmode}])}))))
 
 {1 :hrsh7th/nvim-cmp
  :dependencies [:L3MON4D3/LuaSnip
