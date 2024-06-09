@@ -116,9 +116,10 @@
 ;; OTHER NORMAL MODE KEYMAPS
 
 ;; top-level keymaps for "goto" actions (e.g. goto definition
-(local go-keymaps {:name :+goto
-                   :d ["<cmd>lua vim.lsp.buf.definition()<cr>"
-                       "Goto definition"]})
+(local go-keymaps
+       {:name :+goto
+        :d ["<cmd>lua vim.lsp.buf.definition()<cr>" "Goto definition"]
+        :o ["<cmd>edit ~/Documents/org<cr>" "Goto Org Dir"]})
 
 ;; non-namespaced normal mode keymaps
 (wk.register {:- [:<cmd>Oil<cr> "Open enclosing directory"]
