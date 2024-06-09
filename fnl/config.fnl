@@ -17,5 +17,3 @@
 ;; TODO: try out stevearc/overseer.nvim
 ;; TODO: try out karb94/neoscroll.nvim
 
-;; very much on the backburner, but possibly give nyoom.nvim a try?
-

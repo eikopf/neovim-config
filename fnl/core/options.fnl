@@ -32,7 +32,7 @@
 (set! :updatetime 250)
 
 ;; ui options
-(set! :conceallevel 2)
+(set! :conceallevel 0)
 (set! :scrolloff 3)
 (set! :number)
 (set! :norelativenumber)
