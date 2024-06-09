@@ -12,7 +12,7 @@
                                                         :path $})
                                           1)
                             :settings {:fennel-ls {:extra-globals :vim}}}
-                :hls {}
+                ;; hls is configured by haskell-tools
                 :html {}
                 :jdtls {}
                 :jsonls {}
