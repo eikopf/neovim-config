@@ -20,5 +20,5 @@
                  :lualine_y [:encoding :filetype]
                  :lualine_z [:location]})
 
-{1 :nvim-lualine/lualine.nvim :opts {: options : sections}}
+{1 :nvim-lualine/lualine.nvim :opts {: options : sections} :event :UiEnter}
 

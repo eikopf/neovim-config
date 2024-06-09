@@ -122,7 +122,9 @@
 
 ;; non-namespaced normal mode keymaps
 (wk.register {:- [:<cmd>Oil<cr> "Open enclosing directory"]
-              ";" [(fn [] (vim.cmd.FnlEval (vim.fn.input "")))
+              ";" [(fn []
+                     (vim.cmd.FnlEval (vim.fn.input {:prompt "eval: "
+                                                     :cancelreturn :nil})))
                    "Evaluate Fennel expression"]
               :g go-keymaps
               :K ["<cmd>lua vim.lsp.buf.hover()<cr>" "LSP hover"]}
