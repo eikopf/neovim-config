@@ -24,7 +24,7 @@
                 :sqlls {}
                 ;;:tsserver {}
                 ;;:typst_lsp {}
-                :zls {}})
+                })
 
 ;; require mason-lspconfig and ensure that the necessary servers are installed
 (local mason (require :mason-lspconfig))
