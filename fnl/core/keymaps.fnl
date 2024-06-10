@@ -119,7 +119,8 @@
 (local go-keymaps
        {:name :+goto
         :d ["<cmd>lua vim.lsp.buf.definition()<cr>" "Goto definition"]
-        :o ["<cmd>edit ~/Documents/org<cr>" "Goto Org Dir"]})
+        :o ["<cmd>edit ~/Documents/org<cr>" "Goto Org Dir"]
+        :p ["<cmd>edit ~/projects<cr>" "Goto Projects"]})
 
 ;; non-namespaced normal mode keymaps
 (wk.register {:- [:<cmd>Oil<cr> "Open enclosing directory"]
