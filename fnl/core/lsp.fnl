@@ -21,10 +21,10 @@
                 :marksman {}
                 :ruff_lsp {}
                 ;; rust_analyzer is configured by rustaceanvim
-                :sqlls {}
-                ;;:tsserver {}
-                ;;:typst_lsp {}
-                })
+                :sqlls {}})
+
+;;:tsserver {}
+;;:typst_lsp {}
 
 ;; require mason-lspconfig and ensure that the necessary servers are installed
 (local mason (require :mason-lspconfig))

@@ -11,57 +11,67 @@
 
 ;; NORMAL MODE <LEADER> KEYMAPS
 
+(λ format-buffer []
+  "Formats the current buffer"
+  (let [conform (require :conform)]
+    (conform.format {:async true :lsp_fallback true})))
+
 ;; general code keymaps -- under the <leader>c namespace
 (local code-keymaps {:name :+code
                      :a "Code actions"
-                     :d ["<cmd>Trouble document_diagnostics<cr>"
+                     :d [#(vim.cmd.Trouble :document_diagnostics)
                          "Show document diagnostics"]
-                     :D ["<cmd>Trouble workspace_diagnostics<cr>"
+                     :D [#(vim.cmd.Trouble :workspace_diagnostics)
                          "Show workspace diagnostics"]
-                     :f ["<cmd>lua require(\"conform\").format({async=true, lsp_fallback=true})<cr>"
-                         "Format buffer"]
-                     :r ["<cmd>lua vim.lsp.buf.rename()<cr>" "Rename symbol"]
-                     :R ["<cmd>Trouble lsp_references<cr>" "Show references"]
+                     :f [format-buffer "Format buffer"]
+                     :r [vim.lsp.buf.rename "Rename symbol"]
+                     :R [#(vim.cmd.Trouble :lsp_references) "Show references"]
                      :t "Run tests"
                      :x :Execute})
 
 ;; (quick)fixing keymaps -- under the <leader>f namespace
 (local fix-keymaps
        {:name :+fix
-        :h ["<cmd>TodoTrouble keywords=HACK<cr>" "Fix HACKs"]
-        :t ["<cmd>TodoTrouble keywords=TODO<cr>" "Fix TODOs"]
-        :q ["<cmd>Trouble quickfix<cr>" "Fix quickfix items"]})
+        :h [#(vim.cmd.TodoTrouble :keywords=HACK) "Fix HACKs"]
+        :t [#(vim.cmd.TodoTrouble :keywords=TODO) "Fix TODOs"]
+        :q [#(vim.cmd.Trouble :quickfix) "Fix quickfix items"]})
 
 ;; keymaps for git -- under the <leader>g namespace
-(local git-keymaps {:name :+git
-                    :A ["<cmd>Git add -A<cr>" "Stage all"]
-                    :c ["<cmd>Git commit<cr>" :Commit]
-                    :d ["<cmd>Git diff<cr>" :Diff]
-                    :g [:<cmd>Git<cr> :Status]
-                    :p ["<cmd>Git push<cr>" :Push]
-                    :s ["<cmd>Telescope git_branches<cr>" "Switch branch"]
-                    :u ["<cmd>Git reset<cr>" "Unstage all"]})
+(local git-keymaps
+       {:name :+git
+        :A [#(vim.cmd.Git "add -A") "Stage all"]
+        :c [#(vim.cmd.Git :commit) :Commit]
+        :d [#(vim.cmd.Git :diff) :Diff]
+        :g [vim.cmd.Git :Status]
+        :p [#(vim.cmd.Git :push) :Push]
+        :s [#(vim.cmd.Telescope :git_branches) "Switch branch"]
+        :u [#(vim.cmd.Git :reset) "Unstage all"]})
 
 ;; lsp keymaps -- under the <leader>l namespace
 (local lsp-keymaps {:name :+lsp
-                    :r [:<cmd>LspRestart<cr> "Restart server"]
-                    :l [:<cmd>LspLog<cr> "Show server logs"]
-                    :i [:<cmd>LspInfo<cr> "Show LSP info"]})
+                    :r [vim.cmd.LspRestart "Restart server"]
+                    :l [vim.cmd.LspLog "Show server logs"]
+                    :i [vim.cmd.LspInfo "Show LSP info"]})
+
+;; emulating the behaviour of vterm in doom emacs
+(λ open-short-term []
+  "Opens a short horizontal terminal split and binds `<Esc>` to `:q`"
+  (vim.cmd :ToggleTerm)
+  (vim.keymap.set :t :<Esc> :<cmd>q<cr> {:buffer true})
+  (vim.cmd :startinsert))
+
+(λ open-full-term []
+  "Opens a normal terminal session in the current buffer."
+  (vim.cmd :terminal)
+  (vim.cmd :startinsert))
 
 ;; keymaps for opening operations -- under the <leader>o namespace
 (local open-keymaps
        {:name :+open
-        :l [:<cmd>Lazy<cr> "Open lazy"]
-        :m [:<cmd>Mason<cr> "Open mason"]
-        ;; opens a short horizontal split and binds <Esc> to :q
-        :t [(fn []
-              (let [cmd vim.cmd
-                    map vim.keymap.set]
-                (cmd :ToggleTerm)
-                (map :t :<Esc> :<cmd>q<cr> {:buffer true})
-                (cmd :startinsert)))
-            "Open terminal split"]
-        :T [:<cmd>terminal<cr>i "Open terminal here"]})
+        :l [#(vim.cmd :Lazy) "Open lazy"]
+        :m [#(vim.cmd :Mason) "Open mason"]
+        :t [#(open-short-term) "Open terminal split"]
+        :T [#(open-full-term) "Open terminal here"]})
 
 ;; keymaps for proof assistants -- under the <leader>p namespace
 ;; this is mostly here to mark <leader>p as reserved
@@ -70,34 +80,38 @@
 ;; keymaps for searching -- under the <leader>s namespace
 (local search-keymaps
        {:name :+search
-        :t ["<cmd>TodoTelescope keywords=TODO<cr>" "Search TODOs"]
-        :c [:<cmd>TodoTelescope<cr> "Search labelled comments"]
-        :f ["<cmd>Telescope find_files<cr>" "Search files"]
-        :g ["<cmd>Telescope live_grep<cr>" "Grep files"]
-        :b ["<cmd>Telescope buffers<cr>" "Search buffers"]})
+        :t [#(vim.cmd.TodoTelescope :keywords=TODO) "Search TODOs"]
+        :c [#(vim.cmd.TodoTelescope) "Search labelled comments"]
+        :f [#(vim.cmd.Telescope :find_files) "Search files"]
+        :g [#(vim.cmd.Telescope :live_grep) "Grep files"]
+        :b [#(vim.cmd.Telescope :buffers) "Search buffers"]})
+
+(λ toggle-neotest-summary []
+  "Toggles the `neotest` summary buffer."
+  (let [nt (require :neotest)]
+    (nt.summary.toggle)))
 
 ;; keymaps for toggling settings -- under the <leader>t namespace
 (local toggle-keymaps
        {:name :+toggle
-        :l ["<cmd>set number!<cr>" "Toggle line numbers"]
-        :t ["<cmd>lua require(\"neotest\").summary.toggle()<cr>"
-            "Toggle test summary"]
-        :p [:<cmd>ParinferToggle<cr> "Toggle Parinfer"]
-        :P [:<cmd>ParinferToggle!<cr> "Toggle Parinfer Globally"]
-        :r ["<cmd>set relativenumber!<cr>" "Toggle relative line numbers"]})
+        :l [#(vim.cmd.set :number!) "Toggle line numbers"]
+        :t [toggle-neotest-summary "Toggle test summary"]
+        :p [vim.cmd.ParinferToggle "Toggle Parinfer"]
+        :P [vim.cmd.ParinferToggle! "Toggle Parinfer Globally"]
+        :r [#(vim.cmd.set :relativenumber!) "Toggle relative line numbers"]})
 
 ;; keymaps for window operations -- under the <leader>w namespace
 ;; these have been chosen to match exactly with the <c-w> bindings
 (local window-keymaps
        {:name :+window
-        :h ["<cmd>wincmd h<cr>" "Go left"]
-        :j ["<cmd>wincmd j<cr>" "Go down"]
-        :k ["<cmd>wincmd k<cr>" "Go up"]
-        :l ["<cmd>wincmd l<cr>" "Go right"]
-        :o [:<cmd>only<cr> "Close other windows"]
-        :q [:<cmd>q<cr> "Quit window"]
-        :s [:<cmd>split<cr> "Horizontal split"]
-        :v [:<cmd>vsplit<cr> "Vertical split"]})
+        :h [#(vim.cmd.wincmd :h) "Go left"]
+        :j [#(vim.cmd.wincmd :j) "Go down"]
+        :k [#(vim.cmd.wincmd :k) "Go up"]
+        :l [#(vim.cmd.wincmd :l) "Go right"]
+        :o [vim.cmd.only "Close other windows"]
+        :q [vim.cmd.q "Quit window"]
+        :s [vim.cmd.split "Horizontal split"]
+        :v [vim.cmd.vsplit "Vertical split"]})
 
 ;; leader-namespaced keymaps are properly bound and prefixed at this bound
 (wk.register ;; table of immediate subnamespaces
@@ -115,20 +129,27 @@
 
 ;; OTHER NORMAL MODE KEYMAPS
 
+(λ goto-dir-and-edit [dir]
+  "Sets the `cwd` to `dir` and calls `:edit .`"
+  (vim.cmd.cd dir)
+  (vim.cmd.edit ".")
+  (vim.notify (.. "set cwd to " (vim.fn.expand dir)) vim.log.levels.INFO))
+
 ;; top-level keymaps for "goto" actions (e.g. goto definition
 (local go-keymaps
        {:name :+goto
-        :d ["<cmd>lua vim.lsp.buf.definition()<cr>" "Goto definition"]
-        :o ["<cmd>edit ~/Documents/org<cr>" "Goto Org Dir"]
-        :p ["<cmd>edit ~/projects<cr>" "Goto Projects"]})
+        :c [#(goto-dir-and-edit "~/.config/nvim") "Goto config"]
+        :d [#(vim.lsp.buf.definition) "Goto definition"]
+        :o [#(goto-dir-and-edit "~/Documents/org") "Goto org documents"]
+        :p [#(goto-dir-and-edit "~/projects") "Goto projects"]})
+
+(λ prompt-fennel-eval []
+  "Prompts for a Fennel expression and evaluates it."
+  (vim.cmd.FnlEval (vim.fn.input {:prompt "eval: " :cancelreturn :nil})))
 
 ;; non-namespaced normal mode keymaps
-(wk.register {:- [:<cmd>Oil<cr> "Open enclosing directory"]
-              ";" [(fn []
-                     (vim.cmd.FnlEval (vim.fn.input {:prompt "eval: "
-                                                     :cancelreturn :nil})))
-                   "Evaluate Fennel expression"]
+(wk.register {:- [#(vim.cmd :Oil) "Open enclosing directory"]
+              ";" [prompt-fennel-eval "Evaluate Fennel expression"]
               :g go-keymaps
-              :K ["<cmd>lua vim.lsp.buf.hover()<cr>" "LSP hover"]}
-             {:mode :n})
+              :K [#(vim.lsp.buf.hover) "LSP hover"]} {:mode :n})
 
