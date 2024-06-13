@@ -53,6 +53,9 @@
                     :l [vim.cmd.LspLog "Show server logs"]
                     :i [vim.cmd.LspInfo "Show LSP info"]})
 
+;; notes keymaps -- under the <leader>n namespace
+(local note-keymaps {:name :+notes :a :Agenda :c :Capture})
+
 ;; emulating the behaviour of vterm in doom emacs
 (λ open-short-term []
   "Opens a short horizontal terminal split and binds `<Esc>` to `:q`"
@@ -65,11 +68,20 @@
   (vim.cmd :terminal)
   (vim.cmd :startinsert))
 
+(λ goto-dir-and-edit [dir]
+  "Sets the `cwd` to `dir` and calls `:edit .`"
+  (vim.cmd.cd dir)
+  (vim.cmd.edit ".")
+  (vim.notify (.. "set cwd to " (vim.fn.expand dir)) vim.log.levels.INFO))
+
 ;; keymaps for opening operations -- under the <leader>o namespace
 (local open-keymaps
        {:name :+open
+        :c [#(goto-dir-and-edit "~/.config/nvim") "Open config"]
         :l [#(vim.cmd :Lazy) "Open lazy"]
         :m [#(vim.cmd :Mason) "Open mason"]
+        :o [#(goto-dir-and-edit "~/Documents/org") "Open org dir"]
+        :p [#(goto-dir-and-edit "~/projects") "Open projects"]
         :t [#(open-short-term) "Open terminal split"]
         :T [#(open-full-term) "Open terminal here"]})
 
@@ -119,6 +131,7 @@
               :f fix-keymaps
               :g git-keymaps
               :l lsp-keymaps
+              :n note-keymaps
               :o open-keymaps
               :p proof-keymaps
               :s search-keymaps
@@ -129,19 +142,9 @@
 
 ;; OTHER NORMAL MODE KEYMAPS
 
-(λ goto-dir-and-edit [dir]
-  "Sets the `cwd` to `dir` and calls `:edit .`"
-  (vim.cmd.cd dir)
-  (vim.cmd.edit ".")
-  (vim.notify (.. "set cwd to " (vim.fn.expand dir)) vim.log.levels.INFO))
-
 ;; top-level keymaps for "goto" actions (e.g. goto definition
 (local go-keymaps
-       {:name :+goto
-        :c [#(goto-dir-and-edit "~/.config/nvim") "Goto config"]
-        :d [#(vim.lsp.buf.definition) "Goto definition"]
-        :o [#(goto-dir-and-edit "~/Documents/org") "Goto org documents"]
-        :p [#(goto-dir-and-edit "~/projects") "Goto projects"]})
+       {:name :+goto :d [#(vim.lsp.buf.definition) "Goto definition"]})
 
 (λ prompt-fennel-eval []
   "Prompts for a Fennel expression and evaluates it."
