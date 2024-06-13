@@ -82,11 +82,12 @@
               :zig])
 
 ;; complete spec given here: https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#modules
-(local opts {:ensure_installed langs
-             :ignore_install [:org]
-             :auto_install false
-             :index {:enable true}
-             :highlight {:enable true}})
+(local opts
+       {:ensure_installed langs
+        :ignore_install [:org]
+        :auto_install false
+        :index {:enable true}
+        :highlight {:enable true :additional_vim_regex_highlighting [:org]}})
 
 ;; callback to pass opts to nvim-treesitter.configs.setup
 (fn config []

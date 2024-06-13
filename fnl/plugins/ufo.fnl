@@ -1,7 +1,9 @@
 ;; kevinhwang91/nvim-ufo --- ultrafolding in neovim
 
-;; use :1 for column markings
-(set vim.o.foldcolumn :0)
+;; BUG: sometimes large folds will reopen after writing to file?
+;; this seems to affect fennel in particular, but i haven't done
+;; enough testing with other filetypes to be sure
+(set vim.o.foldcolumn :1)
 (set vim.o.foldlevel 99)
 (set vim.o.foldlevelstart 99)
 (set vim.o.foldenable true)
