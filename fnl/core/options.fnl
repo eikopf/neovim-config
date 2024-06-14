@@ -37,6 +37,7 @@
 (set! :number)
 (set! :norelativenumber)
 (set! :wrap)
+(set! :termguicolors)
 
 ;; make the neovim clipboard play nicely with the OS's clipboard
 (set! :clipboard :unnamedplus)
