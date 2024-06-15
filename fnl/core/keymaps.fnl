@@ -82,6 +82,7 @@
         :m [#(vim.cmd :Mason) "Open mason"]
         :o [#(goto-dir-and-edit "~/Documents/org") "Open org dir"]
         :p [#(goto-dir-and-edit "~/projects") "Open projects"]
+        :P [#(vim.cmd.Lazy :profile) "Open lazy profiler"]
         :t [#(open-short-term) "Open terminal split"]
         :T [#(open-full-term) "Open terminal here"]})
 

@@ -95,8 +95,5 @@
     (ts.setup opts)))
 
 ;; plugin spec
-{1 :nvim-treesitter/nvim-treesitter
- :dependencies [:nvim-treesitter/nvim-treesitter-textobjects]
- :build ":TSUpdate"
- : config}
+{1 :nvim-treesitter/nvim-treesitter :build ":TSUpdate" : config}
 

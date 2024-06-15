@@ -14,10 +14,7 @@
 (set vim.g.haskell_tools
      {:hls {:on_attach (fn [_ bufnr ht]
                          (make-local-bindings bufnr ht))}
-      :tools {:repl {:handler :toggleterm}}})
+      :tools {:repl {:handler :builtin}}})
 
-{1 :mrcjkb/haskell-tools.nvim
- :version :^3
- :lazy false
- :dependencies [:akinsho/toggleterm.nvim]}
+{1 :mrcjkb/haskell-tools.nvim :version :^3 :lazy false}
 
