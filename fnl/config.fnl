@@ -14,4 +14,6 @@
 ;; TODO: try out ggandor/leap.nvim
 ;; TODO: add keybindings for octo
 ;; TODO: get nvim-dap to lazy-load (by modifying rustaceanvim config)
+;; TODO: get dressing.nvim to lazy-load, or remove it
+;; TODO: get gitsigns.nvim to lazy-load, or replace it
 
