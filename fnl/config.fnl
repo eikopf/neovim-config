@@ -13,4 +13,5 @@
 ;; TODO: try out chomosuke/typst-preview.nvim
 ;; TODO: try out ggandor/leap.nvim
 ;; TODO: add keybindings for octo
+;; TODO: get nvim-dap to lazy-load (by modifying rustaceanvim config)
 
