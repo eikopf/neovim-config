@@ -65,5 +65,5 @@
 (set! :splitright)
 (set! :sidescroll 5)
 (set! :splitkeep :screen)
-(set! :signcolumn "yes:1")
+(set! :signcolumn :auto)
 

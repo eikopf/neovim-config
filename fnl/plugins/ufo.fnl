@@ -3,7 +3,10 @@
 ;; BUG: sometimes large folds will reopen after writing to file?
 ;; this seems to affect fennel in particular, but i haven't done
 ;; enough testing with other filetypes to be sure
-(set vim.o.foldcolumn :1)
+
+(set vim.o.foldcolumn :0)
+
+;; use :1 for column symbols
 (set vim.o.foldlevel 99)
 (set vim.o.foldlevelstart 99)
 (set vim.o.foldenable true)
