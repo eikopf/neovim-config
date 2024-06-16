@@ -15,7 +15,7 @@
   (match (get-term)
     TERM.WEZTERM :catppuccin-macchiato
     TERM.NEOVIDE :oxocarbon
-    _            :catppuccin-macchiato))
+    _            :catppuccin-latte))
 
 ;; todos
 ;; TODO: update README

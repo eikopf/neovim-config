@@ -1,7 +1,9 @@
 ;; KEYMAPS
 
 ;; keymaps are bound and documented with which-key.nvim
-;; following the doom emacs convention, prefix names begin with a + (e.g. +open, +find)
+;; following the doom emacs convention, prefix names are 
+;; lowercased and begin with a "+" (e.g. +open, +find)
+
 (local wk (require :which-key))
 
 ;; TERMINAL MODE KEYMAPS
@@ -17,17 +19,16 @@
     (conform.format {:async true :lsp_fallback true})))
 
 ;; general code keymaps -- under the <leader>c namespace
-(local code-keymaps {:name :+code
-                     :a "Code actions"
-                     :d [#(vim.cmd.Trouble :document_diagnostics)
-                         "Show document diagnostics"]
-                     :D [#(vim.cmd.Trouble :workspace_diagnostics)
-                         "Show workspace diagnostics"]
-                     :f [format-buffer "Format buffer"]
-                     :r [vim.lsp.buf.rename "Rename symbol"]
-                     :R [#(vim.cmd.Trouble :lsp_references) "Show references"]
-                     :t "Run tests"
-                     :x :Execute})
+(local code-keymaps 
+       {:name :+code
+        :a "Code actions"
+        :d [#(vim.cmd.Trouble :document_diagnostics)   "Show document diagnostics"]
+        :D [#(vim.cmd.Trouble :workspace_diagnostics) "Show workspace diagnostics"]
+        :f [format-buffer                                          "Format buffer"]
+        :r [vim.lsp.buf.rename                                     "Rename symbol"]
+        :R [#(vim.cmd.Trouble :lsp_references)                   "Show references"]
+        :t                                                             "Run tests"
+        :x                                                                :Execute})
 
 ;; (quick)fixing keymaps -- under the <leader>f namespace
 (local fix-keymaps
@@ -39,19 +40,19 @@
 ;; keymaps for git -- under the <leader>g namespace
 (local git-keymaps
        {:name :+git
-        :A [#(vim.cmd.Git "add -A") "Stage all"]
-        :c [#(vim.cmd.Git :commit) :Commit]
-        :d [#(vim.cmd.Git :diff) :Diff]
-        :g [vim.cmd.Git :Status]
-        :p [#(vim.cmd.Git :push) :Push]
+        :A [#(vim.cmd.Git "add -A")                "Stage all"]
+        :c [#(vim.cmd.Git :commit)                     :Commit]
+        :d [#(vim.cmd.Git :diff)                         :Diff]
+        :g [vim.cmd.Git                                :Status]
+        :p [#(vim.cmd.Git :push)                         :Push]
         :s [#(vim.cmd.Telescope :git_branches) "Switch branch"]
-        :u [#(vim.cmd.Git :reset) "Unstage all"]})
+        :u [#(vim.cmd.Git :reset)                "Unstage all"]})
 
 ;; lsp keymaps -- under the <leader>l namespace
 (local lsp-keymaps {:name :+lsp
                     :r [vim.cmd.LspRestart "Restart server"]
-                    :l [vim.cmd.LspLog "Show server logs"]
-                    :i [vim.cmd.LspInfo "Show LSP info"]})
+                    :l [vim.cmd.LspLog   "Show server logs"]
+                    :i [vim.cmd.LspInfo     "Show LSP info"]})
 
 ;; notes keymaps -- under the <leader>n namespace
 (local note-keymaps {:name :+notes :a :Agenda :c :Capture})
@@ -77,14 +78,14 @@
 ;; keymaps for opening operations -- under the <leader>o namespace
 (local open-keymaps
        {:name :+open
-        :c [#(goto-dir-and-edit "~/.config/nvim") "Open config"]
-        :l [#(vim.cmd :Lazy) "Open lazy"]
-        :m [#(vim.cmd :Mason) "Open mason"]
+        :c [#(goto-dir-and-edit "~/.config/nvim")   "Open config"]
+        :l [#(vim.cmd :Lazy)                          "Open lazy"]
+        :m [#(vim.cmd :Mason)                        "Open mason"]
         :o [#(goto-dir-and-edit "~/Documents/org") "Open org dir"]
-        :p [#(goto-dir-and-edit "~/projects") "Open projects"]
-        :P [#(vim.cmd.Lazy :profile) "Open lazy profiler"]
-        :t [#(open-short-term) "Open terminal split"]
-        :T [#(open-full-term) "Open terminal here"]})
+        :p [#(goto-dir-and-edit "~/projects")     "Open projects"]
+        :P [#(vim.cmd.Lazy :profile)         "Open lazy profiler"]
+        :t [#(open-short-term)              "Open terminal split"]
+        :T [#(open-full-term)                "Open terminal here"]})
 
 ;; keymaps for proof assistants -- under the <leader>p namespace
 ;; this is mostly here to mark <leader>p as reserved
@@ -94,37 +95,45 @@
 (local search-keymaps
        {:name :+search
         :t [#(vim.cmd.TodoTelescope :keywords=TODO) "Search TODOs"]
-        :c [#(vim.cmd.TodoTelescope) "Search labelled comments"]
-        :f [#(vim.cmd.Telescope :find_files) "Search files"]
-        :g [#(vim.cmd.Telescope :live_grep) "Grep files"]
-        :b [#(vim.cmd.Telescope :buffers) "Search buffers"]})
+        :c [#(vim.cmd.TodoTelescope)       "Search comment labels"]
+        :f [#(vim.cmd.Telescope :find_files)        "Search files"]
+        :g [#(vim.cmd.Telescope :live_grep)           "Grep files"]
+        :b [#(vim.cmd.Telescope :buffers)         "Search buffers"]})
 
 (λ toggle-neotest-summary []
   "Toggles the `neotest` summary buffer."
   (let [nt (require :neotest)]
     (nt.summary.toggle)))
 
+(λ toggle-colorscheme-mode []
+   "Toggles the value of `background` between `:light` and `:dark`."
+  (set vim.opt.bg
+       (case vim.opt.bg._value
+         :light :dark
+         :dark  :light)))
+
 ;; keymaps for toggling settings -- under the <leader>t namespace
 (local toggle-keymaps
        {:name :+toggle
-        :l [#(vim.cmd.set :number!) "Toggle line numbers"]
-        :t [toggle-neotest-summary "Toggle test summary"]
-        :p [vim.cmd.ParinferToggle "Toggle Parinfer"]
-        :P [vim.cmd.ParinferToggle! "Toggle Parinfer Globally"]
+        :l [#(vim.cmd.set :number!)                  "Toggle line numbers"]
+        :m [toggle-colorscheme-mode              "Toggle colorscheme mode"]
+        :t [toggle-neotest-summary                   "Toggle test summary"]
+        :p [vim.cmd.ParinferToggle                       "Toggle parinfer"]
+        :P [vim.cmd.ParinferToggle!             "Toggle parinfer globally"]
         :r [#(vim.cmd.set :relativenumber!) "Toggle relative line numbers"]})
 
 ;; keymaps for window operations -- under the <leader>w namespace
 ;; these have been chosen to match exactly with the <c-w> bindings
 (local window-keymaps
        {:name :+window
-        :h [#(vim.cmd.wincmd :h) "Go left"]
-        :j [#(vim.cmd.wincmd :j) "Go down"]
-        :k [#(vim.cmd.wincmd :k) "Go up"]
-        :l [#(vim.cmd.wincmd :l) "Go right"]
+        :h [#(vim.cmd.wincmd :h)     "Go left"]
+        :j [#(vim.cmd.wincmd :j)     "Go down"]
+        :k [#(vim.cmd.wincmd :k)       "Go up"]
+        :l [#(vim.cmd.wincmd :l)    "Go right"]
         :o [vim.cmd.only "Close other windows"]
-        :q [vim.cmd.q "Quit window"]
-        :s [vim.cmd.split "Horizontal split"]
-        :v [vim.cmd.vsplit "Vertical split"]})
+        :q [vim.cmd.q            "Quit window"]
+        :s [vim.cmd.split   "Horizontal split"]
+        :v [vim.cmd.vsplit    "Vertical split"]})
 
 ;; leader-namespaced keymaps are properly bound and prefixed at this bound
 (wk.register ;; table of immediate subnamespaces
@@ -152,8 +161,9 @@
   (vim.cmd.FnlEval (vim.fn.input {:prompt "eval: " :cancelreturn :nil})))
 
 ;; non-namespaced normal mode keymaps
-(wk.register {:- [#(vim.cmd :Oil) "Open enclosing directory"]
+(wk.register {:-  [#(vim.cmd :Oil)      "Open enclosing directory"]
               ";" [prompt-fennel-eval "Evaluate Fennel expression"]
-              :g go-keymaps
-              :K [#(vim.lsp.buf.hover) "LSP hover"]} {:mode :n})
+              :g   go-keymaps
+              :K  [#(vim.lsp.buf.hover)                "LSP hover"]} 
+             {:mode :n})
 

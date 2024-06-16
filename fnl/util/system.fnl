@@ -1,6 +1,6 @@
 ;; utilities for interacting with host systems
 
-(local {: suffix} (require :util.string))
+(local {: prefix : suffix} (require :util.string))
 
 (λ hostname []
   "Returns the full hostname of the system."
@@ -8,7 +8,7 @@
 
 (λ hostname-prefix []
   "Returns the first component of the system's hostname."
-  (?. (vim.split (hostname) "." {:plain true}) 1))
+  (prefix (hostname) "."))
 
 (λ hostname-domain []
   "Returns the domain portion of the system's hostname."

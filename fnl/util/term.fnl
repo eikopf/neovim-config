@@ -27,18 +27,18 @@
 ;; enum of recognised terminal emulators
 (local TERM {:ALACRITTY {} :ITERM2 {} :NEOVIDE {} :WEZTERM {} :UNKNOWN {}})
 (setmetatable TERM.ALACRITTY {:__tostring #:Alacritty})
-(setmetatable TERM.ITERM2 {:__tostring #:iTerm2})
-(setmetatable TERM.NEOVIDE {:__tostring #:Neovide})
-(setmetatable TERM.WEZTERM {:__tostring #:WezTerm})
-(setmetatable TERM.UNKNOWN {:__tostring #:unknown})
+(setmetatable TERM.ITERM2    {:__tostring    #:iTerm2})
+(setmetatable TERM.NEOVIDE   {:__tostring   #:Neovide})
+(setmetatable TERM.WEZTERM   {:__tostring   #:WezTerm})
+(setmetatable TERM.UNKNOWN   {:__tostring   #:unknown})
 
 (λ get-term []
   "Returns a `util.term.TERM` value corresponding to the current terminal."
   (if (running-in-alacritty) TERM.ALACRITTY
-      (running-in-iterm2) TERM.ITERM2
-      (running-in-neovide) TERM.NEOVIDE
-      (running-in-wezterm) TERM.WEZTERM
-      TERM.UNKNOWN))
+      (running-in-iterm2)    TERM.ITERM2
+      (running-in-neovide)   TERM.NEOVIDE
+      (running-in-wezterm)   TERM.WEZTERM
+                             TERM.UNKNOWN))
 
 (λ get-term-name []
    "Returns the canonical name of the current terminal."
