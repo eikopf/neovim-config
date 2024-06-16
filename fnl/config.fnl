@@ -14,13 +14,12 @@
 (vim.cmd.colorscheme 
   (match (get-term)
     TERM.WEZTERM :catppuccin-macchiato
-    TERM.NEOVIDE :oxocarbon
+    TERM.NEOVIDE :kanagawa
     _            :catppuccin-latte))
 
 ;; todos
 ;; TODO: update README
 ;; TODO: try out chomosuke/typst-preview.nvim
-;; TODO: try out ggandor/leap.nvim
 ;; TODO: add keybindings for octo
 ;; TODO: get nvim-dap to lazy-load (by modifying rustaceanvim config)
 ;; TODO: get dressing.nvim to lazy-load, or remove it

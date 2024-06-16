@@ -15,15 +15,15 @@
 
 ;; reasonable defaults
 (set! :backspace :2)
-(set! :showcmd)
 (set! :laststatus 2)
+(set! :showcmd)
 (set! :autoread)
 ;;(set! :shortmess+ :sWcI)
 
 ;; tab behaviour
-(set! :tabstop 4)
+(set! :tabstop     4)
 (set! :softtabstop 4)
-(set! :shiftwidth 2)
+(set! :shiftwidth  2)
 (set! :shiftround)
 (set! :expandtab)
 
@@ -33,7 +33,7 @@
 
 ;; ui options
 (set! :conceallevel 0)
-(set! :scrolloff 3)
+(set! :scrolloff    3)
 (set! :number)
 (set! :norelativenumber)
 (set! :wrap)
@@ -47,9 +47,9 @@
 (set! :smartcase)
 (set! :hlsearch)
 ;; this relies on ripgrep being available
-(set! :grepprg "rg --vimgrep")
+(set! :grepprg   "rg --vimgrep")
 (set! :grepformat "%f:%1:%c:%m")
-(set! :path ["." "**"])
+(set! :path          ["." "**"])
 
 ;; vim commandline options
 (set! :history 1000)
@@ -63,7 +63,7 @@
 ;; window options
 (set! :splitbelow)
 (set! :splitright)
-(set! :sidescroll 5)
+(set! :sidescroll      5)
 (set! :splitkeep :screen)
-(set! :signcolumn :auto)
+(set! :signcolumn  :auto)
 
