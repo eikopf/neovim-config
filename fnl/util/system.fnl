@@ -1,10 +1,6 @@
-;; utilities for state that differs between systems and OSes
+;; utilities for interacting with host systems
 
-(λ suffix [str sep]
-  "Returns the suffix of `str` after `sep`, or `nil` if `sep` doesn't occur in `str`."
-  (-?>> (string.find str sep 1 :plain)
-        (+ 1)
-        (string.sub str)))
+(local {: suffix} (require :util.string))
 
 (λ hostname []
   "Returns the full hostname of the system."
@@ -36,7 +32,7 @@
    (tostring (get-os)))
 
 (λ get-env-var [name]
-  "Returns the value an environment variable, or `nil` if it is undefined."
+  "Returns the value of an environment variable, or `nil` if it is undefined."
   (. vim.env name))
 
 (λ run-cmd [cmd ?opts ?on-exit]

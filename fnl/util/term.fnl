@@ -1,4 +1,4 @@
-;; configuration based on the terminal environment
+;; utilities for inspecting the terminal environment
 
 (λ term-info []
   "Returns the value of the `$TERM` environment variable."
