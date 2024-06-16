@@ -21,7 +21,7 @@
 (set vim.g.neovide_cursor_animate_command_line false)
 
 ;; ui
-(set vim.g.neovide_theme :light)
+(set vim.g.neovide_theme :dark)
 
 ;; startup
 (λ last [items]

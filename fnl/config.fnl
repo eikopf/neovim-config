@@ -14,7 +14,7 @@
 (vim.cmd.colorscheme 
   (match (get-term)
     TERM.WEZTERM :catppuccin-macchiato
-    TERM.NEOVIDE :kanagawa
+    TERM.NEOVIDE :everforest
     _            :catppuccin-latte))
 
 ;; todos

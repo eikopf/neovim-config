@@ -3,18 +3,18 @@
 ;; NOTE: both rust-analyzer and hls are configured by other plugins
 
 (local servers {})
-(set servers.clangd {})
-(set servers.clojure_lsp {})
-(set servers.cssls {})
-(set servers.fennel_ls {})
-(set servers.html {})
-(set servers.jsonls {})
-(set servers.julials {})
-(set servers.lua_ls {})
-(set servers.marksman {})
-(set servers.ruff_lsp {})
-(set servers.sourcekit {})
-(set servers.sqlls {})
+(set servers.clangd      {}) ;; c/c++
+(set servers.clojure_lsp {}) ;; clojure
+(set servers.cssls       {}) ;; css
+(set servers.fennel_ls   {}) ;; fennel
+(set servers.html        {}) ;; html
+(set servers.jsonls      {}) ;; json
+(set servers.julials     {}) ;; julia
+(set servers.lua_ls      {}) ;; lua
+(set servers.marksman    {}) ;; markdown
+(set servers.ruff_lsp    {}) ;; python
+(set servers.sourcekit   {}) ;; swift
+(set servers.sqlls       {}) ;; sql
 
 (λ find-fennel-root-dir [path]
   (. (vim.fs.find [:fnl :git] {:upward true :type :directory : path}) 1))

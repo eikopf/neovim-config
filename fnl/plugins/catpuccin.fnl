@@ -8,5 +8,8 @@
                      ;; trouble.nvim
                      :lsp_trouble true})
 
-{1 :catppuccin/nvim :priority 1000 :name :catpuccin : integrations}
+{1 :catppuccin/nvim 
+ :priority 1000 
+ :name :catpuccin 
+ : integrations}
 
