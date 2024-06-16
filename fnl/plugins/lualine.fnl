@@ -8,7 +8,7 @@
 
 ;; refer to :help lualine.txt for all options
 (local options {:icons_enabled true
-                :theme :catppuccin
+                :theme :auto
                 :component_separators "|"
                 :section_separators ""})
 

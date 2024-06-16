@@ -1,12 +1,21 @@
 ;; configuration entrypoint
 
+(local {: TERM 
+        : get-term 
+        : running-in-neovide} (require :util.term))
+
 ;; core configuration
 (require :core.options)
 (require :core.keymaps)
 (require :core.lsp)
+(if (running-in-neovide) (require :core.neovide))
 
 ;; load colorscheme
-(vim.cmd.colorscheme :catppuccin-macchiato)
+(vim.cmd.colorscheme 
+  (match (get-term)
+    TERM.WEZTERM :catppuccin-macchiato
+    TERM.NEOVIDE :oxocarbon
+    _            :catppuccin-macchiato))
 
 ;; todos
 ;; TODO: update README

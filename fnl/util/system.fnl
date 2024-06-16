@@ -20,28 +20,33 @@
 
 ;; fake enum table (distinct tables are always inequal)
 (local OS {:MACOS {} :LINUX {} :WINDOWS {}})
-(setmetatable OS.MACOS {:__tostring #:MacOS})
-(setmetatable OS.LINUX {:__tostring #:Linux})
+(setmetatable OS.MACOS   {:__tostring   #:MacOS})
+(setmetatable OS.LINUX   {:__tostring   #:Linux})
 (setmetatable OS.WINDOWS {:__tostring #:Windows})
 
 (λ get-os []
-  "Returns the system's operating system as an element of `system.OS`."
+  "Returns the system's OS as an element of `system.OS`."
   (case (. (vim.uv.os_uname) :sysname)
-    :Darwin OS.MACOS
-    :Linux OS.LINUX
+    :Darwin  OS.MACOS
+    :Linux   OS.LINUX
     :Windows OS.WINDOWS))
 
-(λ term-info []
-  "Returns the value of the `$TERM` environment variable."
-  vim.env.TERM)
+(λ get-os-name []
+   "Returns the canonical name of the system's OS."
+   (tostring (get-os)))
 
-(λ running-in-wezterm []
-  "Returns `(= :Wezterm vim.env.TERM_PROGRAM)`."
-  (= :WezTerm vim.env.TERM_PROGRAM))
+(λ get-env-var [name]
+  "Returns the value an environment variable, or `nil` if it is undefined."
+  (. vim.env name))
 
-(λ running-in-alacritty []
-  "Returns `(= :alacritty vim.env.TERM)`."
-  (= :alacritty vim.env.TERM))
+(λ run-cmd [cmd ?opts ?on-exit]
+  "Executes the given system `cmd` asynchronously."
+  (vim.system cmd ?opts ?on-exit))
+
+(λ run-cmd-sync [cmd ?opts ?on-exit]
+  "Synchronous version of `run-cmd`."
+  (let [res (: (vim.system cmd ?opts ?on-exit) :wait)]
+    (values (= res.code 0) res.stdout res.stderr)))
 
 ;; return public interface
 {: hostname
@@ -49,7 +54,8 @@
  : hostname-domain
  : OS
  : get-os
- : term-info
- : running-in-wezterm
- : running-in-alacritty}
+ : get-os-name
+ : get-env-var
+ : run-cmd
+ : run-cmd-sync}
 

@@ -1,7 +1,6 @@
 ;; conform.nvim -- code formatting plugin
 
-(local formatters {:fennel [:fnlfmt]
-                   :javascript [:prettier]
+(local formatters {:javascript [:prettier]
                    :lua [:stylua]
                    :python [:ruff]
                    :rust [:rustfmt]})
