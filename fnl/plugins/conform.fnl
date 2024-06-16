@@ -1,9 +1,10 @@
 ;; conform.nvim -- code formatting plugin
 
-(local formatters {:javascript [:prettier]
-                   :lua [:stylua]
-                   :python [:ruff]
-                   :rust [:rustfmt]})
+(local formatters {:clojure      [:cljfmt]
+                   :javascript [:prettier]
+                   :lua          [:stylua]
+                   :python         [:ruff]
+                   :rust        [:rustfmt]})
 
 (local opts {:formatters_by_ft formatters
              :format_on_save {:timeout_ms 500 :lsp_fallback true}})

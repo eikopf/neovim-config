@@ -4,6 +4,7 @@
 
 (local servers {})
 (set servers.clangd {})
+(set servers.clojure_lsp {})
 (set servers.cssls {})
 (set servers.fennel_ls {})
 (set servers.html {})

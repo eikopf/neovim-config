@@ -3,7 +3,7 @@
 (fn eval-fennel-in-commandline [tbl]
   "Evaluates the Fennel expression passed as `tbl.args`, 
    and prints the result to the commandline."
-  (let [eval (require :conjure.eval)
+  (let [eval   (require :conjure.eval)
         client (require :conjure.client)]
     (client.with-filetype :fennel
       eval.eval-str
@@ -18,7 +18,7 @@
                                   {:nargs "?"})
 
 {1 :Olical/conjure
- :ft [:fennel :scheme]
+ :ft [:clojure :fennel :scheme]
  :config (fn []
            (let [main (require :conjure.main)
                  mapping (require :conjure.mapping)]
