@@ -10,10 +10,10 @@
 (set vim.g.neovide_text_contrast              0.1)
 
 ;; padding
-(set vim.g.neovide_padding_top    5)
-(set vim.g.neovide_padding_bottom 5)
-(set vim.g.neovide_padding_right  5)
-(set vim.g.neovide_padding_left   5)
+(set vim.g.neovide_padding_top    10)
+(set vim.g.neovide_padding_bottom 10)
+(set vim.g.neovide_padding_right  10)
+(set vim.g.neovide_padding_left   10)
 
 ;; cursor
 (set vim.g.neovide_cursor_animation_length     0.025)

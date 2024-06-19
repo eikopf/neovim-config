@@ -158,7 +158,7 @@
 
 (λ prompt-fennel-eval []
   "Prompts for a Fennel expression and evaluates it."
-  (vim.cmd.FnlEval (vim.fn.input {:prompt "eval: " :cancelreturn :nil})))
+  (vim.cmd.Fnl (vim.fn.input {:prompt "eval: " :cancelreturn :nil})))
 
 ;; non-namespaced normal mode keymaps
 (wk.register {:-  [#(vim.cmd :Oil)      "Open enclosing directory"]

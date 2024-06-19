@@ -1,6 +1,6 @@
 ;; Olical/conjure.nvim -- interactive evaluation within neovim
 
-(fn eval-fennel-in-commandline [tbl]
+(fn eval-fennel-in-cmd [tbl]
   "Evaluates the Fennel expression passed as `tbl.args`, 
    and prints the result to the commandline."
   (let [eval   (require :conjure.eval)
@@ -10,15 +10,13 @@
       {:origin tbl.name
        :passive? true
        :code tbl.args
-       :on-result (fn [res]
-                    (print res))})))
+       :on-result vim.print})))
 
 ;; create user command for evaluating fennel expressions
-(vim.api.nvim_create_user_command :FnlEval eval-fennel-in-commandline
-                                  {:nargs "?"})
+(vim.api.nvim_create_user_command :Fnl eval-fennel-in-cmd {:nargs "?"})
 
 {1 :Olical/conjure
- :ft [:clojure :fennel :scheme]
+ :ft [:clojure :fennel :racket :scheme]
  :config (fn []
            (let [main (require :conjure.main)
                  mapping (require :conjure.mapping)]
