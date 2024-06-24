@@ -22,13 +22,13 @@
 (local code-keymaps 
        {:name :+code
         :a "Code actions"
-        :d [#(vim.cmd.Trouble :document_diagnostics)   "Show document diagnostics"]
-        :D [#(vim.cmd.Trouble :workspace_diagnostics) "Show workspace diagnostics"]
-        :f [format-buffer                                          "Format buffer"]
-        :r [vim.lsp.buf.rename                                     "Rename symbol"]
-        :R [#(vim.cmd.Trouble :lsp_references)                   "Show references"]
-        :t                                                             "Run tests"
-        :x                                                                :Execute})
+        :d [#(vim.cmd.Trouble :document_diagnostics)   "Show local diagnostics"]
+        :D [#(vim.cmd.Trouble :workspace_diagnostics)    "Show all diagnostics"]
+        :f [format-buffer                                       "Format buffer"]
+        :r [vim.lsp.buf.rename                                  "Rename symbol"]
+        :R [#(vim.cmd.Trouble :lsp_references)                "Show references"]
+        :t                                                          "Run tests"
+        :x                                                            :Execute})
 
 ;; (quick)fixing keymaps -- under the <leader>f namespace
 (local fix-keymaps

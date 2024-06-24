@@ -12,6 +12,7 @@
               :d
               :diff
               :dockerfile
+              :ebnf
               :elixir
               :elm
               :erlang
@@ -38,6 +39,7 @@
               :just
               :kdl
               :kotlin
+              :lalrpop
               :latex
               :linkerscript
               :llvm

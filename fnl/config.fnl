@@ -5,6 +5,7 @@
         : running-in-neovide} (require :util.term))
 
 ;; core configuration
+(require :core.filetype)
 (require :core.options)
 (require :core.autocmds)
 (require :core.keymaps)

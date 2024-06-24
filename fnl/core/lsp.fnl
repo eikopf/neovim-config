@@ -12,6 +12,7 @@
 (set servers.julials     {}) ;; julia
 (set servers.lua_ls      {}) ;; lua
 (set servers.marksman    {}) ;; markdown
+(set servers.ocamllsp    {})
 (set servers.ruff_lsp    {}) ;; python
 (set servers.sourcekit   {}) ;; swift
 (set servers.sqlls       {}) ;; sql

@@ -39,6 +39,15 @@
 (set! :wrap)
 (set! :termguicolors)
 
+;; folding options
+;; https://www.jackfranklin.co.uk/blog/code-folding-in-vim-neovim/
+(set! :foldmethod :expr)
+(set! :foldexpr "v:lua.vim.treesitter.foldexpr()")
+(set! :foldcolumn :0)
+(set! :foldlevel 99)
+(set! :foldlevelstart 99)
+(set! :foldnestmax 4)
+
 ;; make the neovim clipboard play nicely with the OS's clipboard
 (set! :clipboard :unnamedplus)
 
@@ -46,8 +55,7 @@
 (set! :ignorecase)
 (set! :smartcase)
 (set! :hlsearch)
-;; this relies on ripgrep being available
-(set! :grepprg   "rg --vimgrep")
+(set! :grepprg   "rg --vimgrep") ;; this relies on ripgrep being available
 (set! :grepformat "%f:%1:%c:%m")
 (set! :path          ["." "**"])
 
