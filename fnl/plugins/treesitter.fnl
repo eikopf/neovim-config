@@ -83,6 +83,16 @@
               :yaml
               :zig])
 
+;; TODO: the following parsers aren't available on windows
+;; - just
+;; - linkerscript
+;; - roc
+;; - ssh_config
+;; - tmux
+;; - typst
+;; - unison
+;; (also the agda parser tries and fails to build on windows)
+
 ;; complete spec given here: https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#modules
 (local opts
        {:ensure_installed langs
