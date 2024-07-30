@@ -1,5 +1,7 @@
 ;; KEYMAPS
 
+;; TODO: alter keymaps to which-key v3 spec
+
 ;; keymaps are bound and documented with which-key.nvim
 ;; following the doom emacs convention, prefix names are 
 ;; lowercased and begin with a "+" (e.g. +open, +find)
@@ -135,8 +137,12 @@
         :s [vim.cmd.split   "Horizontal split"]
         :v [vim.cmd.vsplit    "Vertical split"]})
 
+(λ prompt-fennel-eval []
+  "Prompts for a Fennel expression and evaluates it."
+  (vim.cmd.Fnl (vim.fn.input {:prompt "eval: " :cancelreturn :nil})))
+
 ;; leader-namespaced keymaps are properly bound and prefixed at this bound
-(wk.register ;; table of immediate subnamespaces
+(wk.register ;; table of immediate sub-namespaces
              {:c code-keymaps
               :f fix-keymaps
               :g git-keymaps
@@ -146,7 +152,8 @@
               :p proof-keymaps
               :s search-keymaps
               :t toggle-keymaps
-              :w window-keymaps}
+              :w window-keymaps
+              ";" [prompt-fennel-eval "Evaluate Fennel expression"]}
              ;; options passed with these keymaps
              {:mode :n :prefix :<leader>})
 
@@ -156,13 +163,8 @@
 (local go-keymaps
        {:name :+goto :d [#(vim.lsp.buf.definition) "Goto definition"]})
 
-(λ prompt-fennel-eval []
-  "Prompts for a Fennel expression and evaluates it."
-  (vim.cmd.Fnl (vim.fn.input {:prompt "eval: " :cancelreturn :nil})))
-
 ;; non-namespaced normal mode keymaps
 (wk.register {:-  [#(vim.cmd :Oil)      "Open enclosing directory"]
-              ";" [prompt-fennel-eval "Evaluate Fennel expression"]
               :g   go-keymaps
               :K  [#(vim.lsp.buf.hover)                "LSP hover"]} 
              {:mode :n})
