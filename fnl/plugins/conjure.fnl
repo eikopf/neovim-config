@@ -16,7 +16,7 @@
 (vim.api.nvim_create_user_command :Fnl eval-fennel-in-cmd {:nargs "?"})
 
 {1 :Olical/conjure
- :ft [:clojure :fennel :racket :scheme]
+ :ft [:clojure :fennel :racket :scheme :janet]
  :config (fn []
            (let [main (require :conjure.main)
                  mapping (require :conjure.mapping)]
@@ -31,5 +31,7 @@
          ;; scheme config -- change chez to petite if it starts to slow down
          (tset vim.g "conjure#client#scheme#stdio#command" :chez)
          (tset vim.g "conjure#client#scheme#stdio#prompt_pattern" "> $?")
-         (tset vim.g "conjure#client#scheme#stdio#value_prefix_pattern" false))}
+         (tset vim.g "conjure#client#scheme#stdio#value_prefix_pattern" false)
+         ;; janet config
+         (tset vim.g "conjure#filetype#janet" :conjure.client.janet.stdio))}
 
