@@ -1,15 +1,10 @@
 ;; complete list of parsers: https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#supported-languages
-(local langs [:agda
-              :bash
-              :beancount
-              :bibtex
+(local langs [:bash
               :c
-              :c_sharp
               :clojure
               :comment
               :css
               :csv
-              :d
               :diff
               :dockerfile
               :ebnf
@@ -24,8 +19,6 @@
               :gitcommit
               :gitignore
               :gleam
-              :glsl
-              :go
               :haskell
               :hlsl
               :html
@@ -36,45 +29,22 @@
               :jsdoc
               :json
               :julia
-              :just
-              :kdl
-              :kotlin
               :lalrpop
               :latex
-              :linkerscript
-              :llvm
               :lua
               :luadoc
               :make
               :markdown
               :markdown_inline
-              :matlab
-              :nix
-              :norg
               :ocaml
               :ocaml_interface
               :ocamllex
-              :odin
-              :perl
-              :php
-              :phpdoc
               :python
-              :r
-              :racket
-              :roc
-              :ruby
               :rust
-              :scala
               :scheme
               :sql
-              :ssh_config
-              :swift
-              :tmux
               :toml
               :typescript
-              :typst
-              :unison
-              :uxntal
               :vim
               :vimdoc
               :wgsl

@@ -6,6 +6,6 @@
          (set vim.o.timeout true)
          (set vim.o.timeoutlen 300))
  :opts {:win   {:border   :none}
-        :icons {:mappings false}
-        :notify           false}}
+        :icons {:mappings false}}}
+        
 

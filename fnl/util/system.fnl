@@ -23,9 +23,10 @@
 (λ get-os []
   "Returns the system's OS as an element of `system.OS`."
   (case (. (vim.uv.os_uname) :sysname)
-    :Darwin  OS.MACOS
-    :Linux   OS.LINUX
-    :Windows OS.WINDOWS))
+    :Darwin     OS.MACOS
+    :Linux      OS.LINUX
+    :Windows    OS.WINDOWS
+    :Windows_NT OS.WINDOWS))
 
 (λ get-os-name []
    "Returns the canonical name of the system's OS."
