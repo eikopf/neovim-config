@@ -4,8 +4,13 @@
 ;; so using them in neovide becomes borderline painful. as a baseline,
 ;; nyoom-engineering/oxocarbon.nvim does this correctly.
 
+(local {: OS : get-os} (require :util.system))
+
 ;; text
-(set vim.opt.guifont "BerkeleyMono Nerd Font:h14")
+(set vim.opt.guifont (match (get-os)
+                       OS.WINDOWS "Berkeley Mono:h14"
+                       OS.MACOS   "BerkeleyMono Nerd Font:h14"
+                       _          ""))
 (set vim.g.neovide_text_gamma                 0.6)
 (set vim.g.neovide_text_contrast              0.1)
 
