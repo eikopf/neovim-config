@@ -1,5 +1,7 @@
 ;; configuration entrypoint
 
+(local {: OS : get-os} (require :util.system))
+
 (local {: TERM 
         : get-term 
         : running-in-neovide} (require :util.term))
@@ -10,7 +12,8 @@
 (require :core.autocmds)
 (require :core.keymaps)
 (require :core.lsp)
-(if (running-in-neovide) (require :core.neovide))
+(if (running-in-neovide)    (require :core.neovide))
+(if (= (get-os) OS.WINDOWS) (require :core.windows))
 
 ;; load colorscheme
 (vim.cmd.colorscheme 

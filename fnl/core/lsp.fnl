@@ -6,13 +6,14 @@
 (set servers.clangd      {}) ;; c/c++
 (set servers.clojure_lsp {}) ;; clojure
 (set servers.cssls       {}) ;; css
+(set servers.tsserver    {}) ;; javascript
 (set servers.fennel_ls   {}) ;; fennel
 (set servers.html        {}) ;; html
 (set servers.jsonls      {}) ;; json
 (set servers.julials     {}) ;; julia
 (set servers.lua_ls      {}) ;; lua
 (set servers.marksman    {}) ;; markdown
-(set servers.ocamllsp    {})
+(set servers.ocamllsp    {}) ;; ocaml
 (set servers.ruff_lsp    {}) ;; python
 (set servers.sourcekit   {}) ;; swift
 (set servers.sqlls       {}) ;; sql
