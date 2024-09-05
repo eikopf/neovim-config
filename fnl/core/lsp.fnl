@@ -6,7 +6,7 @@
 (set servers.clangd      {}) ;; c/c++
 (set servers.clojure_lsp {}) ;; clojure
 (set servers.cssls       {}) ;; css
-(set servers.tsserver    {}) ;; javascript
+(set servers.ts_ls       {}) ;; (type/java)script
 (set servers.fennel_ls   {}) ;; fennel
 (set servers.html        {}) ;; html
 (set servers.jsonls      {}) ;; json
