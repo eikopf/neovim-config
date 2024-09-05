@@ -99,13 +99,13 @@
 
 ;; keymaps for opening operations -- under the <leader>o namespace
 (group :<leader>o :open)
-(map :<leader>oc #(goto-dir-and-edit "~/.config/nvim")   "Open config")
-(map :<leader>ol #(vim.cmd :Lazy)                          "Open lazy")
-(map :<leader>om #(vim.cmd :Mason)                        "Open mason")
-(map :<leader>op #(goto-dir-and-edit "~/projects")     "Open projects")
-(map :<leader>oP #(vim.cmd.Lazy :profile)         "Open lazy profiler")
-(map :<leader>ot #(open-short-term)              "Open terminal split")
-(map :<leader>oT #(open-full-term)                "Open terminal here")
+(map :<leader>oc #(goto-dir-and-edit (vim.fn.stdpath :config))   "Open config")
+(map :<leader>ol #(vim.cmd :Lazy)                                  "Open lazy")
+(map :<leader>om #(vim.cmd :Mason)                                "Open mason")
+(map :<leader>op #(goto-dir-and-edit "~/projects")             "Open projects")
+(map :<leader>oP #(vim.cmd.Lazy :profile)                 "Open lazy profiler")
+(map :<leader>ot #(open-short-term)                      "Open terminal split")
+(map :<leader>oT #(open-full-term)                        "Open terminal here")
 
 ;; keymaps for proof assistants -- under the <leader>p namespace
 ;; this is mostly here to mark <leader>p as reserved
