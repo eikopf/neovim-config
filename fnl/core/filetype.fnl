@@ -1,7 +1,8 @@
 ;; custom filetype handling
 
 (macro extension! [ft extension]
-  `(vim.filetype.add {:extension {,ft ,extension}}))
+  `(vim.filetype.add {:extension {,extension ,ft}}))
 
-(extension! :lalrpop :lalrpop)
 (extension! :ebnf    :ebnf)
+(extension! :jabber  :jbr) 
+(extension! :lalrpop :lalrpop)

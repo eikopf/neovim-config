@@ -1,11 +1,17 @@
 ;; rustaceanvim -- additional rust tooling, forked from rust-tools.nvim
 
-;; keymaps to be bound when rust-analyzer attaches
-(local bindings {:a [#(vim.cmd.RustLsp :codeAction) "Code actions"]
-                 :x [#(vim.cmd.RustLsp :run) "Execute item"]
-                 :t [(fn []
-                       ((. (require :neotest) :run :run) (_G.vim.fn.expand "%")))
-                     "Test file"]})
+(λ run-tests-in-file []
+   ((. (require :neotest) :run :run) (_G.vim.fn.expand "%")))
+
+(λ make-bindings []
+   (let [wk (require :which-key)
+         buffer (vim.api.nvim_get_current_buf)]
+     (wk.add {1 :<leader>ca 2 #(vim.cmd.RustLsp :codeAction) :desc "Code actions" : buffer})
+     (wk.add {1 :<leader>cx 2 #(vim.cmd.RustLsp        :run) :desc "Execute item" : buffer})
+     (wk.add {1 :<leader>ct 2   run-tests-in-file            :desc "Test file"    : buffer})))
+     
+     
+     
 
 ;; configuration options passed to rust-analyzer
 ;; refer to https://rust-analyzer.github.io/manual.html#configuration
@@ -30,13 +36,7 @@
 ;; the primary configuration interface for rustaceanvim
 (set vim.g.rustaceanvim
      (fn []
-       {:server {:on_attach (fn []
-                              (let [wk (require :which-key)
-                                    bufnr (vim.api.nvim_get_current_buf)]
-                                (wk.register bindings
-                                             {:mode :n
-                                              :prefix :<leader>c
-                                              :buffer bufnr})))
+       {:server {:on_attach make-bindings
                  :default_settings {: rust-analyzer}}}))
 
 ;; additional configuration options are described in :help ft-settings

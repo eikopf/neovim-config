@@ -1,6 +1,6 @@
 ;; configuration entrypoint
 
-(local {: OS : get-os} (require :util.system))
+(local {: OS : get-os : hostname-prefix} (require :util.system))
 
 (local {: TERM 
         : get-term 
@@ -14,6 +14,8 @@
 (require :core.lsp)
 (if (running-in-neovide)    (require :core.neovide))
 (if (= (get-os) OS.WINDOWS) (require :core.windows))
+
+(if (= (hostname-prefix) :pilatus) (require :core.jabber))
 
 ;; load colorscheme
 (vim.cmd.colorscheme 
