@@ -2,14 +2,27 @@
 
 (fn make-local-bindings [bufnr ht]
   (let [wk (require :which-key)]
-    (wk.register {:l [vim.lsp.codelens.run "Run Code Lens"]
-                  :s [ht.hoogle.hoogle_signature
-                      "Search Hoogle for Matching Signatures"]
-                  :e [ht.lsp.buf_eval_all "Evaluate All Snippets"]
-                  :r {1 :+repl
-                      :t [ht.repl.toggle "Toggle GHCi REPL"]
-                      :q [ht.repl.quit "Quit GHCi REPL"]}}
-                 {:mode :n :prefix :<leader>c :buffer bufnr})))
+    (wk.add {1 :<leader>cl 
+             2 vim.lsp.codelens.run
+             :buffer bufnr
+             :desc "Run code lens"})
+    (wk.add {1 :<leader>cs 
+             2 ht.hoogle.hoogle_signature 
+             :buffer bufnr
+             :desc "Search Hoogle for matching signatures"})
+    (wk.add {1 :<leader>ce 
+             2 ht.lsp.buf_eval_all 
+             :buffer bufnr
+             :desc "Evaluate all snippets"})
+    (wk.add {1 :<leader>r :group "+repl" :buffer bufnr}) ;; define group name
+    (wk.add {1 :<leader>rt 
+             2 ht.repl.toggle 
+             :buffer bufnr
+             :desc "Toggle GHCi REPL"})
+    (wk.add {1 :<leader>rq 
+             2 ht.repl.quit
+             :buffer bufnr
+             :desc "Quit GHCi REPL"})))
 
 (set vim.g.haskell_tools
      {:hls {:on_attach (fn [_ bufnr ht]
