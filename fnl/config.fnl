@@ -24,11 +24,11 @@
     TERM.NEOVIDE :everforest
     _            :catppuccin-latte))
 
-;; todos
-;; TODO: update README
-;; TODO: try out chomosuke/typst-preview.nvim
-;; TODO: add keybindings for octo
-;; TODO: get nvim-dap to lazy-load (by modifying rustaceanvim config)
-;; TODO: get dressing.nvim to lazy-load, or remove it
-;; TODO: get gitsigns.nvim to lazy-load, or replace it
-
+;; HACK: patch for neovim/neovim#30985
+;; a neovim patch should fix this in 0.11 (expected 2024-12-25)
+(each [_ method (ipairs [:textDocument/diagnostic :workspace/diagnostic])]
+  (local default-diagnostic-handler (. vim.lsp.handlers method))
+  (tset vim.lsp.handlers method 
+        (fn [err result context config]
+          (if (not= (?. err :code) -32802)
+            (default-diagnostic-handler err result context config)))))
