@@ -14,7 +14,7 @@
 (set servers.lua_ls      {}) ;; lua
 (set servers.marksman    {}) ;; markdown
 (set servers.ocamllsp    {}) ;; ocaml
-(set servers.ruff_lsp    {}) ;; python
+(set servers.ruff        {}) ;; python
 (set servers.sourcekit   {}) ;; swift
 (set servers.sqlls       {}) ;; sql
 
