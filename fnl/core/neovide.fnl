@@ -5,6 +5,7 @@
 ;; nyoom-engineering/oxocarbon.nvim does this correctly.
 
 (local {: OS : get-os} (require :util.system))
+(local {: last}        (require :util.table))
 
 ;; text
 (set vim.opt.guifont (match (get-os)
@@ -27,10 +28,6 @@
 
 ;; ui
 (set vim.g.neovide_theme :dark)
-
-;; startup
-(λ last [items]
-   (. items (length items)))
 
 ;; if the final argument to neovim doesn't match the cwd, then
 ;; the user didn't pass a path manually -- so switch to $HOME

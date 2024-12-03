@@ -1,24 +1,6 @@
 ;; KEYMAPS
 
-;; keymaps are bound and documented with which-key.nvim
-(local wk (require :which-key))
-
-(λ group [lhs name]
-   "Defines `lhs` as a keybinding group with the given `name`."
-   (wk.add {1 lhs :group name}))
-
-(λ map [lhs rhs desc ?mode]
-   "Creates a new keybinding for `lhs`."
-   (wk.add {1 lhs
-            2 rhs
-            : desc
-            :mode (or ?mode :n)}))
-
-(λ slot [lhs desc ?mode]
-   "Creates an empty keybinding for `lhs`."
-   (wk.add {1 lhs
-            : desc
-            :mode (or ?mode :n)}))
+(local {: group : map : slot} (require :util.keymap))
 
 (λ format-buffer []
   "Formats the current buffer"

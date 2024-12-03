@@ -2,31 +2,34 @@
 
 ;; callback invoked when the idris2 LSP attaches to a buffer
 (fn on_attach [_client]
-  (let [wk (require :which-key)
+  (let [{: map : group} (require :util.keymap)
         bufnr (vim.api.nvim_get_current_buf)
         action (require :idris2.code_action)
         repl (require :idris2.repl)
         metavar (require :idris2.metavars)]
-    (wk.register {:name :+proof
-                  :d [action.add_clause "Add Declaration Clause"]
-                  :e [repl.evaluate "Evaluate Expression"]
-                  :g [action.generate_def "Generate Definition"]
-                  :m {:name :+metavar
-                      :c [action.make_case "Replace Metavar With Case Block"]
-                      :f [action.expr_search "Fill Metavar"]
-                      :F [action.intro "Fill Metavar With Valid Constructors"]
-                      :l [action.make_lemma "Replace Metavar With Lemma Block"]
-                      :m [metavar.request_all "Show Metavars"]
-                      :w [action.make_with "Replace Metavar With With Block"]}
-                  :r [action.refine_hole "Refine Hole"]
-                  :R [action.expr_search_hints "Refine Hole With Names"]
-                  :s [action.case_split "Case Split"]
-                  "]" [metavar.goto_next "Next Metavar"]
-                  "[" [metavar.goto_prev "Previous Metavar"]}
-                 {:mode :n :prefix :<leader>p :buffer bufnr})))
 
+    ;; primary bindings
+    (group :<leader>p :+proof bufnr)
+    (map :<leader>pd action.add_clause "Add declaration clause" :n bufnr)
+    (map :<leader>pe repl.evaluate "Evaluate expression" :n bufnr)
+    (map :<leader>pg action.generate_def "Generate definition" :n bufnr)
+    (map :<leader>pr action.refine_hole "Refine hole" :n bufnr)
+    (map :<leader>pR action.expr_search_hints "Refine hole with names" :n bufnr)
+    (map :<leader>ps action.case_split "Case split" :n bufnr)
+    (map "<leader>p]" metavar.goto_next "Next metavar" :n bufnr)
+    (map "<leader>p[" metavar.goto_prev "Previous metavar" :n bufnr)
+
+    ;; metavariable bindings
+    (group :<leader>pm :+metavar bufnr)
+    (map :<leader>pmc action.make_case "Replace metavar with case block" :n bufnr)
+    (map :<leader>pmf action.expr_search "Fill metavar" :n bufnr)
+    (map :<leader>pmF action.intro "Fill metavar with constructors" :n bufnr)
+    (map :<leader>pml action.make_lemma "Replace metavar with lemma block" :n bufnr)
+    (map :<leader>pmm metavar.request_all "Show metavars" :n bufnr)
+    (map :<leader>pmw metavar.make_with "Replace metavar with with block" :n bufnr)))
+    
 (local opts {:autostart_semantic true
-             ;; immediately write the buffer after LSP actions
+             ;; immediately write to the buffer after LSP actions
              :code_action_post_hook (fn [] (vim.cmd "silent write"))
              :server {: on_attach}})
 

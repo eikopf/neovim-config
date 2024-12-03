@@ -4,15 +4,12 @@
    ((. (require :neotest) :run :run) (_G.vim.fn.expand "%")))
 
 (λ make-bindings []
-   (let [wk (require :which-key)
+   (let [{: map} (require :util.keymap)
          buffer (vim.api.nvim_get_current_buf)]
-     (wk.add {1 :<leader>ca 2 #(vim.cmd.RustLsp :codeAction) :desc "Code actions" : buffer})
-     (wk.add {1 :<leader>cx 2 #(vim.cmd.RustLsp        :run) :desc "Execute item" : buffer})
-     (wk.add {1 :<leader>ct 2   run-tests-in-file            :desc "Test file"    : buffer})))
+     (map :<leader>ca #(vim.cmd.RustLsp :codeAction) "Code actions" :n buffer)
+     (map :<leader>cx #(vim.cmd.RustLsp        :run) "Execute item" :n buffer) 
+     (map :<leader>ct run-tests-in-file              "Test file"    :n buffer)))
      
-     
-     
-
 ;; configuration options passed to rust-analyzer
 ;; refer to https://rust-analyzer.github.io/manual.html#configuration
 ;;
