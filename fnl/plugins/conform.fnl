@@ -3,6 +3,7 @@
 (local formatters {:clojure      [:cljfmt]
                    :javascript [:prettier]
                    :lua          [:stylua]
+                   :nix          [:nixfmt]
                    :python         [:ruff]
                    :rust        [:rustfmt]})
 
