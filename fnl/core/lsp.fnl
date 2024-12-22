@@ -13,6 +13,7 @@
 (set servers.julials     {}) ;; julia
 (set servers.lua_ls      {}) ;; lua
 (set servers.marksman    {}) ;; markdown
+(set servers.nil_ls      {}) ;; nix
 (set servers.ocamllsp    {}) ;; ocaml
 (set servers.ruff        {}) ;; python
 (set servers.sourcekit   {}) ;; swift
