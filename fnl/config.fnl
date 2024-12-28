@@ -21,6 +21,7 @@
 (vim.cmd.colorscheme 
   (match (get-term)
     TERM.WEZTERM :catppuccin-macchiato
+    TERM.GHOSTTY :catppuccin-macchiato
     TERM.NEOVIDE :everforest
     _            :catppuccin-latte))
 

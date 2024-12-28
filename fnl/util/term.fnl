@@ -8,6 +8,10 @@
   "Returns the value of the `$TERM_PROGRAM` environment variable."
   vim.env.TERM_PROGRAM)
 
+(λ running-in-ghostty []
+  "Returns `(= :ghostty vim.env.TERM_PROGRAM)`."
+  (= :ghostty vim.env.TERM_PROGRAM))
+
 (λ running-in-wezterm []
   "Returns `(= :Wezterm vim.env.TERM_PROGRAM)`."
   (= :WezTerm vim.env.TERM_PROGRAM))
@@ -25,8 +29,15 @@
   (if (?. vim.g.neovide) true false))
 
 ;; enum of recognised terminal emulators
-(local TERM {:ALACRITTY {} :ITERM2 {} :NEOVIDE {} :WEZTERM {} :UNKNOWN {}})
+(local TERM {:ALACRITTY {} 
+             :GHOSTTY   {} 
+             :ITERM2    {} 
+             :NEOVIDE   {} 
+             :WEZTERM   {} 
+             :UNKNOWN   {}})
+
 (setmetatable TERM.ALACRITTY {:__tostring #:Alacritty})
+(setmetatable TERM.GHOSTTY   {:__tostring   #:Ghostty})
 (setmetatable TERM.ITERM2    {:__tostring    #:iTerm2})
 (setmetatable TERM.NEOVIDE   {:__tostring   #:Neovide})
 (setmetatable TERM.WEZTERM   {:__tostring   #:WezTerm})
@@ -35,6 +46,7 @@
 (λ get-term []
   "Returns a `util.term.TERM` value corresponding to the current terminal."
   (if (running-in-alacritty) TERM.ALACRITTY
+      (running-in-ghostty)   TERM.GHOSTTY
       (running-in-iterm2)    TERM.ITERM2
       (running-in-neovide)   TERM.NEOVIDE
       (running-in-wezterm)   TERM.WEZTERM
@@ -52,6 +64,7 @@
  : term-program
  : running-in-wezterm
  : running-in-alacritty
+ : running-in-ghostty
  : running-in-iterm2
  : running-in-neovide}
 
