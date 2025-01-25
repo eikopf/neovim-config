@@ -26,6 +26,13 @@
 (set servers.fennel_ls.root_dir find-fennel-root-dir)
 (set servers.fennel_ls.settings {:fennel-ls {:extra-globals :vim}})
 
+(set servers.julials.on_new_config 
+     (fn [new_config _]
+       (let [julia (vim.fn.expand "~/.julia/environments/nvim-lspconfig/bin/julia")
+             lsp (require :lspconfig)]
+         (if (lsp.util.path_is_file julia)
+             (tset new_config :cmd 1 julia)))))
+
 (set servers.sourcekit.capabilities
      {:workspace {:didChangeWatchedFiles {:dynamicRegistration true}}})
 
