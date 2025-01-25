@@ -26,14 +26,14 @@
     (map :<leader>pmF action.intro "Fill metavar with constructors" :n bufnr)
     (map :<leader>pml action.make_lemma "Replace metavar with lemma block" :n bufnr)
     (map :<leader>pmm metavar.request_all "Show metavars" :n bufnr)
-    (map :<leader>pmw metavar.make_with "Replace metavar with with block" :n bufnr)))
+    (map :<leader>pmw action.make_with "Replace metavar with with block" :n bufnr)))
     
 (local opts {:autostart_semantic true
              ;; immediately write to the buffer after LSP actions
              :code_action_post_hook (fn [] (vim.cmd "silent write"))
              :server {: on_attach}})
 
-{1 :ShinKage/idris2-nvim
+{1 :idris-community/idris2-nvim
  :dependencies [:neovim/nvim-lspconfig :MunifTanjim/nui.nvim]
  ;; this plugin HAS to be lazy-loaded, because it's extremely slow to start
  :ft [:idris2 :ipkg]
