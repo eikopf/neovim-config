@@ -22,7 +22,6 @@
 (λ find-fennel-root-dir [path]
   (. (vim.fs.find [:fnl :git] {:upward true :type :directory : path}) 1))
 
-(set servers.fennel_ls.cmd [(.. (vim.fn.stdpath :data) :/mason/bin/fennel-ls)])
 (set servers.fennel_ls.root_dir find-fennel-root-dir)
 (set servers.fennel_ls.settings {:fennel-ls {:extra-globals :vim}})
 
