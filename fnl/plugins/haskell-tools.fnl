@@ -17,7 +17,7 @@
       :tools {:repl {:handler :builtin}}})
 
 {1 :mrcjkb/haskell-tools.nvim 
- :version :^3 
+ :version :^4 
  :lazy false}
  
  
