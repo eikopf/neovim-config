@@ -25,11 +25,3 @@
     TERM.NEOVIDE :everforest
     _            :catppuccin-latte))
 
-;; HACK: patch for neovim/neovim#30985
-;; a neovim patch should fix this in 0.11 (expected 2024-12-25)
-(each [_ method (ipairs [:textDocument/diagnostic :workspace/diagnostic])]
-  (local default-diagnostic-handler (. vim.lsp.handlers method))
-  (tset vim.lsp.handlers method 
-        (fn [err result context config]
-          (if (not= (?. err :code) -32802)
-            (default-diagnostic-handler err result context config)))))
