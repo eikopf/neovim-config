@@ -28,7 +28,7 @@ vim.opt.rtp:prepend(lazy_install_path)
 -- enable jit compilation
 vim.loader.enable()
 
--- the plugin spec defines the set of plugins that lazy loads.
+-- the plugin spec defines the set of plugins that lazy.nvim loads.
 -- in this case, all files under the plugin module are merged
 -- into a plugin spec, and nfnl is explicitly added
 local plugin_spec = { {
@@ -46,17 +46,13 @@ require("lazy").setup(plugin_spec, {
   change_detection = {
     notify = false, -- this disables the "Config Change Detected..." messages
   },
-
-  rtp = {
-    paths = { "/opt/homebrew/lib/lua/5.4" },
-  },
 })
 
 -- at this point, it's possible that the lua/ directory does not exist,
 -- typically because the repo has just been cloned
 local target_dir = vim.fn.stdpath("config") .. "/lua"
 if vim.fn.glob(target_dir) == "" then
-  -- we do the dumbest possible thing here: compile the .fnl files and immediately exit
+  -- we do the dumbest possible thing here: compile the .fnl files and immediately exit;
   -- then the next time the user opens neovim, it should just behave as normal
   require("nfnl.api")["compile-all-files"](target_dir)
   os.exit()
