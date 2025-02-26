@@ -26,7 +26,7 @@
     _            :catppuccin-latte))
 
 ;; HACK: patch for neovim/neovim#30985
-;; a neovim patch should fix this in 0.11 (expected 2024-12-25)
+;; a neovim patch should fix this in 0.11 (in prerelease as of 2025-02-26)
 (each [_ method (ipairs [:textDocument/diagnostic :workspace/diagnostic])]
   (local default-diagnostic-handler (. vim.lsp.handlers method))
   (tset vim.lsp.handlers method 
