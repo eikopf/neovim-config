@@ -4,6 +4,7 @@
                    :javascript [:prettier]
                    :lua          [:stylua]
                    :nix          [:nixfmt]
+                   :ocaml   [:ocamlformat]
                    :python         [:ruff]
                    :rust        [:rustfmt]})
 
