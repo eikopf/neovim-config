@@ -1,17 +1,4 @@
-(fn set! [key ?value]
-  "
-  Sets the value of `vim.opt.key` as follows:
-  - if `?value` is not `nil`, set it as the value;
-  - if `key` begins with `no`, strip the `no` prefix and set it as `false`;
-  - if `key` is not `nil`, set the value as `true`;
-  - otherwise panic and return `nil`.
-  "
-  (case [key ?value]
-    [key value] (tset vim.opt key value)
-    (where [key] (vim.startswith key :no)) (tset vim.opt (string.sub key 3)
-                                                 false)
-    [key] (tset vim.opt key true)
-    _ nil))
+(import-macros {: set!} :util.macros)
 
 ;; reasonable defaults
 (set! :backspace :2)

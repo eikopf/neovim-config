@@ -1,6 +1,15 @@
 ;; fennel-ls: macro-file
 ;; [nfnl-macro]
 
+(fn set! [key ?value]
+  (assert-compile (not= key nil))
+  (local prefix?# _G.vim.startswith)
+  (case [key ?value]
+    [key value] `(tset vim.opt ,key ,value)
+    (where [key] (prefix?# key :no))
+    `(tset vim.opt ,(string.sub key 3) false)
+    [key] `(tset vim.opt ,key true)))
+
 (fn concat! [x & xs]
   "Concatenates two or more lists into a single list."
   (local data# x)
@@ -17,4 +26,5 @@
         `(->> group# ,datum#))))
 
 {: augroup!
- : concat!}
+ : concat!
+ : set!}
