@@ -2,6 +2,11 @@
 ;; [nfnl-macro]
 
 (fn set! [key ?value]
+  "Sets a global option, where
+  - if `?value` is not nil then `key` is assigned `?value`;
+  - if `key` begins with `:no` then the corresponding key is set to `false`;
+  - otherwise `key` is set to `true`.
+  "
   (assert-compile (not= key nil))
   (local prefix?# (fn [s p] 
                       (= (string.sub s 1 (length p)) p)))
