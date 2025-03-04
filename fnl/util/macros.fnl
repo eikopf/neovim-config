@@ -3,7 +3,8 @@
 
 (fn set! [key ?value]
   (assert-compile (not= key nil))
-  (local prefix?# _G.vim.startswith)
+  (local prefix?# (fn [s p] 
+                      (= (string.sub s 1 (length p)) p)))
   (case [key ?value]
     [key value] `(tset vim.opt ,key ,value)
     (where [key] (prefix?# key :no))
