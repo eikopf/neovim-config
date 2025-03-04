@@ -1,6 +1,5 @@
+;; fennel-ls: macro-file
 ;; [nfnl-macro]
-
-;; TODO: get fennel-ls to play nice with macros (and nfnl in particular)
 
 (fn augroup! [name clear & tail]
   "Creates an autocommand group and threads it though several `autocmd` calls."
