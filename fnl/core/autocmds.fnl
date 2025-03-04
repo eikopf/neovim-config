@@ -1,12 +1,7 @@
 ;; custom autocommands and autogroups
 
-(local {: autocmd : make-augroup} (require :util.autocmd))
-
-;; hacky macro to make autogroup declarations prettier
-;; this relies on autocmd returning the passed group id
-(macro augroup! [name clear & tail]
-  `(->> (make-augroup ,name ,clear) ,(unpack tail)))
-
+(local {: autocmd} (require :util.autocmd))
+(import-macros {: augroup!} :util.macros)
 
 ;; terminal autocommands
 (augroup! :terminal :clear
