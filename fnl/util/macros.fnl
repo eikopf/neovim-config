@@ -16,6 +16,10 @@
     `(tset vim.opt ,(string.sub key 3) false)
     [key] `(tset vim.opt ,key true)))
 
+(fn extension! [ft extension]
+  "Associates the filetype `ft` with the given `extension`."
+  `(vim.filetype.add {:extension {,extension ,ft}}))
+
 (fn concat! [x & xs]
   "Concatenates two or more lists into a single list."
   (local data# x)
@@ -33,4 +37,5 @@
 
 {: augroup!
  : concat!
+ : extension!
  : set!}
