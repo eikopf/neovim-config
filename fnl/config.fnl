@@ -11,6 +11,7 @@
 (require :core.options)
 (require :core.autocmds)
 (require :core.keymaps)
+(require :core.journal)
 (require :core.lsp)
 (if (running-in-neovide)    (require :core.neovide))
 (if (= (get-os) OS.WINDOWS) (require :core.windows))
