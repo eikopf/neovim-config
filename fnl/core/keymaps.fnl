@@ -73,6 +73,11 @@
 (map :<leader>gs #(vim.cmd.Telescope "git_branches") "Switch branch")
 (map :<leader>gu #(vim.cmd.Git              "reset")   "Unstage all")
 
+;; journal keymaps -- under the <leader>j namespace
+(group :<leader>j :journal)
+(map :<leader>jt vim.cmd.JournalToday "Open journal entry for today")
+(map :<leader>jo vim.cmd.JournalOpen        "Open journal directory")
+
 ;; lsp keymaps -- under the <leader>l namespace
 (group :<leader>l :lsp)
 (map :<leader>lr vim.cmd.LspRestart "Restart server")
@@ -82,6 +87,7 @@
 ;; keymaps for opening operations -- under the <leader>o namespace
 (group :<leader>o :open)
 (map :<leader>oc #(goto-dir-and-edit (vim.fn.stdpath :config))   "Open config")
+(map :<leader>oj #(vim.cmd :JournalOpen)                        "Open journal")
 (map :<leader>ol #(vim.cmd :Lazy)                                  "Open lazy")
 (map :<leader>om #(vim.cmd :Mason)                                "Open mason")
 (map :<leader>op #(goto-dir-and-edit "~/projects")             "Open projects")
