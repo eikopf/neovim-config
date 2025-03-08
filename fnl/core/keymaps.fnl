@@ -46,6 +46,10 @@
 ;; define and document the terminal mode <Esc> fix
 (map :<Esc> "<C-\\><C-n>" "Exit terminal mode" :t)
 
+;; visual mode bindings
+(map :J ":m '>+1<CR>gv=gv" "Move selection down" :v)
+(map :K ":m '<-2<CR>gv=gv" "Move selection up"   :v)
+
 ;; general code keymaps -- under the <leader>c namespace
 (group :<leader>c :code)
 (map :<leader>cd #(vim.cmd.Trouble :document_diagnostics) "Show local diagnostics")
