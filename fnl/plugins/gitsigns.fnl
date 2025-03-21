@@ -7,5 +7,6 @@
               :topdelete {:text "‾"}
               :changedelete {:text "┆"}})
 
-{1 :lewis6991/gitsigns.nvim :opts {: signs}}
-
+{1 :lewis6991/gitsigns.nvim 
+ :opts {: signs}}
+ 
