@@ -1,6 +1,6 @@
 ;; language server configuration
 
-;; NOTE: both rust-analyzer and hls are configured by other plugins
+;; NOTE: rust-analyzer is configured by rustaceanvim
 
 (local servers {})
 (set servers.clangd      {}) ;; c/c++
