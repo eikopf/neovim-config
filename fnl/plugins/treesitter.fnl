@@ -1,4 +1,5 @@
-;; complete list of parsers: https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#supported-languages
+;; nvim-treesitter
+
 (local langs [:bash
               :c
               :clojure
@@ -63,19 +64,24 @@
 ;; - unison
 ;; (also the agda parser tries and fails to build on windows)
 
-;; complete spec given here: https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#modules
 (local opts
        {:ensure_installed langs
-        :ignore_install [:org]
+        :highlight {:enable true}
         :auto_install false
-        :index {:enable true}
-        :highlight {:enable true :additional_vim_regex_highlighting [:org]}})
+        :index {:enable true}})
+
 
 ;; callback to pass opts to nvim-treesitter.configs.setup
 (fn config []
-  (let [ts (require :nvim-treesitter.configs)]
-    (ts.setup opts)))
+  (let [ts (require :nvim-treesitter.configs)
+        jabber (require :core.jabber)]
+    (ts.setup opts)
+    (if vim.g.__jabber_enabled (jabber.setup))))
+        
 
 ;; plugin spec
-{1 :nvim-treesitter/nvim-treesitter :build ":TSUpdate" : config}
+{1 :nvim-treesitter/nvim-treesitter 
+ :build ":TSUpdate"
+ :event :BufRead
+ : config}
 

@@ -16,7 +16,9 @@
 (if (running-in-neovide)    (require :core.neovide))
 (if (= (get-os) OS.WINDOWS) (require :core.windows))
 
-(if (= (hostname-prefix) :pilatus) (require :core.jabber))
+;; conditionally enable jabber; this causes plugins.treesitter to load
+;; core.jabber when treesitter is loaded
+(tset vim.g :__jabber_enabled (= (hostname-prefix) :pilatus))
 
 ;; load colorscheme
 (vim.cmd.colorscheme 
