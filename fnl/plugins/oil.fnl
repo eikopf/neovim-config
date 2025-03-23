@@ -9,5 +9,7 @@
              ;; faster up/down bindings
              :keymaps {:L :actions.select :H :actions.parent}})
 
-{1 :stevearc/oil.nvim : opts :dependencies :nvim-tree/nvim-web-devicons}
+{1 :stevearc/oil.nvim 
+ :dependencies :nvim-tree/nvim-web-devicons
+ : opts}
 
