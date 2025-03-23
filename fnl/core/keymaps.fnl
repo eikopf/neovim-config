@@ -93,7 +93,6 @@
 (map :<leader>oc #(goto-dir-and-edit (vim.fn.stdpath :config))   "Open config")
 (map :<leader>oj #(vim.cmd :JournalOpen)                        "Open journal")
 (map :<leader>ol #(vim.cmd :Lazy)                                  "Open lazy")
-(map :<leader>om #(vim.cmd :Mason)                                "Open mason")
 (map :<leader>op #(goto-dir-and-edit "~/projects")             "Open projects")
 (map :<leader>oP #(vim.cmd.Lazy :profile)                 "Open lazy profiler")
 (map :<leader>ot #(open-short-term)                      "Open terminal split")
