@@ -8,10 +8,9 @@
 (set servers.fennel_ls   {}) ;; fennel
 (set servers.julials     {}) ;; julia
 (set servers.lua_ls      {}) ;; lua
-(set servers.marksman    {}) ;; markdown
 (set servers.nixd        {}) ;; nix
 (set servers.ocamllsp    {}) ;; ocaml
-(set servers.ruff        {}) ;; python
+(set servers.ruff_lsp    {}) ;; python
 
 (λ find-fennel-root-dir [path]
   (. (vim.fs.find [:fnl :git] {:upward true :type :directory : path}) 1))
