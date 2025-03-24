@@ -4,5 +4,5 @@
  :dependencies [:nvim-lua/plenary.nvim]
  :opts {}
  :cmd [:TodoQuickFix :TodoLocList :TodoTelescope :Trouble]
- :event [:BufEnter]}
+ :event :BufRead}
 
