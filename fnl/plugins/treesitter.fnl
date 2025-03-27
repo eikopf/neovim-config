@@ -64,12 +64,10 @@
 ;; - unison
 ;; (also the agda parser tries and fails to build on windows)
 
-(local opts
-       {:ensure_installed langs
-        :highlight {:enable true}
-        :auto_install false
-        :index {:enable true}})
-
+(local opts {:ensure_installed langs
+             :highlight {:enable true}
+             :auto_install false
+             :index {:enable true}})
 
 ;; callback to pass opts to nvim-treesitter.configs.setup
 (fn config []
@@ -77,11 +75,9 @@
         jabber (require :core.jabber)]
     (ts.setup opts)
     (if vim.g.__jabber_enabled (jabber.setup))))
-        
 
 ;; plugin spec
-{1 :nvim-treesitter/nvim-treesitter 
+{1 :nvim-treesitter/nvim-treesitter
  :build ":TSUpdate"
  :event :BufRead
  : config}
-

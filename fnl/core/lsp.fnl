@@ -3,14 +3,15 @@
 ;; NOTE: rust-analyzer is configured by rustaceanvim
 
 (local servers {})
-(set servers.clangd      {}) ;; c/c++
-(set servers.ts_ls       {}) ;; (type/java)script
-(set servers.fennel_ls   {}) ;; fennel
-(set servers.julials     {}) ;; julia
-(set servers.lua_ls      {}) ;; lua
-(set servers.nixd        {}) ;; nix
-(set servers.ocamllsp    {}) ;; ocaml
-(set servers.ruff        {}) ;; python
+
+(set servers.clangd {})
+(set servers.ts_ls {})
+(set servers.fennel_ls {})
+(set servers.julials {})
+(set servers.lua_ls {})
+(set servers.nixd {})
+(set servers.ocamllsp {})
+(set servers.ruff {})
 
 (λ find-fennel-root-dir [path]
   (. (vim.fs.find [:fnl :git] {:upward true :type :directory : path}) 1))
@@ -18,7 +19,7 @@
 (set servers.fennel_ls.root_dir find-fennel-root-dir)
 (set servers.fennel_ls.settings {:fennel-ls {:extra-globals :vim}})
 
-(set servers.julials.on_new_config 
+(set servers.julials.on_new_config
      (fn [new_config _]
        (let [julia (vim.fn.expand "~/.julia/environments/nvim-lspconfig/bin/julia")
              lsp (require :lspconfig)]
@@ -33,4 +34,3 @@
 ;; initialize the servers
 (each [server settings (pairs servers)]
   ((. lsp server :setup) (vim.tbl_deep_extend :keep settings {: capabilities})))
-

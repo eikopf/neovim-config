@@ -5,4 +5,3 @@
  :opts {}
  :cmd [:TodoQuickFix :TodoLocList :TodoTelescope :Trouble]
  :event :BufRead}
-

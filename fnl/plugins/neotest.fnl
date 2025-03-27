@@ -11,4 +11,3 @@
                 :rustaceanvim]
  : opts
  :lazy true}
-

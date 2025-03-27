@@ -45,4 +45,3 @@
                 :kdheepak/cmp-latex-symbols]
  : config
  :event :InsertEnter}
-

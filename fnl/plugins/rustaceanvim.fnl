@@ -1,15 +1,15 @@
 ;; rustaceanvim -- additional rust tooling, forked from rust-tools.nvim
 
 (λ run-tests-in-file []
-   ((. (require :neotest) :run :run) (_G.vim.fn.expand "%")))
+  ((. (require :neotest) :run :run) (_G.vim.fn.expand "%")))
 
 (λ make-bindings []
-   (let [{: map} (require :util.keymap)
-         buffer (vim.api.nvim_get_current_buf)]
-     (map :<leader>ca #(vim.cmd.RustLsp :codeAction) "Code actions" :n buffer)
-     (map :<leader>cx #(vim.cmd.RustLsp        :run) "Execute item" :n buffer) 
-     (map :<leader>ct run-tests-in-file              "Test file"    :n buffer)))
-     
+  (let [{: map} (require :util.keymap)
+        buffer (vim.api.nvim_get_current_buf)]
+    (map :<leader>ca #(vim.cmd.RustLsp :codeAction) "Code actions" :n buffer)
+    (map :<leader>cx #(vim.cmd.RustLsp :run) "Execute item" :n buffer)
+    (map :<leader>ct run-tests-in-file "Test file" :n buffer)))
+
 ;; configuration options passed to rust-analyzer
 ;; refer to https://rust-analyzer.github.io/manual.html#configuration
 (local rust-analyzer
@@ -30,11 +30,7 @@
 ;; the primary configuration interface for rustaceanvim
 (set vim.g.rustaceanvim
      (fn []
-       {:server {:on_attach make-bindings
-                 :default_settings {: rust-analyzer}}}))
+       {:server {:on_attach make-bindings :default_settings {: rust-analyzer}}}))
 
 ;; this plugin is internally lazy, so lazy-loading with lazy.nvim is redundant
-{1 :mrcjkb/rustaceanvim
- :version :^4
- :lazy false}
-
+{1 :mrcjkb/rustaceanvim :version :^4 :lazy false}

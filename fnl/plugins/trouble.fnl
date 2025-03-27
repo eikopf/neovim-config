@@ -15,4 +15,3 @@
  :opts {:auto_close true}
  :cmd [:Trouble :TroubleClose :TroubleToggle :TroubleRefresh :TodoTrouble]
  :lazy true}
-

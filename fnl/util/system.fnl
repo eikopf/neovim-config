@@ -16,21 +16,21 @@
 
 ;; fake enum table (distinct tables are always inequal)
 (local OS {:MACOS {} :LINUX {} :WINDOWS {}})
-(setmetatable OS.MACOS   {:__tostring   #:MacOS})
-(setmetatable OS.LINUX   {:__tostring   #:Linux})
+(setmetatable OS.MACOS {:__tostring #:MacOS})
+(setmetatable OS.LINUX {:__tostring #:Linux})
 (setmetatable OS.WINDOWS {:__tostring #:Windows})
 
 (λ get-os []
   "Returns the system's OS as an element of `system.OS`."
   (case (. (vim.uv.os_uname) :sysname)
-    :Darwin     OS.MACOS
-    :Linux      OS.LINUX
-    :Windows    OS.WINDOWS
+    :Darwin OS.MACOS
+    :Linux OS.LINUX
+    :Windows OS.WINDOWS
     :Windows_NT OS.WINDOWS))
 
 (λ get-os-name []
-   "Returns the canonical name of the system's OS."
-   (tostring (get-os)))
+  "Returns the canonical name of the system's OS."
+  (tostring (get-os)))
 
 (λ get-env-var [name]
   "Returns the value of an environment variable, or `nil` if it is undefined."
@@ -55,4 +55,3 @@
  : get-env-var
  : run-cmd
  : run-cmd-sync}
-

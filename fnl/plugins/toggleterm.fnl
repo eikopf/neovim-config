@@ -4,4 +4,3 @@
  :version "*"
  :opts {:shade_terminals false}
  :cmd [:ToggleTerm]}
-

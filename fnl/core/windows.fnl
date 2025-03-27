@@ -2,4 +2,4 @@
 
 ;; make treesitter use zig to compile parsers
 (let [ts-install (require :nvim-treesitter.install)]
-  (tset ts-install :compilers [ :zig]))
+  (tset ts-install :compilers [:zig]))

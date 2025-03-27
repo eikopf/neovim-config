@@ -7,7 +7,6 @@
         action (require :idris2.code_action)
         repl (require :idris2.repl)
         metavar (require :idris2.metavars)]
-
     ;; primary bindings
     (group :<leader>p :+proof bufnr)
     (map :<leader>pd action.add_clause "Add declaration clause" :n bufnr)
@@ -18,16 +17,18 @@
     (map :<leader>ps action.case_split "Case split" :n bufnr)
     (map "<leader>p]" metavar.goto_next "Next metavar" :n bufnr)
     (map "<leader>p[" metavar.goto_prev "Previous metavar" :n bufnr)
-
     ;; metavariable bindings
     (group :<leader>pm :+metavar bufnr)
-    (map :<leader>pmc action.make_case "Replace metavar with case block" :n bufnr)
+    (map :<leader>pmc action.make_case "Replace metavar with case block" :n
+         bufnr)
     (map :<leader>pmf action.expr_search "Fill metavar" :n bufnr)
     (map :<leader>pmF action.intro "Fill metavar with constructors" :n bufnr)
-    (map :<leader>pml action.make_lemma "Replace metavar with lemma block" :n bufnr)
+    (map :<leader>pml action.make_lemma "Replace metavar with lemma block" :n
+         bufnr)
     (map :<leader>pmm metavar.request_all "Show metavars" :n bufnr)
-    (map :<leader>pmw action.make_with "Replace metavar with with block" :n bufnr)))
-    
+    (map :<leader>pmw action.make_with "Replace metavar with with block" :n
+         bufnr)))
+
 (local opts {:autostart_semantic true
              ;; immediately write to the buffer after LSP actions
              :code_action_post_hook (fn [] (vim.cmd "silent write"))
@@ -41,4 +42,3 @@
  :config (fn []
            (let [idris2 (require :idris2)]
              (idris2.setup opts)))}
-

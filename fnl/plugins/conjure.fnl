@@ -3,7 +3,7 @@
 (fn eval-fennel-in-cmd [tbl]
   "Evaluates the Fennel expression passed as `tbl.args`, 
    and prints the result to the commandline."
-  (let [eval   (require :conjure.eval)
+  (let [eval (require :conjure.eval)
         client (require :conjure.client)]
     (client.with-filetype :fennel
       eval.eval-str
@@ -34,4 +34,3 @@
          (tset vim.g "conjure#client#scheme#stdio#value_prefix_pattern" false)
          ;; janet config
          (tset vim.g "conjure#filetype#janet" :conjure.client.janet.stdio))}
-

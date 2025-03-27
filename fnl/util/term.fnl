@@ -29,32 +29,32 @@
   (if (?. vim.g.neovide) true false))
 
 ;; enum of recognised terminal emulators
-(local TERM {:ALACRITTY {} 
-             :GHOSTTY   {} 
-             :ITERM2    {} 
-             :NEOVIDE   {} 
-             :WEZTERM   {} 
-             :UNKNOWN   {}})
+(local TERM {:ALACRITTY {}
+             :GHOSTTY {}
+             :ITERM2 {}
+             :NEOVIDE {}
+             :WEZTERM {}
+             :UNKNOWN {}})
 
 (setmetatable TERM.ALACRITTY {:__tostring #:Alacritty})
-(setmetatable TERM.GHOSTTY   {:__tostring   #:Ghostty})
-(setmetatable TERM.ITERM2    {:__tostring    #:iTerm2})
-(setmetatable TERM.NEOVIDE   {:__tostring   #:Neovide})
-(setmetatable TERM.WEZTERM   {:__tostring   #:WezTerm})
-(setmetatable TERM.UNKNOWN   {:__tostring   #:unknown})
+(setmetatable TERM.GHOSTTY {:__tostring #:Ghostty})
+(setmetatable TERM.ITERM2 {:__tostring #:iTerm2})
+(setmetatable TERM.NEOVIDE {:__tostring #:Neovide})
+(setmetatable TERM.WEZTERM {:__tostring #:WezTerm})
+(setmetatable TERM.UNKNOWN {:__tostring #:unknown})
 
 (λ get-term []
   "Returns a `util.term.TERM` value corresponding to the current terminal."
   (if (running-in-alacritty) TERM.ALACRITTY
-      (running-in-ghostty)   TERM.GHOSTTY
-      (running-in-iterm2)    TERM.ITERM2
-      (running-in-neovide)   TERM.NEOVIDE
-      (running-in-wezterm)   TERM.WEZTERM
-                             TERM.UNKNOWN))
+      (running-in-ghostty) TERM.GHOSTTY
+      (running-in-iterm2) TERM.ITERM2
+      (running-in-neovide) TERM.NEOVIDE
+      (running-in-wezterm) TERM.WEZTERM
+      TERM.UNKNOWN))
 
 (λ get-term-name []
-   "Returns the canonical name of the current terminal."
-   (tostring (get-term)))
+  "Returns the canonical name of the current terminal."
+  (tostring (get-term)))
 
 ;; return public interface
 {: TERM
@@ -67,4 +67,3 @@
  : running-in-ghostty
  : running-in-iterm2
  : running-in-neovide}
-

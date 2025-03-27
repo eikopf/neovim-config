@@ -2,8 +2,4 @@
 
 {1 :tjdevries/ocaml.nvim
  :lazy true
- :ft [:ocaml 
-      :ocaml.interface 
-      :ocaml.ocamllex
-      :ocaml.menhir
-      :ocaml.cram]}
+ :ft [:ocaml :ocaml.interface :ocaml.ocamllex :ocaml.menhir :ocaml.cram]}
