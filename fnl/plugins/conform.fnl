@@ -1,6 +1,7 @@
 ;; conform.nvim -- code formatting plugin
 
 (local formatters {:clojure       [:cljfmt]
+                   :fennel        [:fnlfmt]
                    :javascript [:prettierd]
                    :lua           [:stylua]
                    :nix           [:nixfmt]
