@@ -34,10 +34,7 @@ vim.loader.enable()
 local plugin_spec = { {
   {
     { import = "plugins" },
-    {
-      "Olical/nfnl",
-      ft = "fennel",
-    },
+    { "Olical/nfnl" },
   },
 } }
 
