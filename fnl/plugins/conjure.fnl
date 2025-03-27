@@ -10,7 +10,7 @@
       {:origin tbl.name
        :passive? true
        :code tbl.args
-       :on-result vim.print})))
+       :on-result (. (require :nfnl.notify) :info)})))
 
 ;; create user command for evaluating fennel expressions
 (vim.api.nvim_create_user_command :Fnl eval-fennel-in-cmd {:nargs "?"})
