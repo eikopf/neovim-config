@@ -1,6 +1,7 @@
 ;; KEYMAPS
 
 (local {: group : map : slot} (require :util.keymap))
+(local buffer (require :util.buffer))
 
 (λ format-buffer []
   "Formats the current buffer"
@@ -38,6 +39,21 @@
 (λ prompt-fennel-eval []
   "Prompts for a Fennel expression and evaluates it."
   (vim.cmd.Fnl (vim.fn.input {:prompt "eval: " :cancelreturn :nil})))
+
+(local scratch-lines [";; scratch fennel buffer"
+                      ";; - see :help conjure-mappings for evaluation details"
+                      ";; - run :write <filename> to save the contents of this buffer"
+                      ""
+                      ""])
+
+(λ make-scratch-buffer []
+  "Creates and switches to a scratch Fennel buffer."
+  (doto (buffer.create {:listed true :scratch true})
+    (buffer.rename! :*scratch*)
+    (buffer.set! :filetype :fennel)
+    (buffer.set! :buftype :nofile)
+    (buffer.set-lines! 0 -1 scratch-lines)
+    (buffer.open #(vim.api.nvim_win_set_cursor 0 [5 0]))))
 
 ;; emacs-style lisp evaluation prompt
 (map "<leader>;" prompt-fennel-eval "Evaluate Fennel expression")
@@ -98,6 +114,7 @@
 (map :<leader>ol #(vim.cmd :Lazy) "Open lazy")
 (map :<leader>op #(goto-dir-and-edit "~/projects") "Open projects")
 (map :<leader>oP #(vim.cmd.Lazy :profile) "Open lazy profiler")
+(map :<leader>os make-scratch-buffer "Open new scratch buffer")
 (map :<leader>ot #(open-short-term) "Open terminal split")
 (map :<leader>oT #(open-full-term) "Open terminal here")
 
