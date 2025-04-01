@@ -37,11 +37,29 @@
                                                 {:name :latex_symbols}
                                                 {:name :orgmode}])}))))
 
-{1 :hrsh7th/nvim-cmp
- :dependencies [:L3MON4D3/LuaSnip
-                :saadparwaiz1/cmp_luasnip
-                :hrsh7th/cmp-nvim-lsp
-                :rafamadriz/friendly-snippets
-                :kdheepak/cmp-latex-symbols]
- : config
- :event :InsertEnter}
+(comment {1 :hrsh7th/nvim-cmp
+          :dependencies [:L3MON4D3/LuaSnip
+                         :saadparwaiz1/cmp_luasnip
+                         :hrsh7th/cmp-nvim-lsp
+                         :rafamadriz/friendly-snippets
+                         :kdheepak/cmp-latex-symbols]
+          : config
+          :event :InsertEnter})
+
+;; semver(ish?) release tag
+(local version :1.*)
+
+;; completion sources
+(local dependencies [:rafamadriz/friendly-snippets])
+
+;; configuration
+(local opts {:keymap {:preset :default}
+             :appearance {:nerd_font_variant :mono}
+             :completion {:documentation {:auto_show true}}
+             :sources {:default [:lsp :path :snippets :buffer]}})
+
+{1 :saghen/blink.cmp
+ : version
+ : dependencies
+ : opts
+ :opts_extend [:sources.default]}
