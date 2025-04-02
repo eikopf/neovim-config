@@ -67,12 +67,7 @@
 
 ;; general code keymaps -- under the <leader>c namespace
 (group :<leader>c :code)
-(map :<leader>cd #(vim.cmd.Trouble :document_diagnostics)
-     "Show local diagnostics")
-
-(map :<leader>cD #(vim.cmd.Trouble :workspace_diagnostics)
-     "Show all diagnostics")
-
+(map :<leader>cd #(vim.cmd.Trouble :diagnostics) "Show local diagnostics")
 (map :<leader>cf format-buffer "Format buffer")
 (map :<leader>cr vim.lsp.buf.rename "Rename symbol")
 (map :<leader>cR #(vim.cmd.Trouble :lsp_references) "Show references")
