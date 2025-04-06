@@ -27,11 +27,11 @@
       (tset data# (+ (length data#) 1) datum#)))
   data#)
 
-(fn augroup! [name clear & tail]
+(fn def-autogroup [name clear & tail]
   "Creates an autocommand group and threads it though several `autocmd` calls."
   `(let [autocmd# (require :lib.autocmd)
          group# (autocmd#.make-augroup ,name ,clear)]
      ,(icollect [_ datum# (ipairs tail)]
         `(->> group# ,datum#))))
 
-{: augroup! : concat! : extension! : set!}
+{: def-autogroup : concat! : extension! : set!}
