@@ -1,4 +1,4 @@
-(import-macros {: set!} :util.macros)
+(import-macros {: set!} :lib.macros)
 
 ;; reasonable defaults
 (set! :backspace :2)

@@ -1,7 +1,7 @@
 ;; personal journal setup
 
-(local {: hostname-prefix} (require :util.system))
-(local {: now} (require :util.time))
+(local {: hostname-prefix} (require :lib.system))
+(local {: now} (require :lib.time))
 
 (λ journal-dir-path []
   "Returns the path to the journal directory, or `nil` if it is unknown."

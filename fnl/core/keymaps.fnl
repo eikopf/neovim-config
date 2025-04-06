@@ -1,7 +1,7 @@
 ;; KEYMAPS
 
-(local {: group : map : slot} (require :util.keymap))
-(local buffer (require :util.buffer))
+(local {: group : map : slot} (require :lib.keymap))
+(local buffer (require :lib.buffer))
 
 (λ format-buffer []
   "Formats the current buffer"

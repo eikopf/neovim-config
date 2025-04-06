@@ -1,7 +1,7 @@
 ;; custom autocommands and autogroups
 
-(local {: autocmd} (require :util.autocmd))
-(import-macros {: augroup!} :util.macros)
+(local {: autocmd} (require :lib.autocmd))
+(import-macros {: augroup!} :lib.macros)
 
 ;; terminal autocommands
 (augroup! :terminal :clear (autocmd :TermOpen "*" "setlocal nonumber"))

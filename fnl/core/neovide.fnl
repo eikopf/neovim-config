@@ -4,8 +4,8 @@
 ;; so using them in neovide becomes borderline painful. as a baseline,
 ;; nyoom-engineering/oxocarbon.nvim does this correctly.
 
-(local {: OS : get-os} (require :util.system))
-(local {: last} (require :util.table))
+(local {: OS : get-os} (require :lib.system))
+(local {: last} (require :lib.table))
 
 ;; font
 (set vim.opt.guifont (match (get-os)

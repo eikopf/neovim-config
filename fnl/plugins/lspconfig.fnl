@@ -1,6 +1,6 @@
 ;; LSP configuration
 
-(local {: first} (require :util.table))
+(local {: first} (require :lib.table))
 
 ;; NOTE: rust-analyzer is configured by rustaceanvim
 

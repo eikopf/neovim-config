@@ -1,7 +1,7 @@
 ;; configuration entrypoint
 
-(local {: OS : get-os : hostname-prefix} (require :util.system))
-(local {: TERM : get-term : running-in-neovide} (require :util.term))
+(local {: OS : get-os : hostname-prefix} (require :lib.system))
+(local {: TERM : get-term : running-in-neovide} (require :lib.term))
 
 ;; core configuration
 (require :core.filetype)

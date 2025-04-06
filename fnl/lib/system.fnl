@@ -1,6 +1,6 @@
 ;; utilities for interacting with host systems
 
-(local {: prefix : suffix} (require :util.string))
+(local {: prefix : suffix} (require :lib.string))
 
 (λ hostname []
   "Returns the full hostname of the system."
