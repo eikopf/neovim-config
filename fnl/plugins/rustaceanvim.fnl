@@ -4,7 +4,7 @@
   ((. (require :neotest) :run :run) (_G.vim.fn.expand "%")))
 
 (λ make-bindings []
-  (let [{: map} (require :util.keymap)
+  (let [{: map} (require :lib.keymap)
         buffer (vim.api.nvim_get_current_buf)]
     (map :<leader>ca #(vim.cmd.RustLsp :codeAction) "Code actions" :n buffer)
     (map :<leader>cx #(vim.cmd.RustLsp :run) "Execute item" :n buffer)

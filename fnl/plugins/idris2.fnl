@@ -2,7 +2,7 @@
 
 ;; callback invoked when the idris2 LSP attaches to a buffer
 (fn on_attach [_client]
-  (let [{: map : group} (require :util.keymap)
+  (let [{: map : group} (require :lib.keymap)
         bufnr (vim.api.nvim_get_current_buf)
         action (require :idris2.code_action)
         repl (require :idris2.repl)

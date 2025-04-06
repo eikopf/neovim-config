@@ -44,7 +44,7 @@
 (setmetatable TERM.UNKNOWN {:__tostring #:unknown})
 
 (λ get-term []
-  "Returns a `util.term.TERM` value corresponding to the current terminal."
+  "Returns a `lib.term.TERM` value corresponding to the current terminal."
   (if (running-in-alacritty) TERM.ALACRITTY
       (running-in-ghostty) TERM.GHOSTTY
       (running-in-iterm2) TERM.ITERM2
