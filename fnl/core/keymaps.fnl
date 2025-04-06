@@ -46,7 +46,7 @@
                       ""
                       ""])
 
-(λ make-scratch-buffer []
+(λ open-scratch-buffer []
   "Creates and switches to a scratch Fennel buffer."
   (doto (buffer.create {:listed true :scratch true})
     (buffer.rename! :*scratch*)
@@ -109,7 +109,7 @@
 (map :<leader>ol #(vim.cmd :Lazy) "Open lazy")
 (map :<leader>op #(goto-dir-and-edit "~/projects") "Open projects")
 (map :<leader>oP #(vim.cmd.Lazy :profile) "Open lazy profiler")
-(map :<leader>os make-scratch-buffer "Open new scratch buffer")
+(map :<leader>os open-scratch-buffer "Open new scratch buffer")
 (map :<leader>ot #(open-short-term) "Open terminal split")
 (map :<leader>oT #(open-full-term) "Open terminal here")
 
