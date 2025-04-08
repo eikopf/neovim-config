@@ -30,7 +30,7 @@
 ;; for lazy-loading reasons this function is used in plugins/treesitter.fnl, not here
 (λ load-jabber-parser []
   "Loads the Jabber treesitter parser from `path` if it exists."
-  (if (vim.uv.fs_stat (vim.fn.normalize jabber-path))
+  (if (vim.uv.fs_stat (vim.fs.normalize jabber-path))
       (let [parsers (: (require :nvim-treesitter.parsers) :get_parser_configs)]
         (vim.treesitter.language.register :jabber :jbr)
         (set parsers.jabber jabber-config))))
