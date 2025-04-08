@@ -72,9 +72,9 @@
 ;; callback to pass opts to nvim-treesitter.configs.setup
 (fn config []
   (let [ts (require :nvim-treesitter.configs)
-        jabber (require :core.jabber)]
+        compat (require :core.compat)]
     (ts.setup opts)
-    (if vim.g.__jabber_enabled (jabber.setup))))
+    (compat.load-jabber-parser)))
 
 ;; plugin spec
 {1 :nvim-treesitter/nvim-treesitter

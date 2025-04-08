@@ -1,11 +1,6 @@
 ;; configuration for when neovim runs inside of neovide
 
-;; WARN: some themes (e.g. catppuccin) don't set terminal colors, and
-;; so using them in neovide becomes borderline painful. as a baseline,
-;; nyoom-engineering/oxocarbon.nvim does this correctly.
-
 (local {: OS : get-os} (require :lib.system))
-(local {: last} (require :lib.table))
 
 ;; font
 (set vim.opt.guifont (match (get-os)
@@ -31,8 +26,3 @@
 
 ;; ui
 (set vim.g.neovide_theme :dark)
-
-;; if the final argument to neovim doesn't match the cwd, then
-;; the user didn't pass a path manually -- so switch to $HOME
-(if (not= (vim.fn.getcwd) (last vim.v.argv))
-    (vim.cmd.cd vim.env.HOME))
