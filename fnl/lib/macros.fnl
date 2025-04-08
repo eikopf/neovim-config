@@ -1,6 +1,11 @@
 ;; fennel-ls: macro-file
 ;; [nfnl-macro]
 
+(fn load! [mod ?opts]
+  "Loads the given module by invoking its `setup` method."
+  (assert-compile (= (type mod) :string))
+  `(: (require ,mod) :setup ,?opts))
+
 (fn set! [key ?value]
   "Sets a global option, where
   - if `?value` is not nil then `key` is assigned `?value`;
@@ -34,4 +39,4 @@
      ,(icollect [_ datum# (ipairs tail)]
         `(->> group# ,datum#))))
 
-{: def-autogroup : concat! : extension! : set!}
+{: def-autogroup : concat! : extension! : load! : set!}
