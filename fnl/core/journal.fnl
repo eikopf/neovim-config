@@ -18,13 +18,19 @@
   "Returns the filename of the journal entry for today."
   (entry-filename-on (now)))
 
-;; defining user commands with associated callbacks
-
 (fn open-journal []
   (vim.cmd.edit (journal-dir-path)))
 
 (fn edit-journal-today []
   (vim.cmd.edit (vim.fs.joinpath (journal-dir-path) (entry-filename-today))))
 
-(vim.api.nvim_create_user_command :JournalOpen open-journal {})
-(vim.api.nvim_create_user_command :JournalToday edit-journal-today {})
+(fn setup [_self]
+  (vim.api.nvim_create_user_command :JournalOpen open-journal {})
+  (vim.api.nvim_create_user_command :JournalToday edit-journal-today {}))
+
+{: journal-dir-path
+ : entry-filename-on
+ : entry-filename-today
+ : open-journal
+ : edit-journal-today
+ : setup}

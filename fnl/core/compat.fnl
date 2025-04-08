@@ -58,7 +58,7 @@
                            TERM.NEOVIDE :everforest
                            _ default))))
 
-(λ setup []
+(fn setup [_self]
   (set-windows-treesitter-compilers [:zig])
   (set-default-neovide-path vim.env.HOME)
   (load-colorscheme-by-term :catppuccin-latte)
