@@ -3,6 +3,11 @@
 ;; this is the final portion of the configuration, where ad-hoc code is run
 ;; based on the host, version, platform, terminal, and so on.
 
+(λ disable-nvim-treesitter-git-downloads []
+   "Makes `nvim-treesitter` use `curl` and `tar` instead of `git` when possible."
+   (let [treesitter-install (require :nvim-treesitter.install)]
+     (set treesitter-install.prefer-git false)))
+
 (λ set-windows-treesitter-compilers [compilers]
   "Sets the compilers used by treesitter to compile grammars on Windows."
   (let [{: OS : get-os} (require :lib.system)]
@@ -59,6 +64,7 @@
                            _ default))))
 
 (fn setup [_self]
+  (disable-nvim-treesitter-git-downloads)
   (set-windows-treesitter-compilers [:zig])
   (set-default-neovide-path vim.env.HOME)
   (load-colorscheme-by-term :catppuccin-latte)
