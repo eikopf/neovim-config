@@ -28,8 +28,8 @@
          (tset vim.g "conjure#debug" true)
          (tset vim.g "conjure#mapping#doc_word" false)
          (tset vim.g "conjure#log#hud#enabled" false)
-         ;; scheme config -- change chez to petite if it starts to slow down
-         (tset vim.g "conjure#client#scheme#stdio#command" :chez)
+         ;; scheme config
+         (tset vim.g "conjure#client#scheme#stdio#command" :scheme)
          (tset vim.g "conjure#client#scheme#stdio#prompt_pattern" "> $?")
          (tset vim.g "conjure#client#scheme#stdio#value_prefix_pattern" false)
          ;; janet config
