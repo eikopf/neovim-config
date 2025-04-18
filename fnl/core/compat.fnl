@@ -4,25 +4,25 @@
 ;; based on the host, version, platform, terminal, and so on.
 
 (λ disable-nvim-treesitter-git-downloads []
-   "Makes `nvim-treesitter` use `curl` and `tar` instead of `git` when possible."
-   (let [treesitter-install (require :nvim-treesitter.install)]
-     (set treesitter-install.prefer-git false)))
+  "Makes `nvim-treesitter` use `curl` and `tar` instead of `git` when possible."
+  (let [treesitter-install (require :nvim-treesitter.install)]
+    (set treesitter-install.prefer-git false)))
 
 (λ set-windows-treesitter-compilers [compilers]
   "Sets the compilers used by treesitter to compile grammars on Windows."
-  (let [{: OS : get-os} (require :lib.system)]
-    (if (= (get-os) OS.WINDOWS)
+  (let [system (require :lib.system)]
+    (if (system.windows?)
         (let [ts-install (require :nvim-treesitter.install)]
           (tset ts-install :compilers compilers)))))
 
 (λ set-default-neovide-path [path]
   "Sets `cwd` to `path` if Neovide is running and no path was passed manually."
-  (let [{: running-in-neovide} (require :lib.term)
-        {: last} (require :lib.table)]
-    (if (running-in-neovide)
+  (let [term (require :lib.term)
+        table (require :lib.table)]
+    (if (term.neovide?)
         ;; if the final argument to neovim doesn't match the cwd, then the user
         ;; didn't pass a path manually, so we default to the given path
-        (if (not= (vim.fn.getcwd) (last vim.v.argv))
+        (if (not= (vim.fn.getcwd) (table.last vim.v.argv))
             (vim.cmd.cd path)))))
 
 (local jabber-path "~/projects/final-year-project/tree-sitter-jabber")
@@ -56,11 +56,12 @@
 
 (λ load-colorscheme-by-term [default]
   "Sets the colorscheme on a per-terminal basis, falling back to the given `default`."
-  (let [{: TERM : get-term} (require :lib.term)]
-    (vim.cmd.colorscheme (match (get-term)
-                           TERM.WEZTERM :catppuccin-macchiato
-                           TERM.GHOSTTY :catppuccin-macchiato
-                           TERM.NEOVIDE :everforest
+  (let [term (require :lib.term)]
+    (vim.cmd.colorscheme (match (term.program)
+                           term.TERM.WEZTERM :catppuccin-macchiato
+                           term.TERM.GHOSTTY :catppuccin-macchiato
+                           term.TERM.NEOVIDE :everforest
+                           term.TERM.WINTERM :everforest
                            _ default))))
 
 (fn setup [_self]

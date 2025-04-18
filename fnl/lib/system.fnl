@@ -1,6 +1,6 @@
 ;; utilities for interacting with host systems
 
-(local {: prefix : suffix} (require :lib.string))
+(local string (require :lib.string))
 
 (λ hostname []
   "Returns the full hostname of the system."
@@ -8,11 +8,11 @@
 
 (λ hostname-prefix []
   "Returns the first component of the system's hostname."
-  (prefix (hostname) "."))
+  (string.prefix (hostname) "."))
 
 (λ hostname-domain []
   "Returns the domain portion of the system's hostname."
-  (suffix (hostname) "."))
+  (string.suffix (hostname) "."))
 
 ;; fake enum table (distinct tables are always inequal)
 (local OS {:MACOS {} :LINUX {} :WINDOWS {}})
@@ -20,7 +20,7 @@
 (setmetatable OS.LINUX {:__tostring #:Linux})
 (setmetatable OS.WINDOWS {:__tostring #:Windows})
 
-(λ get-os []
+(λ os []
   "Returns the system's OS as an element of `system.OS`."
   (case (. (vim.uv.os_uname) :sysname)
     :Darwin OS.MACOS
@@ -28,13 +28,29 @@
     :Windows OS.WINDOWS
     :Windows_NT OS.WINDOWS))
 
-(λ get-os-name []
-  "Returns the canonical name of the system's OS."
-  (tostring (get-os)))
+(λ macos? []
+  "Returns `true` if the host OS is MacOS."
+  (= (os) OS.MACOS))
 
-(λ get-env-var [name]
+(λ linux? []
+  "Returns `true` if the host OS is Linux."
+  (= (os) OS.LINUX))
+
+(λ windows? []
+  "Returns `true` if the host OS is Windows."
+  (= (os) OS.WINDOWS))
+
+(λ os-name []
+  "Returns the canonical name of the system's OS."
+  (tostring (os)))
+
+(λ env-set? [name]
+  "Returns `true` if and only if the given `name` is set in the environment."
+  (not= nil (?. vim.env name)))
+
+(λ env-var [name]
   "Returns the value of an environment variable, or `nil` if it is undefined."
-  (. vim.env name))
+  (?. vim.env name))
 
 (λ run-cmd [cmd ?opts ?on-exit]
   "Executes the given system `cmd` asynchronously."
@@ -46,12 +62,16 @@
     (values (= res.code 0) res.stdout res.stderr)))
 
 ;; return public interface
-{: hostname
+{: env-set?
+ : hostname
  : hostname-prefix
  : hostname-domain
  : OS
- : get-os
- : get-os-name
- : get-env-var
+ : os
+ : os-name
+ : macos?
+ : linux?
+ : windows?
+ : env-var
  : run-cmd
  : run-cmd-sync}

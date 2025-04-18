@@ -1,11 +1,11 @@
 ;; personal journal setup
 
-(local {: hostname-prefix} (require :lib.system))
-(local {: now} (require :lib.time))
+(local system (require :lib.system))
+(local time (require :lib.time))
 
 (λ journal-dir-path []
   "Returns the path to the journal directory, or `nil` if it is unknown."
-  (case (hostname-prefix)
+  (case (system.hostname-prefix)
     :pilatus "~/Documents/Journal"
     _ nil))
 
@@ -16,7 +16,7 @@
 
 (λ entry-filename-today []
   "Returns the filename of the journal entry for today."
-  (entry-filename-on (now)))
+  (entry-filename-on (time.now)))
 
 (fn open-journal []
   (vim.cmd.edit (journal-dir-path)))

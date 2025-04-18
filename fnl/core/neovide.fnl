@@ -1,11 +1,11 @@
 ;; configuration for when neovim runs inside of neovide
 
 (fn setup [_self]
-  (let [{: OS : get-os} (require :lib.system)]
+  (let [system (require :lib.system)]
     ;; font
-    (set vim.opt.guifont (match (get-os)
-                           OS.WINDOWS "Berkeley Mono:h14"
-                           OS.MACOS "BerkeleyMono Nerd Font:h14"
+    (set vim.opt.guifont (match (system.os)
+                           system.OS.WINDOWS "Berkeley Mono:h14"
+                           system.OS.MACOS "BerkeleyMono Nerd Font:h14"
                            _ ""))
     ;; text
     (set vim.g.neovide_text_gamma 0.6)

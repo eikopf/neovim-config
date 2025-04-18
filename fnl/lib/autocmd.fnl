@@ -1,6 +1,6 @@
 ;; autocommand utilities
 
-(λ make-augroup [name ?clear]
+(λ group [name ?clear]
   "Creates (or returns) an autocommand group called `name`."
   (vim.api.nvim_create_augroup name
                                {:clear (case ?clear
@@ -8,7 +8,7 @@
                                          :noclear false
                                          _ nil)}))
 
-(λ autocmd [event pattern action ?group]
+(λ create [event pattern action ?group]
   "Registers an autocommand for `event` and returns `?group`."
   (vim.api.nvim_create_autocmd event
                                {: pattern
@@ -18,5 +18,4 @@
                                    :function :callback) action})
   ?group)
 
-;; return (runtime) public interface
-{: make-augroup : autocmd}
+{: group : create}

@@ -1,30 +1,28 @@
 ;; utilities for inspecting the terminal environment
 
-(λ term-info []
-  "Returns the value of the `$TERM` environment variable."
-  vim.env.TERM)
+(local system (require :lib.system))
 
-(λ term-program []
-  "Returns the value of the `$TERM_PROGRAM` environment variable."
-  vim.env.TERM_PROGRAM)
+(λ windows-terminal? []
+  "Returns `true` if the current terminal program is Windows Terminal."
+  (system.env-set? :WT_SESSION))
 
-(λ running-in-ghostty []
+(λ ghostty? []
   "Returns `(= :ghostty vim.env.TERM_PROGRAM)`."
   (= :ghostty vim.env.TERM_PROGRAM))
 
-(λ running-in-wezterm []
+(λ wezterm? []
   "Returns `(= :Wezterm vim.env.TERM_PROGRAM)`."
   (= :WezTerm vim.env.TERM_PROGRAM))
 
-(λ running-in-alacritty []
+(λ alacritty? []
   "Returns `(= :alacritty vim.env.TERM)`."
   (= :alacritty vim.env.TERM))
 
-(λ running-in-iterm2 []
+(λ iterm2? []
   "Returns `(= :iTerm.app vim.env.TERM_PROGRAM)`."
   (= :iTerm.app vim.env.TERM_PROGRAM))
 
-(λ running-in-neovide []
+(λ neovide? []
   "Returns `true` if `vim.g.neovide` is set, and `false` otherwise."
   (if (?. vim.g.neovide) true false))
 
@@ -34,6 +32,7 @@
              :ITERM2 {}
              :NEOVIDE {}
              :WEZTERM {}
+             :WINTERM {}
              :UNKNOWN {}})
 
 (setmetatable TERM.ALACRITTY {:__tostring #:Alacritty})
@@ -41,29 +40,30 @@
 (setmetatable TERM.ITERM2 {:__tostring #:iTerm2})
 (setmetatable TERM.NEOVIDE {:__tostring #:Neovide})
 (setmetatable TERM.WEZTERM {:__tostring #:WezTerm})
+(setmetatable TERM.WINTERM {:__tostring #"Windows Terminal"})
 (setmetatable TERM.UNKNOWN {:__tostring #:unknown})
 
-(λ get-term []
-  "Returns a `lib.term.TERM` value corresponding to the current terminal."
-  (if (running-in-alacritty) TERM.ALACRITTY
-      (running-in-ghostty) TERM.GHOSTTY
-      (running-in-iterm2) TERM.ITERM2
-      (running-in-neovide) TERM.NEOVIDE
-      (running-in-wezterm) TERM.WEZTERM
+(λ program []
+  "Returns a `lib.term.TERM` value corresponding to the current terminal program."
+  (if (alacritty?) TERM.ALACRITTY
+      (ghostty?) TERM.GHOSTTY
+      (iterm2?) TERM.ITERM2
+      (neovide?) TERM.NEOVIDE
+      (wezterm?) TERM.WEZTERM
+      (windows-terminal?) TERM.WINTERM
       TERM.UNKNOWN))
 
-(λ get-term-name []
-  "Returns the canonical name of the current terminal."
-  (tostring (get-term)))
+(λ program-name []
+  "Returns the canonical name of the current terminal program."
+  (tostring (program)))
 
 ;; return public interface
 {: TERM
- : get-term
- : get-term-name
- : term-info
- : term-program
- : running-in-wezterm
- : running-in-alacritty
- : running-in-ghostty
- : running-in-iterm2
- : running-in-neovide}
+ : program
+ : program-name
+ : wezterm?
+ : alacritty?
+ : ghostty?
+ : iterm2?
+ : neovide?
+ : windows-terminal?}
