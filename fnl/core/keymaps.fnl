@@ -36,6 +36,11 @@
                     :light :dark
                     :dark :light)))
 
+(λ toggle-typst-preview-follow-cursor []
+  "Toggles the value of `(typst-preview.get_follow_cursor)`."
+  (let [typst (require :typst-preview)]
+    (typst.set_follow_cursor (not (typst.get_follow_cursor)))))
+
 (λ prompt-fennel-eval []
   "Prompts for a Fennel expression and evaluates it."
   (vim.cmd.Fnl (vim.fn.input {:prompt "eval: " :cancelreturn :nil})))
@@ -124,6 +129,12 @@
   (map :<leader>tP vim.cmd.ParinferToggle! "Toggle parinfer globally")
   (map :<leader>tr #(vim.cmd.set :relativenumber!)
        "Toggle relative line numbers")
+  ;; keymaps for typst actions -- under the <leader>T namespace
+  (group :<leader>T :typst)
+  (map :<leader>Tc toggle-typst-preview-follow-cursor "Toggle cursor following")
+  (map :<leader>Tp vim.cmd.TypstPreviewToggle "Toggle document preview")
+  (map :<leader>Ts vim.cmd.TypstPreviewSyncCursor
+       "Sync preview with cursor position")
   ;; keymaps for window operations -- under the <leader>w namespace
   (group :<leader>w :window)
   (map :<leader>wh #(vim.cmd.wincmd :h) "Go left")
