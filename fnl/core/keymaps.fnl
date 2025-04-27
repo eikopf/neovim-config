@@ -41,6 +41,11 @@
   (let [typst (require :typst-preview)]
     (typst.set_follow_cursor (not (typst.get_follow_cursor)))))
 
+(λ toggle-completion []
+  "Toggles the active completion engine."
+  (let [state vim.g.blink-cmp-enable]
+    (set vim.g.blink-cmp-enable (not state))))
+
 (λ prompt-fennel-eval []
   "Prompts for a Fennel expression and evaluates it."
   (vim.cmd.Fnl (vim.fn.input {:prompt "eval: " :cancelreturn :nil})))
@@ -122,6 +127,7 @@
   (map :<leader>sb #(vim.cmd.Telescope :buffers) "Search buffers")
   ;; keymaps for toggling settings -- under the <leader>t namespace
   (group :<leader>t :toggle)
+  (map :<leader>tc toggle-completion "Toggle completions")
   (map :<leader>tl #(vim.cmd.set :number!) "Toggle line numbers")
   (map :<leader>tm toggle-colorscheme-mode "Toggle colorscheme mode")
   (map :<leader>tt toggle-neotest-summary "Toggle test summary")
