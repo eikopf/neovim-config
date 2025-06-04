@@ -9,6 +9,8 @@
       (autocmd.create :TermOpen "*" "setlocal nonumber"))
     ;; markdown autocommands
     (def-autogroup :markdown :clear
-      (autocmd.create :FileType :markdown "setlocal linebreak"))))
+      (autocmd.create :FileType :markdown "setlocal linebreak"))
+    (def-autogroup :pollen :clear
+      (autocmd.create :FileType :pollen "setlocal linebreak"))))
 
 {: setup}

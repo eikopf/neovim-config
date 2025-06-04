@@ -6,6 +6,9 @@
   (extension! :ebnf :ebnf)
   (extension! :jabber :jbr)
   (extension! :lalrpop :lalrpop)
-  (extension! :gitignore :tokeignore))
+  (extension! :gitignore :tokeignore)
+  (extension! :pollen :pm)
+  (extension! :pollen :pp)
+  (extension! :pollen :ptree))
 
 {: setup}
