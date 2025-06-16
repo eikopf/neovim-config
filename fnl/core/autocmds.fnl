@@ -10,6 +10,8 @@
     ;; markdown autocommands
     (def-autogroup :markdown :clear
       (autocmd.create :FileType :markdown "setlocal linebreak"))
+    (def-autogroup :icalendar :clear
+      (autocmd.create [:BufRead :BufNewFile] :*.ics "set fileformat=dos"))
     (def-autogroup :pollen :clear
       (autocmd.create :FileType :pollen "setlocal linebreak"))))
 
