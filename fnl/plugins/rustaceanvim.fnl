@@ -15,6 +15,7 @@
 (local rust-analyzer
        (let [show-item-count 16]
          {:cargo {:features :all}
+          :completion {:callable {:snippets :none}} ;; rust-analyzer/rust-analyzer.github.io#211
           :check {:command :clippy
                   :features :all
                   :completions {:termSearch {:enable true}}}
