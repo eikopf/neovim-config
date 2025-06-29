@@ -15,14 +15,16 @@
 (local rust-analyzer
        (let [show-item-count 16]
          {:cargo {:features :all}
-          :completion {:callable {:snippets :none}} ;; rust-analyzer/rust-analyzer.github.io#211
+          ;; rust-analyzer/rust-analyzer.github.io#211
+          :completion {:callable {:snippets :none}}
           :check {:command :clippy
                   :features :all
                   :completions {:termSearch {:enable true}}}
-          :hover {:actions {:implementations {:enable true}}
+          :hover {:actions {:enable true :references {:enable true}}
                   :memoryLayout {:niches true
-                                 :size :decimal
-                                 :alignment :hexadecimal}
+                                 :size :hexadecimal
+                                 :alignment :hexadecimal
+                                 :padding :hexadecimal}
                   :show {:enumVariants show-item-count
                          :fields show-item-count
                          :traitAssocItems show-item-count}}
