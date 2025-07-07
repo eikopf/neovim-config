@@ -43,5 +43,6 @@
   "vim-jack-in": { "branch": "master", "commit": "45e5293cff0802a51dbed31a9b0141b0f80e2952" },
   "vim-pollen": { "branch": "master", "commit": "aaceb56e67a155900f55319dfe92c4bd8aa8c56a" },
   "vim-racket": { "branch": "master", "commit": "0ca759ec409a8d3dd85e49c0b8eb429cc88a4964" },
+  "vim-rfc": { "branch": "master", "commit": "de8e2b6e6a2c339af14d56e82b8b8a70db46c48e" },
   "which-key.nvim": { "branch": "main", "commit": "370ec46f710e058c9c1646273e6b225acf47cbed" }
 }
