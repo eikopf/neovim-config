@@ -2,6 +2,7 @@
 
 (local {: group : map : slot} (require :lib.keymap))
 (local buffer (require :lib.buffer))
+(local md (require :lib.markdown))
 
 (λ format-buffer []
   "Formats the current buffer"
@@ -152,6 +153,8 @@
   (map :<leader>ws vim.cmd.split "Horizontal split")
   (map :<leader>wv vim.cmd.vsplit "Vertical split")
   ;; other normal mode bindings
+  (map :<localleader>t md.toggle-check-on-cursor-line
+       "Toggle Markdown checkbox")
   (map "-" #(vim.cmd :Oil) "Open enclosing directory")
   (map :gd #(vim.lsp.buf.definition) "Goto definition")
   (map :K #(vim.lsp.buf.hover) "LSP hover"))
