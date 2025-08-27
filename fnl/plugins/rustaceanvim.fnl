@@ -16,10 +16,8 @@
        (let [show-item-count 16]
          {:cargo {:features :all}
           ;; rust-analyzer/rust-analyzer.github.io#211
-          :completion {:callable {:snippets :none}}
-          :check {:command :clippy
-                  :features :all
-                  :completions {:termSearch {:enable true}}}
+          :completion {:callable {:snippets :none} :termSearch {:enable true}}
+          :check {:command :clippy :features :all}
           :hover {:actions {:enable true :references {:enable true}}
                   :memoryLayout {:niches true
                                  :size :hexadecimal
