@@ -18,4 +18,15 @@
                                    :function :callback) action})
   ?group)
 
-{: group : create}
+(λ create-once [event pattern action ?group]
+  "Registers an autocommand for `event` with the `once` option and returns `?group`."
+  (vim.api.nvim_create_autocmd event
+                               {: pattern
+                                :group ?group
+                                :once true
+                                (case (type action)
+                                   :string :command
+                                   :function :callback) action})
+  ?group)
+
+{: group : create : create-once}
