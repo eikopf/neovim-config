@@ -39,4 +39,18 @@
      ,(icollect [_ datum# (ipairs tail)]
         `(->> group# ,datum#))))
 
-{: def-autogroup : concat! : extension! : load! : set!}
+;; WARN: i'm not totally sure about how paths are resolved at compile-time, but
+;; i think it's relative to the cwd when :NfnlCompileAllFiles is run. this is
+;; usually fine, we can just say relative filenames are relative to the root of
+;; this repository—but i can't guarantee that will always be the case
+
+;; BUG: fennel-ls doesn't like this because it doesn't have a way to set the
+;; compiler environment explicitly (see https://todo.sr.ht/~xerool/fennel-ls/82)
+
+(fn include-str! [filename]
+  "Returns the contents of the given `filename` as a string."
+  (let [file# (_G.io.open filename :r)
+        content# (file#:read :*a)]
+    content#))
+
+{: def-autogroup : include-str! : concat! : extension! : load! : set!}
