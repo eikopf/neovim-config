@@ -51,6 +51,16 @@
   "Prompts for a Fennel expression and evaluates it."
   (vim.cmd.Fnl (vim.fn.input {:prompt "eval: " :cancelreturn :nil})))
 
+(λ grapple-next-tag []
+  "Invokes `:Grapple cycle_tags next`."
+  (let [grapple (require :grapple)]
+    (grapple.cycle_tags :next)))
+
+(λ grapple-prev-tag []
+  "Invokes `:Grapple cycle_tags prev`."
+  (let [grapple (require :grapple)]
+    (grapple.cycle_tags :prev)))
+
 (local scratch-lines [";; scratch fennel buffer"
                       ";; - see :help conjure-mappings for evaluation details"
                       ";; - run :write <filename> to save the contents of this buffer"
@@ -106,11 +116,18 @@
   (map :<leader>lr vim.cmd.LspRestart "Restart server")
   (map :<leader>ll vim.cmd.LspLog "Show server logs")
   (map :<leader>li vim.cmd.LspInfo "Show LSP info")
+  ;; mark/tag keymaps -- under the <leader>m namespace
+  (group :<leader>m :mark)
+  (map :<leader>mn grapple-next-tag "Next mark")
+  (map :<leader>mo #(vim.cmd.Grapple :toggle_tags) "Show marks in scope")
+  (map :<leader>mp grapple-prev-tag "Previous mark")
+  (map :<leader>mt #(vim.cmd.Grapple :toggle) "Toggle mark")
   ;; keymaps for opening operations -- under the <leader>o namespace
   (group :<leader>o :open)
   (map :<leader>oc #(goto-dir-and-edit (vim.fn.stdpath :config)) "Open config")
   (map :<leader>oj #(vim.cmd :JournalOpen) "Open journal")
   (map :<leader>ol #(vim.cmd :Lazy) "Open lazy")
+  (map :<leader>om #(vim.cmd.Grapple :toggle_tags) "Open marks in scope")
   (map :<leader>op #(goto-dir-and-edit "~/projects") "Open projects")
   (map :<leader>oP #(vim.cmd.Lazy :profile) "Open lazy profiler")
   (map :<leader>os open-scratch-buffer "Open new scratch buffer")
