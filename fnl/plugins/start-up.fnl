@@ -1,4 +1,11 @@
-;; configuration for the default buffer at start-up
+;;; configuration for the default buffer at start-up
+
+;; NOTE: we're currently using mini.nvim#starter for the dashboard, which must
+;; be refreshed immediately when it is first shown to make sure that the
+;; lazy.stats().startuptime value has been calculated (the UIEnter event must
+;; have run for this). it seems like snacks.nvim#dashboard doesn't have this
+;; problem, so perhaps switching to it might be better at some point in the
+;; future
 
 (fn lazy-stats []
   (let [{: stats} (require :lazy)]

@@ -3,6 +3,8 @@
 (import-macros {: def-autogroup} :lib.macros)
 
 (fn make-startup-bindings []
+  "Hacky way to insert key bindings into startup buffer."
+  (vim.keymap.set :n "-" :<Cmd>Oil<CR> {:buffer true :nowait true :silent true})
   (vim.keymap.set :n :<C-l> "<Cmd>lua MiniStarter.eval_current_item()<CR>"
                   {:buffer true :nowait true :silent true})
   (vim.keymap.set :n :<C-j>
