@@ -30,7 +30,7 @@
 
 (fn recent-files []
   (let [starter (require :mini.starter)
-        items ((starter.sections.recent_files 10))]
+        items ((starter.sections.recent_files 15))]
     (icollect [_ {: name : action} (ipairs items)]
       {: name : action :section "recent files"})))
 
