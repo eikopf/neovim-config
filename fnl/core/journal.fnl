@@ -12,6 +12,10 @@
     :RIGI "~/iCloudDrive/Documents/Journal"
     _ nil))
 
+(λ todo-filename []
+  "Returns the filename of the single TODO file in the journal."
+  (.. :TODO ext))
+
 (λ daily-entry-filename-on [{: year : month : day}]
   "Returns the filename of the daily journal entry for the given date."
   (.. (string.format "%04d" year) (string.format "%02d" month)
@@ -33,6 +37,9 @@
 (fn edit-journal [filename]
   (vim.cmd.edit (vim.fs.joinpath (journal-dir-path) filename)))
 
+(fn edit-journal-todo []
+  (edit-journal (todo-filename)))
+
 (fn edit-journal-today-daily []
   (edit-journal (daily-entry-filename-on (time.now))))
 
@@ -43,14 +50,16 @@
   (edit-journal (quarterly-entry-filename-on (time.now))))
 
 (fn setup [_self]
-  (vim.api.nvim_create_user_command :JournalOpen open-journal {})
-  (vim.api.nvim_create_user_command :JournalToday edit-journal-today-daily {})
-  (vim.api.nvim_create_user_command :JournalDaily edit-journal-today-daily {})
-  (vim.api.nvim_create_user_command :JournalWeekly edit-journal-today-weekly {})
-  (vim.api.nvim_create_user_command :JournalQuarterly
-                                    edit-journal-today-quarterly {}))
+  (let [command #(vim.api.nvim_create_user_command $1 $2 {})]
+    (command :JournalOpen open-journal)
+    (command :JournalTodo edit-journal-todo)
+    (command :JournalToday edit-journal-today-daily)
+    (command :JournalDaily edit-journal-today-daily)
+    (command :JournalWeekly edit-journal-today-weekly)
+    (command :JournalQuarterly edit-journal-today-quarterly)))
 
 {: journal-dir-path
+ : todo-filename
  : daily-entry-filename-on
  : weekly-entry-filename-on
  : quarterly-entry-filename-on
