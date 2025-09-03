@@ -109,8 +109,11 @@
   (map :<leader>gu #(vim.cmd.Git :reset) "Unstage all")
   ;; journal keymaps -- under the <leader>j namespace
   (group :<leader>j :journal)
-  (map :<leader>jt vim.cmd.JournalToday "Open journal entry for today")
+  (map :<leader>jd vim.cmd.JournalToday "Open daily journal entry")
   (map :<leader>jo vim.cmd.JournalOpen "Open journal directory")
+  (map :<leader>jq vim.cmd.JournalQuarterly "Open quarterly journal entry")
+  (map :<leader>jt vim.cmd.JournalTodo "Open journal TODO file")
+  (map :<leader>jw vim.cmd.JournalWeekly "Open weekly journal entry")
   ;; lsp keymaps -- under the <leader>l namespace
   (group :<leader>l :lsp)
   (map :<leader>lr vim.cmd.LspRestart "Restart server")
