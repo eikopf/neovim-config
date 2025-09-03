@@ -28,6 +28,13 @@
      (item :terminal open-short-term)
      (item "scratch buffer" open-scratch-buffer)]))
 
+(fn journal-items []
+  (let [item (fn [name action] {: name : action :section :journal})]
+    [(item :todo :JournalTodo)
+     (item :daily :JournalDaily)
+     (item :weekly :JournalWeekly)
+     (item :quarterly :JournalQuarterly)]))
+
 (fn recent-files []
   (let [starter (require :mini.starter)
         items ((starter.sections.recent_files 15))]
@@ -36,10 +43,10 @@
 
 (fn actions []
   (let [item (fn [name action] {: name : action :section :actions})]
-    [(item "open or create daily journal entry" :JournalToday) (item :quit :q)]))
+    [(item :quit :q)]))
 
 (fn items []
-  [open-items recent-files actions])
+  [open-items journal-items recent-files actions])
 
 (λ opts [_plugin _opts]
   (let [items (items)
