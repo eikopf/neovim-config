@@ -53,4 +53,4 @@
         footer (footer)]
     {: header : items : footer :silent true}))
 
-{1 :nvim-mini/mini.starter :version "*" : opts}
+{1 :nvim-mini/mini.starter :version "*" : opts :enabled false}
