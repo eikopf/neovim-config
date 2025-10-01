@@ -44,6 +44,7 @@
   "vim-dispatch": { "branch": "master", "commit": "a2ff28abdb2d89725192db5b8562977d392a4d3f" },
   "vim-fugitive": { "branch": "master", "commit": "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4" },
   "vim-jack-in": { "branch": "master", "commit": "45e5293cff0802a51dbed31a9b0141b0f80e2952" },
+  "vim-ledger": { "branch": "master", "commit": "a0670d0c60c4933a70767033c89467631643a4c1" },
   "vim-pollen": { "branch": "master", "commit": "aaceb56e67a155900f55319dfe92c4bd8aa8c56a" },
   "vim-racket": { "branch": "master", "commit": "9dc3bd39713c598551d149ac6b17075e26c42071" },
   "vim-rfc": { "branch": "master", "commit": "de8e2b6e6a2c339af14d56e82b8b8a70db46c48e" },
