@@ -11,7 +11,7 @@
                 :lua_ls {}
                 :nixd {}
                 :ocamllsp {}
-                :ruff {}})
+                :pyright {}})
 
 (set servers.fennel_ls.settings {:fennel-ls {:extra-globals :vim}})
 (set servers.fennel_ls.root_dir

@@ -90,7 +90,7 @@
   (map :<leader>cf format-buffer "Format buffer")
   (map :<leader>cr vim.lsp.buf.rename "Rename symbol")
   (map :<leader>cR #(vim.cmd.Trouble :lsp_references) "Show references")
-  (slot :<leader>ca "Code actions")
+  (map :<leader>ca vim.lsp.buf.code_action "Code actions")
   (slot :<leader>ct "Run tests")
   (slot :<leader>cx :Execute)
   ;; (quick)fixing keymaps -- under the <leader>f namespace
