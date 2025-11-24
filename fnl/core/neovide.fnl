@@ -5,7 +5,7 @@
     ;; font
     (set vim.opt.guifont (match (system.os)
                            system.OS.WINDOWS "Berkeley Mono:h14"
-                           system.OS.MACOS "BerkeleyMono Nerd Font:h14"
+                           system.OS.MACOS "BerkeleyMono Nerd Font:h14:#e-subpixelantialias"
                            _ ""))
     ;; text
     (set vim.g.neovide_text_gamma 0.6)
@@ -21,6 +21,6 @@
     (set vim.g.neovide_hide_mouse_when_typing true)
     (set vim.g.neovide_cursor_animate_command_line false)
     ;; ui
-    (set vim.g.neovide_theme :dark)))
+    (set vim.g.neovide_theme :light)))
 
 {: setup}

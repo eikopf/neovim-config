@@ -59,16 +59,27 @@
   (let [term (require :lib.term)]
     (vim.cmd.colorscheme (match (term.program)
                            term.TERM.WEZTERM :catppuccin-macchiato
-                           term.TERM.GHOSTTY :catppuccin-macchiato
+                           term.TERM.GHOSTTY :alabaster
                            term.TERM.NEOVIDE :everforest
                            term.TERM.WINTERM :everforest
                            _ default))))
+
+(λ set-colorscheme-mode-by-term [default]
+  "Sets the colorscheme mode on a per-terminal basis, falling back to the given `default`."
+  (let [term (require :lib.term)]
+    (set vim.opt.bg (match (term.program)
+                      term.TERM.WEZTERM :dark
+                      term.TERM.GHOSTTY :light
+                      term.TERM.NEOVIDE :light
+                      term.TERM.WINTERM :dark
+                      _ default))))
 
 (fn setup [_self]
   (disable-nvim-treesitter-git-downloads)
   (set-windows-treesitter-compilers [:zig])
   (set-default-neovide-path vim.env.HOME)
   (load-colorscheme-by-term :catppuccin-latte)
+  (set-colorscheme-mode-by-term :dark)
   (patch-neovim-30985))
 
 {: load-jabber-parser : setup}
