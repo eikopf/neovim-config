@@ -1,6 +1,7 @@
 {
   "FixCursorHold.nvim": { "branch": "master", "commit": "1900f89dc17c603eec29960f57c00bd9ae696495" },
   "agda.nvim": { "branch": "main", "commit": "4dbd441c5ece3da4be0e93934eaf9a026c8225db" },
+  "alabaster.nvim": { "branch": "main", "commit": "1fc9e29fbbce94f127cc8b21960b7e3c85187960" },
   "blink.cmp": { "branch": "main", "commit": "bae4bae0eedd1fa55f34b685862e94a222d5c6f8" },
   "blink.compat": { "branch": "main", "commit": "2ed6d9a28b07fa6f3bface818470605f8896408c" },
   "catpuccin": { "branch": "main", "commit": "30fa4d122d9b22ad8b2e0ab1b533c8c26c4dde86" },
