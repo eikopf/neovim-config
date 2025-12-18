@@ -10,8 +10,12 @@
   "Creates a new keybinding for `lhs`."
   (wk.add {1 lhs 2 rhs : desc :mode (or ?mode :n) :buffer ?buffer}))
 
+(λ map* [mode lhs rhs ?opts]
+  "Creates a new keybinding for `lhs` using `vim.keymap.set`."
+  (vim.keymap.set mode lhs rhs ?opts))
+
 (λ slot [lhs desc ?mode]
   "Creates an empty keybinding for `lhs`."
   (wk.add {1 lhs : desc :mode (or ?mode :n)}))
 
-{: group : map : slot}
+{: group : map : map* : slot}
