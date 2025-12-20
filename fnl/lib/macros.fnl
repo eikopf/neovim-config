@@ -39,6 +39,9 @@
      ,(icollect [_ datum# (ipairs tail)]
         `(->> group# ,datum#))))
 
+(fn toggle [name]
+  `(set ,name (not ,name)))
+
 ;; WARN: i'm not totally sure about how paths are resolved at compile-time, but
 ;; i think it's relative to the cwd when :NfnlCompileAllFiles is run. this is
 ;; usually fine, we can just say relative filenames are relative to the root of
@@ -53,4 +56,4 @@
         content# (file#:read :*a)]
     content#))
 
-{: def-autogroup : include-str! : concat! : extension! : load! : set!}
+{: def-autogroup : include-str! : concat! : extension! : load! : set! : toggle}
