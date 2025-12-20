@@ -149,6 +149,7 @@
   ;; keymaps for toggling settings -- under the <leader>t namespace
   (group :<leader>t :toggle)
   (map :<leader>tc toggle-completion "Toggle completions")
+  (map :<leader>tf vim.cmd.FormatToggle "Toggle global format-on-save")
   (map :<leader>tl #(vim.cmd.set :number!) "Toggle line numbers")
   (map :<leader>tm toggle-colorscheme-mode "Toggle colorscheme mode")
   (map :<leader>tt toggle-neotest-summary "Toggle test summary")
