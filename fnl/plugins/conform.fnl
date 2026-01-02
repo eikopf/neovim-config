@@ -32,7 +32,9 @@
           (if args.bang (toggle vim.b.disable_autoformat)
               (toggle vim.g.disable_autoformat)))))
 
-(local opts {:formatters_by_ft formatters :format_on_save format-on-save})
+(local opts {:formatters_by_ft formatters
+             :format_on_save format-on-save
+             :formatters {:rustfmt {:options {:nightly true}}}})
 
 {1 :stevearc/conform.nvim
  :event [:BufWritePre]
