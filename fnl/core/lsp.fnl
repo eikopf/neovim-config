@@ -1,7 +1,5 @@
 ;; language server configuration
 
-(local {: first} (require :lib.table))
-
 ;; NOTE: rust-analyzer is configured by rustaceanvim
 
 (local servers {:clangd {}
@@ -13,14 +11,6 @@
                 :ocamllsp {}
                 :pyright {}})
 
-(set servers.fennel_ls.settings {:fennel-ls {:extra-globals :vim}})
-(set servers.fennel_ls.root_dir
-     (fn [buf callback]
-       (callback (first (vim.fs.find [:fnl :git]
-                                     {:upward true
-                                      :type :directory
-                                      :path (vim.fn.bufname buf)})))))
-
 ; TODO: update julials config to use vim.lsp.config. previous config:
 ; (set servers.julials.on_new_config
 ;      (fn [new_config _]
@@ -31,8 +21,7 @@
 
 (fn setup [_]
   (each [server config (pairs servers)]
-    (do
-      (vim.lsp.config server config)
-      (vim.lsp.enable server))))
+    (vim.lsp.config server config)
+    (vim.lsp.enable server)))
 
 {: servers : setup}
