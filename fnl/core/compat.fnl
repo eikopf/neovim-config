@@ -13,7 +13,7 @@
   (let [system (require :lib.system)]
     (if (system.windows?)
         (let [ts-install (require :nvim-treesitter.install)]
-          (tset ts-install :compilers compilers)))))
+          (set ts-install.compilers compilers)))))
 
 (λ set-default-neovide-path [path]
   "Sets `cwd` to `path` if Neovide is running and no path was passed manually."
