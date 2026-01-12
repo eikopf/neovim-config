@@ -107,6 +107,10 @@
   (map :<leader>gp #(vim.cmd.Git :push) :Push)
   (map :<leader>gs #(vim.cmd.Telescope :git_branches) "Switch branch")
   (map :<leader>gu #(vim.cmd.Git :reset) "Unstage all")
+  ;; help keymaps -- under the <leader>h namespace
+  (group :<leader>h :help)
+  (map :<leader>hm #(vim.cmd.help :usr_toc.txt) "Open manual")
+  (map :<leader>hl #(vim.cmd.help :luaref) "Open Lua reference")
   ;; journal keymaps -- under the <leader>j namespace
   (group :<leader>j :journal)
   (map :<leader>jd vim.cmd.JournalToday "Open daily journal entry")
