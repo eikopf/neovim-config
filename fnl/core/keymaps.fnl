@@ -1,6 +1,6 @@
 ;; KEYMAPS
 
-(local {: group : map : slot} (require :lib.keymap))
+(local {: group : map : map* : slot} (require :lib.keymap))
 (local buffer (require :lib.buffer))
 (local md (require :lib.markdown))
 
@@ -84,6 +84,18 @@
   ;; visual mode bindings
   (map :J ":m '>+1<CR>gv=gv" "Move selection down" :v)
   (map :K ":m '<-2<CR>gv=gv" "Move selection up" :v)
+  ;; LLM keymaps -- under the <leader>a namespace
+  (group :<leader>a :ai)
+  (map :<leader>aa vim.cmd.ClaudeCodeDiffAccept "Accept diff")
+  (map :<leader>ab #(vim.cmd.ClaudeCodeAdd "%") "Add buffer to Claude")
+  (map :<leader>ac #(vim.cmd.ClaudeCode :--continue) "Continue Claude")
+  (map :<leader>ad vim.cmd.ClaudeCodeDiffDeny "Deny diff")
+  (map :<leader>af vim.cmd.ClaudeCodeFocus "Focus Claude")
+  (map :<leader>am vim.cmd.ClaudeCodeSelectModel "Select Claude model")
+  (map :<leader>ar #(vim.cmd.ClaudeCode :--resume) "Resume Claude")
+  (map :<leader>at vim.cmd.ClaudeCode "Toggle Claude")
+  (map* :v :<leader>as vim.cmd.ClaudeCodeSend
+        {:desc "Send selection to Claude"})
   ;; general code keymaps -- under the <leader>c namespace
   (group :<leader>c :code)
   (map :<leader>cd #(vim.cmd.Trouble :diagnostics) "Show local diagnostics")
@@ -131,6 +143,7 @@
   (map :<leader>mt #(vim.cmd.Grapple :toggle) "Toggle mark")
   ;; keymaps for opening operations -- under the <leader>o namespace
   (group :<leader>o :open)
+  (map :<leader>oa vim.cmd.ClaudeCode "Open Claude Code")
   (map :<leader>oc #(goto-dir-and-edit (vim.fn.stdpath :config)) "Open config")
   (map :<leader>oj #(vim.cmd :JournalOpen) "Open journal")
   (map :<leader>ol #(vim.cmd :Lazy) "Open lazy")
