@@ -120,8 +120,13 @@
   (map :<leader>gd #(vim.cmd.Git :diff) :Diff)
   (map :<leader>gg vim.cmd.Git :Status)
   (map :<leader>gp #(vim.cmd.Git :push) :Push)
-  (map :<leader>gs #(vim.cmd.Telescope :git_branches) "Switch branch")
   (map :<leader>gu #(vim.cmd.Git :reset) "Unstage all")
+  ;; git search keymaps -- under the <leader>gs namespace
+  (group :<leader>gs :search)
+  (map :<leader>gsb #(vim.cmd.Telescope :git_branches) "Search branches")
+  (map :<leader>gsc #(vim.cmd.Telescope :git_commits) "Search commits")
+  (map :<leader>gsC #(vim.cmd.Telescope :git_bcommits) "Search buffer commits")
+  (map :<leader>gsh #(vim.cmd.Telescope :git_status) "Search current changes")
   ;; help keymaps -- under the <leader>h namespace
   (group :<leader>h :help)
   (map :<leader>hm #(vim.cmd.help :usr_toc.txt) "Open manual")
