@@ -84,6 +84,9 @@
   ;; visual mode bindings
   (map :J ":m '>+1<CR>gv=gv" "Move selection down" :v)
   (map :K ":m '<-2<CR>gv=gv" "Move selection up" :v)
+  ;; extra movement bindings under ] and [
+  (map "]h" #(vim.cmd.Gitsigns :next_hunk) "Next hunk")
+  (map "[h" #(vim.cmd.Gitsigns :prev_hunk) "Next hunk")
   ;; LLM keymaps -- under the <leader>a namespace
   (group :<leader>a :ai)
   (map :<leader>aa vim.cmd.ClaudeCodeDiffAccept "Accept diff")
