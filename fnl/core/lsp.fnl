@@ -7,6 +7,7 @@
                 :fennel_ls {}
                 :julials {}
                 :lua_ls {}
+                :marksman {}
                 :nixd {}
                 :ocamllsp {}
                 :pyright {}})
