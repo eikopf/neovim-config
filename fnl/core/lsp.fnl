@@ -10,7 +10,8 @@
                 :marksman {}
                 :nixd {}
                 :ocamllsp {}
-                :pyright {}})
+                :pyright {}
+                :tracey {}})
 
 ; TODO: update julials config to use vim.lsp.config. previous config:
 ; (set servers.julials.on_new_config
