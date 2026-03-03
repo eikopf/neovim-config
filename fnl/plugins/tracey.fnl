@@ -13,6 +13,6 @@
 ;; set source based on the system
 (case (system.hostname)
   :pilatus (set P.dir "~/projects/tracey.nvim")
-  _ (set P.1 :eikopf/tracey.nvim))
+  _ (set (. P 1) :eikopf/tracey.nvim))
 
 P
