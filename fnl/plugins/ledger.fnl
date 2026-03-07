@@ -1,3 +1,3 @@
-;; ledger/vim-ledger --- support for (h)ledger (+ timedot)
+;; ledger/vim-ledger --- support for (h)ledger
 
-{1 :ledger/vim-ledger :dependencies [:linuxcaffe/timedot-vim]}
+{1 :ledger/vim-ledger}
