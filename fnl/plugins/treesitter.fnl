@@ -79,5 +79,7 @@
 ;; plugin spec
 {1 :nvim-treesitter/nvim-treesitter
  :build ":TSUpdate"
+ ;; NOTE: this should be changed to :main after migrating to vim.pack
+ :branch :master
  :event :BufRead
  : config}
