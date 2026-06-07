@@ -70,7 +70,4 @@
              :index {:enable true}})
 
 ;; plugin spec
-{1 :nvim-treesitter/nvim-treesitter
- :build ":TSUpdate"
- :branch :main
- : opts}
+{1 :nvim-treesitter/nvim-treesitter :build ":TSUpdate" :branch :main : opts}
