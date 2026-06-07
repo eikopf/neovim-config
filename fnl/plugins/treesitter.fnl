@@ -66,20 +66,11 @@
 
 (local opts {:ensure_installed langs
              :highlight {:enable true}
-             :auto_install false
+             :auto_install true
              :index {:enable true}})
-
-;; callback to pass opts to nvim-treesitter.configs.setup
-(fn config []
-  (let [ts (require :nvim-treesitter.configs)
-        compat (require :core.compat)]
-    (ts.setup opts)
-    (compat.load-jabber-parser)))
 
 ;; plugin spec
 {1 :nvim-treesitter/nvim-treesitter
  :build ":TSUpdate"
- ;; NOTE: this should be changed to :main after migrating to vim.pack
- :branch :master
- :event :BufRead
- : config}
+ :branch :main
+ : opts}
