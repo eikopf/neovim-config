@@ -40,7 +40,7 @@
   (set! :hlsearch)
   (set! :grepprg "rg --vimgrep")
   ;; this relies on ripgrep being available
-  (set! :grepformat "%f:%1:%c:%m")
+  (set! :grepformat "%f:%l:%c:%m")
   (set! :path ["." "**"])
   ;; vim commandline options
   (set! :history 1000)
