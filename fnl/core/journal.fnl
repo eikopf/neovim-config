@@ -32,10 +32,20 @@
     (.. (string.format "%04d" year) :Q (string.format "%01d" quarter) ext)))
 
 (fn open-journal []
-  (vim.cmd.edit (journal-dir-path)))
+  (let [dir (journal-dir-path)]
+    (if dir
+        (vim.cmd.edit dir)
+        (vim.notify (.. "no journal directory configured for host "
+                        (system.hostname-prefix))
+                    vim.log.levels.ERROR))))
 
 (fn edit-journal [filename]
-  (vim.cmd.edit (vim.fs.joinpath (journal-dir-path) filename)))
+  (let [dir (journal-dir-path)]
+    (if dir
+        (vim.cmd.edit (vim.fs.joinpath dir filename))
+        (vim.notify (.. "no journal directory configured for host "
+                        (system.hostname-prefix))
+                    vim.log.levels.ERROR))))
 
 (fn edit-journal-todo []
   (edit-journal (todo-filename)))

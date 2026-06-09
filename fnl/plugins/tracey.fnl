@@ -11,7 +11,7 @@
                  :open_quickfix open-quickfix}})
 
 ;; set source based on the system
-(case (system.hostname)
+(case (system.hostname-prefix)
   :pilatus (set P.dir "~/projects/tracey.nvim")
   _ (set (. P 1) :eikopf/tracey.nvim))
 
