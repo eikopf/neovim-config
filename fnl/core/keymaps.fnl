@@ -198,6 +198,11 @@
   (map :<leader>wq vim.cmd.q "Close window")
   (map :<leader>ws vim.cmd.split "Horizontal split")
   (map :<leader>wv vim.cmd.vsplit "Vertical split")
+  ;; markdown checkbox handling (also exposed as :MarkdownArchive)
+  (vim.api.nvim_create_user_command :MarkdownArchive
+                                    md.archive-checked-on-current-buffer {})
+  (map :<localleader>a md.archive-checked-on-current-buffer
+       "Archive checked Markdown items")
   ;; other normal mode bindings
   (map :<localleader>t md.toggle-check-on-cursor-line
        "Toggle Markdown checkbox")
