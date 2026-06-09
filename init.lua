@@ -52,6 +52,7 @@ if vim.fn.glob(target_dir) == "" then
   -- we do the dumbest possible thing here: compile the .fnl files and immediately exit;
   -- then the next time the user opens neovim, it should just behave as normal
   require("nfnl.api")["compile-all-files"](target_dir)
+  print("compiled fennel sources to lua/; please restart neovim")
   os.exit()
 end
 
