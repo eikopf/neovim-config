@@ -1,7 +1,7 @@
 ;; markdown utilities
 
-(local checked-pattern "%[x%]")
-(local unchecked-pattern "%[ %]")
+(local checked-pattern "^(%s*%- )%[[xX]%]")
+(local unchecked-pattern "^(%s*%- )%[ %]")
 
 ;; matches a list item with a checked checkbox, capturing its indentation
 (local checked-item-pattern "^(%s*)%- %[[xX]%]")
@@ -16,13 +16,13 @@
 
 (λ check [line]
   "Checks the first unchecked checkbox in the given string if any."
-  (let [(line success) (line:gsub unchecked-pattern checked-pattern 1)
+  (let [(line success) (line:gsub unchecked-pattern "%1[x]" 1)
         success (if (= success 1) true false)]
     {: line : success}))
 
 (λ uncheck [line]
   "Unchecks the first checked checkbox in the given string if any."
-  (let [(line success) (line:gsub checked-pattern unchecked-pattern 1)
+  (let [(line success) (line:gsub checked-pattern "%1[ ]" 1)
         success (if (= success 1) true false)]
     {: line : success}))
 
