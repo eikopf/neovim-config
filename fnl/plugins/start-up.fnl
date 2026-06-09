@@ -1,5 +1,29 @@
 ;;; configuration for the default buffer at start-up
 
+(import-macros {: def-autogroup} :lib.macros)
+
+(local autocmd (require :lib.autocmd))
+
+(fn make-startup-bindings []
+  "Hacky way to insert key bindings into startup buffer."
+  (vim.keymap.set :n "-" :<Cmd>Oil<CR> {:buffer true :nowait true :silent true})
+  (vim.keymap.set :n :<C-l> "<Cmd>lua MiniStarter.eval_current_item()<CR>"
+                  {:buffer true :nowait true :silent true})
+  (vim.keymap.set :n :<C-j>
+                  "<Cmd>lua MiniStarter.update_current_item('next')<CR>"
+                  {:buffer true :nowait true :silent true})
+  (vim.keymap.set :n :<C-k>
+                  "<Cmd>lua MiniStarter.update_current_item('prev')<CR>"
+                  {:buffer true :nowait true :silent true}))
+
+(fn init []
+  ;; the once-autocmd makes lazy.stats().startuptime render correctly,
+  ;; since it must be refreshed after the UIEnter event has fired
+  (def-autogroup :startup-extras
+    :clear
+    (autocmd.create-once :User :MiniStarterOpened "lua MiniStarter.refresh()")
+    (autocmd.create :User :MiniStarterOpened make-startup-bindings)))
+
 ;; NOTE: we're currently using mini.nvim#starter for the dashboard, which must
 ;; be refreshed immediately when it is first shown to make sure that the
 ;; lazy.stats().startuptime value has been calculated (the UIEnter event must
@@ -53,4 +77,4 @@
         footer (footer)]
     {: header : items : footer :silent true}))
 
-{1 :nvim-mini/mini.starter :version "*" : opts :enabled false}
+{1 :nvim-mini/mini.starter :version "*" : init : opts :enabled false}
