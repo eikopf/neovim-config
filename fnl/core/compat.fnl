@@ -40,20 +40,6 @@
         (vim.treesitter.language.register :jabber :jbr)
         (set parsers.jabber jabber-config))))
 
-(λ patch-neovim-30985 []
-  "Fixes neovim/neovim#30985 for versions before v0.11."
-  (let [version (require :lib.version)
-        current-version (version.nvim)
-        v0-11-0 (version.parse :0.11.0)]
-    (if (current-version:lt v0-11-0)
-        (each [_ method (ipairs [:textDocument/diagnostic
-                                 :workspace/diagnostic])]
-          (local default-diagnostic-handler (. vim.lsp.handlers method))
-          (tset vim.lsp.handlers method
-                (fn [err result context config]
-                  (if (not= (?. err :code) -32802)
-                      (default-diagnostic-handler err result context config))))))))
-
 (λ load-colorscheme-by-term [default]
   "Sets the colorscheme on a per-terminal basis, falling back to the given `default`."
   (let [term (require :lib.term)]
@@ -79,7 +65,6 @@
   (set-windows-treesitter-compilers [:zig])
   (set-default-neovide-path vim.env.HOME)
   (load-colorscheme-by-term :catppuccin-latte)
-  (set-colorscheme-mode-by-term :dark)
-  (patch-neovim-30985))
+  (set-colorscheme-mode-by-term :dark))
 
 {: load-jabber-parser : setup}
