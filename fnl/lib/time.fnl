@@ -21,7 +21,10 @@
 (λ week [date]
   "Returns the ISO week number of `date`."
   (let [y (. date :year)
-        w (math.floor (/ (+ 10 (. date :yday) (. date :wday)) 7))]
+        wday (. date :wday)
+        yday (. date :yday)
+        iso-wday (+ (% (+ wday 5) 7) 1)
+        w (math.floor (/ (+ 10 (- yday iso-wday)) 7))]
     (if (< w 1) (weeks-in-year (- y 1))
         (> w (weeks-in-year y)) 1
         w)))
