@@ -1,17 +1,11 @@
-;; trouble.nvim -- a nicer quickfix list
-;; INFO: running version 2; set branch = "dev" to use the version 3 beta
+;; trouble.nvim -- a nicer quickfix list (v3, tracking branch main)
 
-;; trouble provides the following commands:
-;; - Trouble [mode]
-;; - TroubleClose [mode]
-;; - TroubleToggle [mode]
-;; - TroubleRefresh
-;; refer to :help trouble.nvim-trouble-v2-usage for details
-
-;; further details here: https://github.com/folke/trouble.nvim
+;; trouble provides the single command :Trouble [mode], where the standard
+;; modes are diagnostics, lsp_references, qflist, loclist, symbols, and todo;
+;; refer to :help trouble.nvim for details
 
 {1 :folke/trouble.nvim
  :dependencies [:nvim-tree/nvim-web-devicons]
  :opts {:auto_close true}
- :cmd [:Trouble :TroubleClose :TroubleToggle :TroubleRefresh :TodoTrouble]
+ :cmd [:Trouble]
  :lazy true}
