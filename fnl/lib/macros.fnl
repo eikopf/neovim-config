@@ -24,14 +24,7 @@
   "Associates the filetype `ft` with the given `extension`."
   `(vim.filetype.add {:extension {,extension ,ft}}))
 
-(fn def-autogroup [name clear & tail]
-  "Creates an autocommand group and threads it though several `autocmd` calls."
-  `(let [autocmd# (require :lib.autocmd)
-         group# (autocmd#.group ,name ,clear)]
-     ,(icollect [_ datum# (ipairs tail)]
-        `(->> group# ,datum#))))
-
 (fn toggle [name]
   `(set ,name (not ,name)))
 
-{: def-autogroup : extension! : load! : set! : toggle}
+{: extension! : load! : set! : toggle}

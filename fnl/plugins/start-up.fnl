@@ -1,7 +1,5 @@
 ;;; configuration for the default buffer at start-up
 
-(import-macros {: def-autogroup} :lib.macros)
-
 (local autocmd (require :lib.autocmd))
 
 (fn make-startup-bindings []
@@ -19,10 +17,9 @@
 (fn init []
   ;; the once-autocmd makes lazy.stats().startuptime render correctly,
   ;; since it must be refreshed after the UIEnter event has fired
-  (def-autogroup :startup-extras
-    :clear
-    (autocmd.create-once :User :MiniStarterOpened "lua MiniStarter.refresh()")
-    (autocmd.create :User :MiniStarterOpened make-startup-bindings)))
+  (-> (autocmd.group :startup-extras :clear)
+      (: :on-once :User :MiniStarterOpened "lua MiniStarter.refresh()")
+      (: :on :User :MiniStarterOpened make-startup-bindings)))
 
 ;; NOTE: we're currently using mini.nvim#starter for the dashboard, which must
 ;; be refreshed immediately when it is first shown to make sure that the

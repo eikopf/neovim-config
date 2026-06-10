@@ -1,18 +1,16 @@
 ;; custom autocommands and autogroups
 
-(import-macros {: def-autogroup} :lib.macros)
-
 (fn setup [_self]
   (let [autocmd (require :lib.autocmd)]
     ;; terminal autocommands
-    (def-autogroup :terminal :clear
-      (autocmd.create :TermOpen "*" "setlocal nonumber"))
+    (-> (autocmd.group :terminal :clear)
+        (: :on :TermOpen "*" "setlocal nonumber"))
     ;; markdown autocommands
-    (def-autogroup :markdown :clear
-      (autocmd.create :FileType :markdown "setlocal linebreak"))
-    (def-autogroup :icalendar :clear
-      (autocmd.create [:BufRead :BufNewFile] :*.ics "set fileformat=dos"))
-    (def-autogroup :pollen :clear
-      (autocmd.create :FileType :pollen "setlocal linebreak"))))
+    (-> (autocmd.group :markdown :clear)
+        (: :on :FileType :markdown "setlocal linebreak"))
+    (-> (autocmd.group :icalendar :clear)
+        (: :on [:BufRead :BufNewFile] :*.ics "set fileformat=dos"))
+    (-> (autocmd.group :pollen :clear)
+        (: :on :FileType :pollen "setlocal linebreak"))))
 
 {: setup}
