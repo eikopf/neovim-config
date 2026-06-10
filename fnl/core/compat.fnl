@@ -43,21 +43,21 @@
 (λ load-colorscheme-by-term [default]
   "Sets the colorscheme on a per-terminal basis, falling back to the given `default`."
   (let [term (require :lib.term)]
-    (vim.cmd.colorscheme (match (term.program)
-                           term.TERM.WEZTERM :catppuccin-macchiato
-                           term.TERM.GHOSTTY :alabaster
-                           term.TERM.NEOVIDE :everforest
-                           term.TERM.WINTERM :everforest
+    (vim.cmd.colorscheme (case (term.program)
+                           :wezterm :catppuccin-macchiato
+                           :ghostty :alabaster
+                           :neovide :everforest
+                           :winterm :everforest
                            _ default))))
 
 (λ set-colorscheme-mode-by-term [default]
   "Sets the colorscheme mode on a per-terminal basis, falling back to the given `default`."
   (let [term (require :lib.term)]
-    (set vim.opt.bg (match (term.program)
-                      term.TERM.WEZTERM :dark
-                      term.TERM.GHOSTTY :light
-                      term.TERM.NEOVIDE :light
-                      term.TERM.WINTERM :dark
+    (set vim.opt.bg (case (term.program)
+                      :wezterm :dark
+                      :ghostty :light
+                      :neovide :light
+                      :winterm :dark
                       _ default))))
 
 (fn setup [_self]

@@ -3,9 +3,9 @@
 (fn setup [_self]
   (let [system (require :lib.system)]
     ;; font
-    (set vim.opt.guifont (match (system.os)
-                           system.OS.WINDOWS "Berkeley Mono:h14"
-                           system.OS.MACOS "BerkeleyMono Nerd Font:h14:#e-subpixelantialias"
+    (set vim.opt.guifont (case (system.os)
+                           :windows "Berkeley Mono:h14"
+                           :macos "BerkeleyMono Nerd Font:h14:#e-subpixelantialias"
                            _ ""))
     ;; text
     (set vim.g.neovide_text_gamma 0.6)

@@ -14,35 +14,29 @@
   "Returns the domain portion of the system's hostname."
   (string.suffix (hostname) "."))
 
-;; fake enum table (distinct tables are always inequal)
-(local OS {:MACOS {} :LINUX {} :WINDOWS {}})
-(setmetatable OS.MACOS {:__tostring #:MacOS})
-(setmetatable OS.LINUX {:__tostring #:Linux})
-(setmetatable OS.WINDOWS {:__tostring #:Windows})
+;; the host OS, computed once at load time since it cannot change mid-session
+(local host-os (case (. (vim.uv.os_uname) :sysname)
+                 :Darwin :macos
+                 :Linux :linux
+                 :Windows :windows
+                 :Windows_NT :windows))
 
 (λ os []
-  "Returns the system's OS as an element of `system.OS`."
-  (case (. (vim.uv.os_uname) :sysname)
-    :Darwin OS.MACOS
-    :Linux OS.LINUX
-    :Windows OS.WINDOWS
-    :Windows_NT OS.WINDOWS))
+  "Returns the host OS as one of `:macos`, `:linux`, or `:windows`, or `nil`
+  if it is unrecognised."
+  host-os)
 
 (λ macos? []
   "Returns `true` if the host OS is MacOS."
-  (= (os) OS.MACOS))
+  (= host-os :macos))
 
 (λ linux? []
   "Returns `true` if the host OS is Linux."
-  (= (os) OS.LINUX))
+  (= host-os :linux))
 
 (λ windows? []
   "Returns `true` if the host OS is Windows."
-  (= (os) OS.WINDOWS))
-
-(λ os-name []
-  "Returns the canonical name of the system's OS."
-  (tostring (os)))
+  (= host-os :windows))
 
 (λ env-set? [name]
   "Returns `true` if and only if the given `name` is set in the environment."
@@ -56,9 +50,10 @@
   "Executes the given system `cmd` asynchronously."
   (vim.system cmd ?opts ?on-exit))
 
-(λ run-cmd-sync [cmd ?opts ?on-exit]
-  "Synchronous version of `run-cmd`."
-  (let [res (: (vim.system cmd ?opts ?on-exit) :wait)]
+(λ run-cmd-sync [cmd ?opts]
+  "Synchronous version of `run-cmd`; returns whether the command succeeded,
+  along with its stdout and stderr."
+  (let [res (: (vim.system cmd ?opts) :wait)]
     (values (= res.code 0) res.stdout res.stderr)))
 
 ;; return public interface
@@ -66,9 +61,7 @@
  : hostname
  : hostname-prefix
  : hostname-domain
- : OS
  : os
- : os-name
  : macos?
  : linux?
  : windows?
