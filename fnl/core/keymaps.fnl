@@ -69,12 +69,12 @@
 
 (λ open-scratch-buffer []
   "Creates and switches to a scratch Fennel buffer."
-  (doto (buffer.create {:listed true :scratch true})
-    (buffer.rename! :*scratch*)
-    (buffer.set! :filetype :fennel)
-    (buffer.set! :buftype :nofile)
-    (buffer.set-lines! 0 -1 scratch-lines)
-    (buffer.open #(vim.api.nvim_win_set_cursor 0 [5 0]))))
+  (-> (buffer.create {:listed true :scratch true})
+      (: :rename! :*scratch*)
+      (: :set! :filetype :fennel)
+      (: :set! :buftype :nofile)
+      (: :set-lines! 0 -1 scratch-lines)
+      (: :open #(vim.api.nvim_win_set_cursor 0 [5 0]))))
 
 (fn setup [_self]
   ;; emacs-style lisp evaluation prompt
