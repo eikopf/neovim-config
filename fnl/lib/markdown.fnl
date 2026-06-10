@@ -1,5 +1,7 @@
 ;; markdown utilities
 
+(local buffer (require :lib.buffer))
+
 (local checked-pattern "^(%s*%- )%[[xX]%]")
 (local unchecked-pattern "^(%s*%- )%[ %]")
 
@@ -15,37 +17,34 @@
   (not= (line:find unchecked-pattern) nil))
 
 (λ check [line]
-  "Checks the first unchecked checkbox in the given string if any."
-  (let [(line success) (line:gsub unchecked-pattern "%1[x]" 1)
-        success (if (= success 1) true false)]
-    {: line : success}))
+  "Checks the first unchecked checkbox in `line` if any, returning the new
+  line and whether it changed."
+  (let [(line n) (line:gsub unchecked-pattern "%1[x]" 1)]
+    (values line (= n 1))))
 
 (λ uncheck [line]
-  "Unchecks the first checked checkbox in the given string if any."
-  (let [(line success) (line:gsub checked-pattern "%1[ ]" 1)
-        success (if (= success 1) true false)]
-    {: line : success}))
+  "Unchecks the first checked checkbox in `line` if any, returning the new
+  line and whether it changed."
+  (let [(line n) (line:gsub checked-pattern "%1[ ]" 1)]
+    (values line (= n 1))))
 
 (λ toggle-check [line]
-  "Toggles the first checkbox in the given string if any."
+  "Toggles the first checkbox in `line` if any, returning the new line and
+  whether it changed."
   (if (line-contains-unchecked line) (check line)
       (line-contains-checked line) (uncheck line)
-      {: line :success false}))
+      (values line false)))
 
 (λ toggle-check-on-cursor-line []
-  (let [buf (vim.api.nvim_buf_get_number 0)
+  "Toggles the first checkbox on the cursor line, if any."
+  (let [buf (buffer.current)
         cursor (vim.api.nvim_win_get_cursor 0)
-        cursor-line (- (. cursor 1) 1)
-        current-line (or (. (vim.api.nvim_buf_get_lines buf cursor-line
-                                                        (+ cursor-line 1) false)
-                            1) "")
-        {: line : success} (toggle-check current-line)]
-    (if success
-        (do
-          (vim.api.nvim_buf_set_lines buf cursor-line (+ cursor-line 1) false
-                                      [line])
-          (vim.api.nvim_win_set_cursor 0 cursor)
-          nil))))
+        row (. cursor 1)
+        current-line (or (. (buf:lines (- row 1) row) 1) "")
+        (line changed?) (toggle-check current-line)]
+    (when changed?
+      (buf:set-lines! (- row 1) row [line])
+      (vim.api.nvim_win_set_cursor 0 cursor))))
 
 (λ checked-item-ranges [lines]
   "Returns a list of `{: first : last}` ranges (1-indexed, inclusive) covering
@@ -84,9 +83,9 @@
 (λ archive-checked-on-current-buffer []
   "Moves every checked item (and its sub-items) from the current buffer into
   its sibling archive file, appended under a dated heading."
-  (let [buf (vim.api.nvim_get_current_buf)
-        source-path (vim.api.nvim_buf_get_name buf)
-        lines (vim.api.nvim_buf_get_lines buf 0 -1 false)
+  (let [buf (buffer.current)
+        source-path (buf:name)
+        lines (buf:lines)
         ranges (checked-item-ranges lines)]
     (if (= source-path "")
         (vim.notify "buffer has no file path; save it first"
@@ -110,8 +109,7 @@
                    ;; remove ranges in reverse to keep earlier indices valid
                    (for [i (length ranges) 1 -1]
                      (let [{: first : last} (. ranges i)]
-                       (vim.api.nvim_buf_set_lines buf (- first 1) last false
-                                                   [])))
+                       (buf:set-lines! (- first 1) last [])))
                    (vim.notify (string.format "archived %d item(s) to %s"
                                               (length ranges) path)
                                vim.log.levels.INFO))
