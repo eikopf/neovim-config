@@ -1,6 +1,12 @@
 ;; coder/claudecode.nvim --- neovim integration for claude code
 
+;; the commands bound in core/keymaps.fnl are all load triggers
 {1 :coder/claudecode.nvim
  :opts {:terminal {:provider :native}}
- :keys :<leader>a
- :cmd :ClaudeCode}
+ :cmd [:ClaudeCode
+       :ClaudeCodeAdd
+       :ClaudeCodeSend
+       :ClaudeCodeFocus
+       :ClaudeCodeSelectModel
+       :ClaudeCodeDiffAccept
+       :ClaudeCodeDiffDeny]}

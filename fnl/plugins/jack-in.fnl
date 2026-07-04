@@ -2,5 +2,4 @@
 
 {1 :clojure-vim/vim-jack-in
  :dependencies [:tpope/vim-dispatch]
- :cmd [:Boot :Clj :Lein]
- :lazy true}
+ :cmd [:Boot :Clj :Lein]}

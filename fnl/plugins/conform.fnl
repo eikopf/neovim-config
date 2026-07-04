@@ -39,7 +39,5 @@
 {1 :stevearc/conform.nvim
  :event [:BufWritePre]
  :cmd [:ConformInfo]
- ;; defined in core/keymaps.fnl
- :keys [:<leader>cf]
  : opts
  :init make-user-commands}

@@ -3,7 +3,7 @@
 This repository contains my personal Neovim configuration, written in Fennel and configured to compile itself using [`nfnl`](https://github.com/Olical/nfnl). It's the replacement for an older configuration written in Lua, which in turn was originally derived from [`kickstart.nvim`](https://github.com/nvim-lua/kickstart.nvim/tree/master).
 
 # Compilation
-If you intend to use this configuration (and really, you shouldn't be), the first launch handles compilation automatically. `init.lua` bootstraps `lazy.nvim` and `nfnl`, compiles all Fennel sources to `lua/`, prints a message, and exits; the next time you start Neovim everything loads normally.
+If you intend to use this configuration (and really, you shouldn't be), the first launch handles compilation automatically. `init.lua` installs `nfnl` with the builtin package manager (`:help vim.pack`, requires Neovim 0.12+), compiles all Fennel sources to `lua/`, prints a message, and exits; the next time you start Neovim everything loads normally, with the remaining plugins managed by `fnl/core/pack.fnl`.
 
 You can also trigger compilation manually by opening any `.fnl` file and running `:NfnlCompileAllFiles` — useful if you have deleted the `lua/` directory and don't want to restart.
 

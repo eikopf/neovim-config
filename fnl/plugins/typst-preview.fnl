@@ -7,5 +7,5 @@
 
 {1 :chomosuke/typst-preview.nvim
  :ft :typst
- :version :1.*
+ :version (vim.version.range :1.*)
  :opts {:follow_cursor false}}

@@ -4,46 +4,13 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
--- installation prefix for lazy.nvim
-local lazy_prefix = vim.fn.stdpath("data") .. "/lazy"
-
--- installation directory for lazy.nvim itself
-local lazy_install_path = lazy_prefix .. "/lazy.nvim"
-
--- if lazy isn't installed, then install the latest stable version
-if not (vim.uv or vim.loop).fs_stat(lazy_install_path) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazy_install_path,
-  })
-end
-
--- prepend lazy.nvim's install path to the runtime path
-vim.opt.rtp:prepend(lazy_install_path)
-
 -- enable jit compilation
 vim.loader.enable()
 
--- the plugin spec defines the set of plugins that lazy.nvim loads.
--- in this case, all files under the plugin module are merged
--- into a plugin spec, and nfnl is explicitly added
-local plugin_spec = { {
-  {
-    { import = "plugins" },
-    { "Olical/nfnl" },
-  },
-} }
-
--- finally, we invoke lazy by passing the plugin spec and some options
-require("lazy").setup(plugin_spec, {
-  change_detection = {
-    notify = false, -- this disables the "Config Change Detected..." messages
-  },
-})
+-- install nfnl with the builtin package manager (see :help vim.pack); the
+-- remaining plugins are handled in fnl/core/pack.fnl, which can only run
+-- once the fennel sources have been compiled
+vim.pack.add({ "https://github.com/Olical/nfnl" }, { confirm = false })
 
 -- at this point, it's possible that the lua/ directory does not exist,
 -- typically because the repo has just been cloned

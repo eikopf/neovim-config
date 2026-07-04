@@ -15,26 +15,14 @@
                   {:buffer true :nowait true :silent true}))
 
 (fn init []
-  ;; the once-autocmd makes lazy.stats().startuptime render correctly,
-  ;; since it must be refreshed after the UIEnter event has fired
   (-> (autocmd.group :startup-extras :clear)
-      (: :on-once :User :MiniStarterOpened "lua MiniStarter.refresh()")
       (: :on :User :MiniStarterOpened make-startup-bindings)))
 
-;; NOTE: we're currently using mini.nvim#starter for the dashboard, which must
-;; be refreshed immediately when it is first shown to make sure that the
-;; lazy.stats().startuptime value has been calculated (the UIEnter event must
-;; have run for this). it seems like snacks.nvim#dashboard doesn't have this
-;; problem, so perhaps switching to it might be better at some point in the
-;; future
-
-(fn lazy-stats []
-  (let [{: stats} (require :lazy)]
-    (stats)))
-
 (fn header []
-  (let [{: count : loaded : startuptime} (lazy-stats)]
-    (string.format "loaded %d/%d plugins in %.3fms" loaded count startuptime)))
+  (let [plugins (vim.pack.get nil {:info false})
+        active (icollect [_ plugin (ipairs plugins)]
+                 (if plugin.active plugin))]
+    (string.format "loaded %d/%d plugins" (length active) (length plugins))))
 
 (fn footer []
   "")
@@ -45,7 +33,7 @@
     [(item :projects #(goto-dir-and-edit "~/projects"))
      (item :journal :JournalOpen)
      (item :config #(goto-dir-and-edit (vim.fn.stdpath :config)))
-     (item :lazy :Lazy)
+     (item :plugins #(vim.pack.update))
      (item :terminal open-short-term)
      (item "scratch buffer" open-scratch-buffer)]))
 
@@ -69,9 +57,13 @@
 (fn items []
   [open-items journal-items recent-files actions])
 
-(λ opts [_plugin _opts]
+(fn opts []
   (let [items (items)
         footer (footer)]
     {: header : items : footer :silent true}))
 
-{1 :nvim-mini/mini.starter :version "*" : init : opts :enabled false}
+{1 :nvim-mini/mini.starter
+ :version (vim.version.range "*")
+ : init
+ : opts
+ :enabled false}

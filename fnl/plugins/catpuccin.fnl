@@ -9,9 +9,8 @@
                      :lsp_trouble true})
 
 ;; :main is needed because the :name above (note the typo) doesn't match the
-;; plugin's actual lua module, so lazy.nvim can't resolve it automatically
+;; plugin's actual lua module, so it can't be resolved automatically
 {1 :catppuccin/nvim
- :priority 1000
  :name :catpuccin
  :main :catppuccin
  :opts {: integrations}}

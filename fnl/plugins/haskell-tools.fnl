@@ -11,4 +11,4 @@
 
 (set vim.g.haskell_tools (fn [] {:hls {:on_attach make-bindings}}))
 
-{1 :mrcjkb/haskell-tools.nvim :version :^6 :lazy false}
+{1 :mrcjkb/haskell-tools.nvim :version (vim.version.range "^6")}

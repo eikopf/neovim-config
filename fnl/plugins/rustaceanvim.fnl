@@ -33,5 +33,5 @@
      (fn []
        {:server {:on_attach make-bindings :default_settings {: rust-analyzer}}}))
 
-;; this plugin is internally lazy, so lazy-loading with lazy.nvim is redundant
-{1 :mrcjkb/rustaceanvim :version :^6 :lazy false}
+;; this plugin is internally lazy, so deferred loading is redundant
+{1 :mrcjkb/rustaceanvim :version (vim.version.range "^6")}

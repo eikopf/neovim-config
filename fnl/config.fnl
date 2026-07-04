@@ -2,6 +2,7 @@
 
 (import-macros {: load!} :lib.macros)
 
+(load! :core.pack)
 (load! :core.filetype)
 (load! :core.lsp)
 (load! :core.options)

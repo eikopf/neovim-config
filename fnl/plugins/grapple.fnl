@@ -4,6 +4,6 @@
 
 {1 :cbochs/grapple.nvim
  : opts
- :dependencies [{1 :nvim-tree/nvim-web-devicons :lazy true}]
+ :dependencies [:nvim-tree/nvim-web-devicons]
  :cmd :Grapple
  :event [:BufReadPost :BufNewFile]}

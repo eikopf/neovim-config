@@ -1,13 +1,13 @@
 ;; saghen/blink.cmp --- a faster cmp.nvim
 
 ;; semver(ish?) release tag
-(local version :1.*)
+(local version (vim.version.range :1.*))
 
 ;; completion sources
 (local dependencies
        [:rafamadriz/friendly-snippets
         :kdheepak/cmp-latex-symbols
-        {1 :saghen/blink.compat :lazy true :opts {} :version "*"}])
+        {1 :saghen/blink.compat :opts {} :version (vim.version.range "*")}])
 
 (fn enabled []
   "Determines whether `blink.cmp` should currently be enabled."
@@ -38,6 +38,4 @@
              :sources {:default [:lsp :path :snippets :buffer :latex_symbols]
                        : providers}})
 
-(local opts_extend [:sources.default])
-
-{1 :saghen/blink.cmp : version : dependencies : init : opts : opts_extend}
+{1 :saghen/blink.cmp : version : dependencies : init : opts}
