@@ -4,7 +4,8 @@
 ;; modes are diagnostics, lsp_references, qflist, loclist, symbols, and todo;
 ;; refer to :help trouble.nvim for details
 
-{1 :folke/trouble.nvim
- :dependencies [:nvim-tree/nvim-web-devicons]
- :opts {:auto_close true}
- :cmd [:Trouble]}
+(fn setup [_self]
+  (let [trouble (require :trouble)]
+    (trouble.setup {:auto_close true})))
+
+{: setup}

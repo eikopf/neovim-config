@@ -28,10 +28,11 @@
                          :traitAssocItems show-item-count}}
           :procMacro {:enable true :attributes {:enable true}}}))
 
-;; the primary configuration interface for rustaceanvim
-(set vim.g.rustaceanvim
-     (fn []
-       {:server {:on_attach make-bindings :default_settings {: rust-analyzer}}}))
+;; the plugin is internally lazy, configuring itself from vim.g.rustaceanvim
+(fn setup [_self]
+  (set vim.g.rustaceanvim
+       (fn []
+         {:server {:on_attach make-bindings
+                   :default_settings {: rust-analyzer}}})))
 
-;; this plugin is internally lazy, so deferred loading is redundant
-{1 :mrcjkb/rustaceanvim :version (vim.version.range "^6")}
+{: setup}

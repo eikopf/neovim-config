@@ -20,4 +20,8 @@
                  :lualine_y [:encoding :filetype]
                  :lualine_z [:location]})
 
-{1 :nvim-lualine/lualine.nvim :opts {: options : sections} :event :UiEnter}
+(fn setup [_self]
+  (let [lualine (require :lualine)]
+    (lualine.setup {: options : sections})))
+
+{: setup}

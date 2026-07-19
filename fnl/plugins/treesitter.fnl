@@ -69,5 +69,8 @@
              :auto_install true
              :index {:enable true}})
 
-;; plugin spec
-{1 :nvim-treesitter/nvim-treesitter :build ":TSUpdate" :version :main : opts}
+(fn setup [_self]
+  (let [treesitter (require :nvim-treesitter)]
+    (treesitter.setup opts)))
+
+{: setup}

@@ -1,5 +1,7 @@
 ;; ShinKage/idris2-nvim -- config for Neovim + LSP + Idris2
 
+(local autocmd (require :lib.autocmd))
+
 ;; callback invoked when the idris2 LSP attaches to a buffer
 (fn on_attach [_client]
   (let [{: map : group} (require :lib.keymap)
@@ -34,11 +36,17 @@
              :code_action_post_hook (fn [] (vim.cmd "silent write"))
              :server {: on_attach}})
 
-{1 :idris-community/idris2-nvim
- :dependencies [:neovim/nvim-lspconfig :MunifTanjim/nui.nvim]
- ;; this plugin HAS to be lazy-loaded, because it's extremely slow to start
- :ft [:idris2 :ipkg]
- ;; this is wrapped in a function to avoid early loading
- :config (fn []
-           (let [idris2 (require :idris2)]
-             (idris2.setup opts)))}
+(λ setup-idris2 [ev]
+  (let [idris2 (require :idris2)]
+    (idris2.setup opts))
+  ;; re-fire the filetype event so that the freshly-registered server
+  ;; config attaches to the triggering buffer
+  (vim.api.nvim_buf_call ev.buf #(set vim.bo.filetype vim.bo.filetype)))
+
+;; NOTE: idris2-nvim is extremely slow to set up, so unlike most plugins
+;; its setup is deferred until the first idris buffer is opened
+(fn setup [_self]
+  (-> (autocmd.group :idris2-setup :clear)
+      (: :on-once :FileType [:idris2 :ipkg] setup-idris2)))
+
+{: setup}

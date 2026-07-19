@@ -1,7 +1,9 @@
-;; which-key configuration, effectively just a returned table
+;; folke/which-key.nvim --- keymap hints
 
-{1 :folke/which-key.nvim
- :init (fn []
-         (set vim.o.timeout true)
-         (set vim.o.timeoutlen 300))
- :opts {:win {:border :none} :icons {:mappings false}}}
+(fn setup [_self]
+  (set vim.o.timeout true)
+  (set vim.o.timeoutlen 300)
+  (let [which-key (require :which-key)]
+    (which-key.setup {:win {:border :none} :icons {:mappings false}})))
+
+{: setup}

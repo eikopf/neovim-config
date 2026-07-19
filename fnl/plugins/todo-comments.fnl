@@ -1,7 +1,7 @@
 ;; todo-comments.nvim -- functionality for ALLCAPS-style comment prefixes
 
-{1 :folke/todo-comments.nvim
- :dependencies [:nvim-lua/plenary.nvim]
- :opts {:signs false}
- :cmd [:TodoQuickFix :TodoLocList :TodoTelescope :TodoTrouble]
- :event :BufRead}
+(fn setup [_self]
+  (let [todo-comments (require :todo-comments)]
+    (todo-comments.setup {:signs false})))
+
+{: setup}

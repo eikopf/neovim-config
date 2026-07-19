@@ -1,4 +1,7 @@
 ;;; configuration for the default buffer at start-up
+;;;
+;;; NOTE: currently disabled --- this module is not loaded in config.fnl,
+;;; and nvim-mini/mini.starter is not listed in core/pack.fnl
 
 (local autocmd (require :lib.autocmd))
 
@@ -13,10 +16,6 @@
   (vim.keymap.set :n :<C-k>
                   "<Cmd>lua MiniStarter.update_current_item('prev')<CR>"
                   {:buffer true :nowait true :silent true}))
-
-(fn init []
-  (-> (autocmd.group :startup-extras :clear)
-      (: :on :User :MiniStarterOpened make-startup-bindings)))
 
 (fn header []
   (let [plugins (vim.pack.get nil {:info false})
@@ -57,13 +56,10 @@
 (fn items []
   [open-items journal-items recent-files actions])
 
-(fn opts []
-  (let [items (items)
-        footer (footer)]
-    {: header : items : footer :silent true}))
+(fn setup [_self]
+  (-> (autocmd.group :startup-extras :clear)
+      (: :on :User :MiniStarterOpened make-startup-bindings))
+  (let [starter (require :mini.starter)]
+    (starter.setup {: header :items (items) :footer (footer) :silent true})))
 
-{1 :nvim-mini/mini.starter
- :version (vim.version.range "*")
- : init
- : opts
- :enabled false}
+{: setup}

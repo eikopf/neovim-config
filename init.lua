@@ -7,6 +7,12 @@ vim.g.maplocalleader = ","
 -- enable jit compilation
 vim.loader.enable()
 
+-- fail early and clearly on neovim versions without the builtin package
+-- manager, e.g. distro-packaged releases
+if vim.fn.has("nvim-0.12") == 0 then
+  error("this configuration requires vim.pack, and hence neovim 0.12+")
+end
+
 -- install nfnl with the builtin package manager (see :help vim.pack); the
 -- remaining plugins are handled in fnl/core/pack.fnl, which can only run
 -- once the fennel sources have been compiled

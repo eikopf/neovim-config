@@ -9,6 +9,8 @@
     (map* :n :<leader>cE ht.lsp.buf_eval_all (opts "Evaluate code snippets"))
     (map* :n :<leader>tR ht.repl.toggle (opts "Toggle GHCi"))))
 
-(set vim.g.haskell_tools (fn [] {:hls {:on_attach make-bindings}}))
+;; the plugin configures itself from vim.g.haskell_tools when it loads
+(fn setup [_self]
+  (set vim.g.haskell_tools (fn [] {:hls {:on_attach make-bindings}})))
 
-{1 :mrcjkb/haskell-tools.nvim :version (vim.version.range "^6")}
+{: setup}
