@@ -8,8 +8,4 @@
              ;; faster up/down bindings
              :keymaps {:L :actions.select :H :actions.parent}})
 
-(fn setup [_self]
-  (let [oil (require :oil)]
-    (oil.setup opts)))
-
-{: setup}
+{:src :stevearc/oil.nvim :deps [:nvim-tree/nvim-web-devicons] : opts}

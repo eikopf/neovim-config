@@ -5,8 +5,6 @@
 ;; display typst files; this requires access to curl. these files can be
 ;; updated manually with `:TypstPreviewUpdate`.
 
-(fn setup [_self]
-  (let [typst-preview (require :typst-preview)]
-    (typst-preview.setup {:follow_cursor false})))
-
-{: setup}
+{:src :chomosuke/typst-preview.nvim
+ :version (vim.version.range :1.*)
+ :opts {:follow_cursor false}}

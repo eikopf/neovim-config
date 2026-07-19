@@ -64,13 +64,10 @@
 ;; - unison
 ;; (also the agda parser tries and fails to build on windows)
 
-(local opts {:ensure_installed langs
-             :highlight {:enable true}
-             :auto_install true
-             :index {:enable true}})
-
-(fn setup [_self]
-  (let [treesitter (require :nvim-treesitter)]
-    (treesitter.setup opts)))
-
-{: setup}
+{:src :nvim-treesitter/nvim-treesitter
+ :version :main
+ :build ":TSUpdate"
+ :opts {:ensure_installed langs
+        :highlight {:enable true}
+        :auto_install true
+        :index {:enable true}}}

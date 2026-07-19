@@ -10,7 +10,7 @@
     (map* :n :<leader>tR ht.repl.toggle (opts "Toggle GHCi"))))
 
 ;; the plugin configures itself from vim.g.haskell_tools when it loads
-(fn setup [_self]
-  (set vim.g.haskell_tools (fn [] {:hls {:on_attach make-bindings}})))
-
-{: setup}
+{:src :mrcjkb/haskell-tools.nvim
+ :version (vim.version.range :^6)
+ :setup (fn []
+          (set vim.g.haskell_tools (fn [] {:hls {:on_attach make-bindings}})))}

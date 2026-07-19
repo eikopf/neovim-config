@@ -11,8 +11,4 @@
                     :jump_next_row (bind :<Enter> [:n :v])
                     :jump_prev_row (bind :<S-Enter> [:n :v])}}))
 
-(fn setup [_self]
-  (let [csvview (require :csvview)]
-    (csvview.setup opts)))
-
-{: setup}
+{:src :hat0uma/csvview.nvim : opts}

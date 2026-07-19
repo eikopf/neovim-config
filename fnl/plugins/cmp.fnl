@@ -26,12 +26,14 @@
              :sources {:default [:lsp :path :snippets :buffer :latex_symbols]
                        : providers}})
 
-(fn setup [_self]
-  (set vim.g.blink-cmp-enable true)
-  (let [compat (require :blink.compat)
-        blink (require :blink.cmp)]
-    ;; blink.compat bridges the nvim-cmp sources (e.g. latex_symbols)
-    (compat.setup {})
-    (blink.setup opts)))
-
-{: setup}
+{:src :saghen/blink.cmp
+ :version (vim.version.range :1.*)
+ ;; completion sources
+ :deps [:rafamadriz/friendly-snippets
+        :kdheepak/cmp-latex-symbols
+        {:src :saghen/blink.compat :version (vim.version.range "*")}]
+ :setup (fn []
+          (set vim.g.blink-cmp-enable true)
+          ;; blink.compat bridges the nvim-cmp sources (e.g. latex_symbols)
+          ((. (require :blink.compat) :setup) {})
+          ((. (require :blink.cmp) :setup) opts))}

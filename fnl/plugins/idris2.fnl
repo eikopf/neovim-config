@@ -37,16 +37,15 @@
              :server {: on_attach}})
 
 (λ setup-idris2 [ev]
-  (let [idris2 (require :idris2)]
-    (idris2.setup opts))
+  ((. (require :idris2) :setup) opts)
   ;; re-fire the filetype event so that the freshly-registered server
   ;; config attaches to the triggering buffer
   (vim.api.nvim_buf_call ev.buf #(set vim.bo.filetype vim.bo.filetype)))
 
 ;; NOTE: idris2-nvim is extremely slow to set up, so unlike most plugins
-;; its setup is deferred until the first idris buffer is opened
-(fn setup [_self]
-  (-> (autocmd.group :idris2-setup :clear)
-      (: :on-once :FileType [:idris2 :ipkg] setup-idris2)))
-
-{: setup}
+;; its configuration is deferred until the first idris buffer is opened
+{:src :idris-community/idris2-nvim
+ :deps [:neovim/nvim-lspconfig :MunifTanjim/nui.nvim]
+ :setup (fn []
+          (-> (autocmd.group :idris2-setup :clear)
+              (: :on-once :FileType [:idris2 :ipkg] setup-idris2)))}

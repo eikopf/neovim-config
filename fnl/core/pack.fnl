@@ -1,96 +1,87 @@
-;; plugin installation via vim.pack
+;; declarative plugin management via vim.pack
 ;;
-;; this module only *installs* plugins: it declares their sources (see
-;; :help vim.pack) and runs build hooks when a plugin is installed or
-;; updated. plugin *configuration* lives in the modules under fnl/plugins/,
-;; which are ordinary config modules loaded from config.fnl.
+;; every module under fnl/plugins/ returns a spec table declaring one
+;; plugin; this module does the plumbing: it installs the sources with
+;; vim.pack (see :help vim.pack), runs build hooks, and applies each
+;; spec's configuration at startup. the dialect is deliberately minimal
+;; and eager --- there is no lazy loading:
 ;;
-;; everything is installed and loaded eagerly: measured against deferred
-;; loading, the difference is roughly 25ms of startup time, which isn't
-;; worth a lazy-loading layer. if this ever becomes too slow on a weaker
-;; machine, defer the expensive tail (lean, conjure) with per-plugin
-;; FileType autocmds (as in fnl/plugins/idris2.fnl) rather than
-;; reintroducing general machinery.
+;;   :src      github "owner/repo" shorthand
+;;   :name     overrides the inferred plugin (and directory) name
+;;   :version  a branch/tag string or a `vim.version.range`
+;;   :dir      local checkout; put on the rtp, not managed by vim.pack
+;;   :deps     extra sources to install: shorthand strings or spec-like
+;;             {:src ...} tables, with no further semantics
+;;   :build    ex command run when the plugin is installed or updated
+;;   :enabled  boolean or nullary predicate; excludes the spec (and its
+;;             configuration) when false
+;;   :opts     table (or nullary function) passed to `setup` in the
+;;             plugin's main module
+;;   :main     overrides the inferred name of that module
+;;   :setup    thunk run instead of the `:opts` mechanism, for plugins
+;;             whose configuration is more than a single `setup` call
+;;
+;; measured against lazy-loading, eager configuration costs ~50ms of
+;; startup; if that becomes too slow on a weaker machine, defer inside
+;; the relevant spec's `:setup` thunk (see plugins/idris2.fnl) rather
+;; than growing the dialect.
 
 (local autocmd (require :lib.autocmd))
-(local system (require :lib.system))
 
-(λ gh [src ?opts]
-  "Returns a `vim.pack` spec (see :help vim.pack.Spec) for a github
-  shorthand `src` like \"owner/repo\"; `?opts` may set `:name` and
-  `:version`."
-  {:src (.. "https://github.com/" src)
-   :name (?. ?opts :name)
-   :version (?. ?opts :version)})
+;;; specs
 
-;; NOTE: nvim-mini/mini.starter is currently disabled and hence not listed
-;; here (see fnl/plugins/start-up.fnl)
-(local plugins [(gh :isti115/agda.nvim)
-                (gh :p00f/alabaster.nvim)
-                (gh :saghen/blink.cmp {:version (vim.version.range :1.*)})
-                (gh :saghen/blink.compat {:version (vim.version.range "*")})
-                ;; installed under a historical typo'd name
-                (gh :catppuccin/nvim {:name :catpuccin})
-                (gh :coder/claudecode.nvim)
-                (gh :kdheepak/cmp-latex-symbols)
-                (gh :stevearc/conform.nvim)
-                (gh :Olical/conjure)
-                (gh :hat0uma/csvview.nvim)
-                (gh :sainnhe/everforest)
-                (gh :antoinemadec/FixCursorHold.nvim)
-                (gh :rafamadriz/friendly-snippets)
-                (gh :lewis6991/gitsigns.nvim)
-                (gh :cbochs/grapple.nvim)
-                (gh :mrcjkb/haskell-tools.nvim
-                    {:version (vim.version.range :^6)})
-                (gh :idris-community/idris2-nvim)
-                (gh :bakpakin/janet.vim)
-                (gh :Julian/lean.nvim)
-                (gh :ledger/vim-ledger)
-                (gh :nvim-lualine/lualine.nvim)
-                (gh :MunifTanjim/nui.nvim)
-                (gh :neovim/nvim-lspconfig)
-                (gh :nvim-lua/plenary.nvim)
-                (gh :nvim-neotest/neotest)
-                (gh :nvim-neotest/nvim-nio)
-                (gh :nvim-tree/nvim-web-devicons)
-                (gh :nvim-treesitter/nvim-treesitter {:version :main})
-                (gh :LhKipp/nvim-nu)
-                (gh :gpanders/nvim-parinfer)
-                (gh :windwp/nvim-autopairs)
-                (gh :tjdevries/ocaml.nvim)
-                (gh :pwntester/octo.nvim)
-                (gh :stevearc/oil.nvim)
-                (gh :mrcjkb/rustaceanvim {:version (vim.version.range :^6)})
-                ;; pinned to the release branch
-                (gh :nvim-telescope/telescope.nvim {:version :0.1.x})
-                (gh :folke/todo-comments.nvim)
-                (gh :akinsho/toggleterm.nvim {:version (vim.version.range "*")})
-                (gh :folke/trouble.nvim)
-                (gh :chomosuke/typst-preview.nvim
-                    {:version (vim.version.range :1.*)})
-                (gh :tpope/vim-dispatch)
-                (gh :tpope/vim-fugitive)
-                (gh :clojure-vim/vim-jack-in)
-                (gh :otherjoel/vim-pollen)
-                (gh :benknoble/vim-racket)
-                ;; a fork that fixes a small bug in mhinz/vim-rfc
-                (gh :eikopf/vim-rfc)
-                (gh :folke/which-key.nvim)])
+(λ enabled? [spec]
+  "Returns whether `spec` is enabled; defaults to `true`."
+  (case spec.enabled
+    nil true
+    pred (if (= (type pred) :function) (pred) pred)))
 
-;; host-specific plugins: tracey is a local checkout on pilatus, and mason
-;; only manages language tooling on windows
-(when (not= :pilatus (system.hostname-prefix))
-  (table.insert plugins (gh :eikopf/tracey.nvim)))
+(λ spec-name [spec]
+  "Returns the name of `spec`, either explicit or inferred from its source."
+  (or spec.name (vim.fs.basename (or spec.dir spec.src))))
 
-(when (system.windows?)
-  (table.insert plugins (gh :mason-org/mason.nvim))
-  (table.insert plugins (gh :mason-org/mason-lspconfig.nvim)))
+(λ main-module [spec]
+  "Returns the name of the main module of `spec`, either explicit or
+  inferred by dropping a `.nvim` suffix from the plugin's name."
+  (or spec.main (pick-values 1 (string.gsub (spec-name spec) "%.nvim$" ""))))
+
+(λ as-spec [dep]
+  "Promotes a shorthand dependency string to a spec table."
+  (if (= (type dep) :string) {:src dep} dep))
+
+(λ pack-spec [spec]
+  "Converts `spec` into a `vim.pack` spec (see :help vim.pack.Spec)."
+  {:src (.. "https://github.com/" spec.src)
+   :name spec.name
+   :version spec.version})
+
+;;; discovery
+
+(λ collect-specs []
+  "Requires every module under fnl/plugins/ in sorted order, returning
+  the enabled specs."
+  (let [paths (vim.fn.glob (.. (vim.fn.stdpath :config) :/fnl/plugins/*.fnl)
+                           false true)]
+    (icollect [_ path (ipairs paths)]
+      (let [name (string.gsub (vim.fs.basename path) "%.fnl$" "")
+            spec (require (.. :plugins. name))]
+        (when (enabled? spec) spec)))))
+
+;;; configuration
+
+(λ configure [spec]
+  "Runs the `setup` thunk of `spec`, or passes its `opts` to the `setup`
+  function of the plugin's main module."
+  (case spec
+    {: setup} (setup)
+    {: opts} (let [opts (if (= (type opts) :function) (opts) opts)]
+               ((. (require (main-module spec)) :setup) opts))
+    _ nil))
 
 ;;; build hooks
 
 ;; ex commands run when the keyed plugin is installed or updated
-(local build-hooks {:nvim-treesitter ":TSUpdate" :nvim-nu ":TSInstall nu"})
+(local build-hooks {})
 
 ;; builds queued during startup, before their commands exist
 (local pending-builds [])
@@ -120,12 +111,34 @@
 ;;; entrypoint
 
 (fn setup [_self]
-  (-> (autocmd.group :pack :clear)
-      (: :on :PackChanged "*" on-pack-changed)
-      (: :on-once :VimEnter "*" flush-builds))
-  (vim.pack.add plugins {:confirm false})
-  ;; local checkouts go straight onto the rtp
-  (when (= :pilatus (system.hostname-prefix))
-    (: vim.opt.rtp :prepend (vim.fs.normalize "~/projects/tracey.nvim"))))
+  (let [specs (collect-specs)
+        pack-specs []
+        seen {}]
+    ;; run build hooks whenever vim.pack installs or updates a plugin
+    (each [_ spec (ipairs specs)]
+      (case spec.build cmd (tset build-hooks (spec-name spec) cmd)))
+    (-> (autocmd.group :pack :clear)
+        (: :on :PackChanged "*" on-pack-changed)
+        (: :on-once :VimEnter "*" flush-builds))
+    ;; collect the sources, deduplicated by src; top-level specs come
+    ;; first so that their versions take precedence over dependencies
+    (each [_ spec (ipairs specs)]
+      (when (and spec.src (not (. seen spec.src)))
+        (tset seen spec.src true)
+        (table.insert pack-specs (pack-spec spec))))
+    (each [_ spec (ipairs specs)]
+      (each [_ dep (ipairs (or spec.deps []))]
+        (let [dep (as-spec dep)]
+          (when (not (. seen dep.src))
+            (tset seen dep.src true)
+            (table.insert pack-specs (pack-spec dep))))))
+    (vim.pack.add pack-specs {:confirm false})
+    ;; local checkouts go straight onto the rtp
+    (each [_ spec (ipairs specs)]
+      (when spec.dir
+        (: vim.opt.rtp :prepend (vim.fs.normalize spec.dir))))
+    ;; apply the configurations in sorted module order
+    (each [_ spec (ipairs specs)]
+      (configure spec))))
 
 {: setup}

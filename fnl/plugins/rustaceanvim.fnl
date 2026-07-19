@@ -29,10 +29,10 @@
           :procMacro {:enable true :attributes {:enable true}}}))
 
 ;; the plugin is internally lazy, configuring itself from vim.g.rustaceanvim
-(fn setup [_self]
-  (set vim.g.rustaceanvim
-       (fn []
-         {:server {:on_attach make-bindings
-                   :default_settings {: rust-analyzer}}})))
-
-{: setup}
+{:src :mrcjkb/rustaceanvim
+ :version (vim.version.range :^6)
+ :setup (fn []
+          (set vim.g.rustaceanvim
+               (fn []
+                 {:server {:on_attach make-bindings
+                           :default_settings {: rust-analyzer}}})))}

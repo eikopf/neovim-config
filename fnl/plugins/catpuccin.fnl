@@ -8,10 +8,9 @@
                      ;; trouble.nvim
                      :lsp_trouble true})
 
-;; NOTE: the plugin is installed under the (typo'd) name "catpuccin", but
-;; its lua module is spelled correctly
-(fn setup [_self]
-  (let [catppuccin (require :catppuccin)]
-    (catppuccin.setup {: integrations})))
-
-{: setup}
+;; :main is needed because the :name (note the typo) doesn't match the
+;; plugin's actual lua module, so it can't be inferred
+{:src :catppuccin/nvim
+ :name :catpuccin
+ :main :catppuccin
+ :opts {: integrations}}

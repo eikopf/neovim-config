@@ -1,7 +1,4 @@
 ;;; configuration for the default buffer at start-up
-;;;
-;;; NOTE: this module no-ops unless nvim-mini/mini.starter is installed,
-;;; so it is enabled and disabled by (un)listing it in core/pack.fnl
 
 (local autocmd (require :lib.autocmd))
 
@@ -56,14 +53,13 @@
 (fn items []
   [open-items journal-items recent-files actions])
 
-(fn setup [_self]
-  (case (pcall require :mini.starter)
-    (true starter) (do
-                     (-> (autocmd.group :startup-extras :clear)
-                         (: :on :User :MiniStarterOpened make-startup-bindings))
-                     (starter.setup {: header
-                                     :items (items)
-                                     :footer (footer)
-                                     :silent true}))))
-
-{: setup}
+{:src :nvim-mini/mini.starter
+ :version (vim.version.range "*")
+ :enabled false
+ :setup (fn []
+          (-> (autocmd.group :startup-extras :clear)
+              (: :on :User :MiniStarterOpened make-startup-bindings))
+          ((. (require :mini.starter) :setup) {: header
+                                               :items (items)
+                                               :footer (footer)
+                                               :silent true}))}

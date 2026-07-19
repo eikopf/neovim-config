@@ -36,9 +36,7 @@
              :format_on_save format-on-save
              :formatters {:rustfmt {:options {:nightly true}}}})
 
-(fn setup [_self]
-  (make-user-commands)
-  (let [conform (require :conform)]
-    (conform.setup opts)))
-
-{: setup}
+{:src :stevearc/conform.nvim
+ :setup (fn []
+          (make-user-commands)
+          ((. (require :conform) :setup) opts))}
