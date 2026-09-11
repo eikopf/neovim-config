@@ -1,8 +1,7 @@
 {
   "alabaster.nvim": { "branch": "main", "commit": "b902c73fabefc13583bfc0c18b28950ea8f6244f" },
   "blink.cmp": { "branch": "main", "commit": "78336bc89ee5365633bcf754d93df01678b5c08f" },
-  "blink.compat": { "branch": "main", "commit": "2ed6d9a28b07fa6f3bface818470605f8896408c" },
-  "cmp-latex-symbols": { "branch": "main", "commit": "0f8a9539f4c1c8fcf3b5244866b07b9d07282fa2" },
+  "blink-cmp-latex": { "branch": "main", "commit": "4f2910b98dabed17a1667ab806354faa8763098e" },
   "conform.nvim": { "branch": "master", "commit": "18aeab3d63d350dcf44d64c462cc489a3412af40" },
   "conjure": { "branch": "main", "commit": "fbc9e2b85b924ba678a4e254d4d8911d0461eb91" },
   "friendly-snippets": { "branch": "main", "commit": "6cd7280adead7f586db6fccbd15d2cac7e2188b9" },

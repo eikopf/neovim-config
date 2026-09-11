@@ -6,8 +6,7 @@
 ;; completion sources
 (local dependencies
        [:rafamadriz/friendly-snippets
-        :kdheepak/cmp-latex-symbols
-        {1 :saghen/blink.compat :lazy true :opts {} :version "*"}])
+        :erooke/blink-cmp-latex])
 
 (fn enabled []
   "Determines whether `blink.cmp` should currently be enabled."
@@ -25,9 +24,10 @@
 (local keymap {:preset :default :<Tab> [:fallback] :<S-Tab> [:fallback]})
 
 ;; per-provider configurations
-(local providers {:latex_symbols {:name :latex_symbols
-                                  :module :blink.compat.source
-                                  :opts {:strategy 0}}})
+;; Native Unicode completion; the symbol table loads on the first backslash.
+(local providers {:latex_symbols {:name :Unicode
+                                  :module :blink-cmp-latex
+                                  :opts {:insert_command false}}})
 
 ;; configuration
 (local opts {: keymap
@@ -35,7 +35,8 @@
              :appearance {:nerd_font_variant :mono}
              :completion {:documentation {:auto_show true}}
              :snippets {: expand}
-             :sources {:default [:lsp :path :snippets :buffer :latex_symbols]
+             :sources {:default [:lsp :path :snippets :buffer]
+                       :per_filetype {:julia {1 :latex_symbols :inherit_defaults true}}
                        : providers}})
 
 (local opts_extend [:sources.default])
