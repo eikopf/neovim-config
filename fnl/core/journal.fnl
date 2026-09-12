@@ -9,7 +9,6 @@
   "Returns the path to the journal directory, or `nil` if it is unknown."
   (case (system.hostname-prefix)
     :pilatus "~/Documents/Journal"
-    :RIGI "~/iCloudDrive/Documents/Journal"
     _ nil))
 
 (λ todo-filename []
