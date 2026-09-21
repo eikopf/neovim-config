@@ -64,7 +64,8 @@
   (disable-nvim-treesitter-git-downloads)
   (set-windows-treesitter-compilers [:zig])
   (set-default-neovide-path vim.env.HOME)
-  (load-colorscheme-by-term :catppuccin-latte)
-  (set-colorscheme-mode-by-term :dark))
+  (load-colorscheme-by-term :alabaster)
+  (set-colorscheme-mode-by-term :light)
+  (patch-neovim-30985))
 
 {: load-jabber-parser : setup}
