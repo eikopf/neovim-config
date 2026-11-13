@@ -65,7 +65,6 @@
   (set-windows-treesitter-compilers [:zig])
   (set-default-neovide-path vim.env.HOME)
   (load-colorscheme-by-term :alabaster)
-  (set-colorscheme-mode-by-term :light)
-  (patch-neovim-30985))
+  (set-colorscheme-mode-by-term :light))
 
 {: load-jabber-parser : setup}
