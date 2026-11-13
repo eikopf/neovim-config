@@ -1,7 +1,5 @@
 ;; language server configuration
 
-;; NOTE: rust-analyzer is configured by rustaceanvim
-
 (local servers {:clangd {}
                 :ts_ls {}
                 :fennel_ls {}
@@ -11,7 +9,7 @@
                 :nixd {}
                 :ocamllsp {}
                 :pyright {}
-                :tracey {}})
+                :rust_analyzer {}})
 
 ; TODO: update julials config to use vim.lsp.config. previous config:
 ; (set servers.julials.on_new_config
