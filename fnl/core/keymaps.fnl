@@ -69,12 +69,13 @@
 
 (λ open-scratch-buffer []
   "Creates and switches to a scratch Fennel buffer."
-  (-> (buffer.create {:listed true :scratch true})
-      (: :rename! :*scratch*)
-      (: :set! :filetype :fennel)
-      (: :set! :buftype :nofile)
-      (: :set-lines! 0 -1 scratch-lines)
-      (: :open #(vim.api.nvim_win_set_cursor 0 [5 0]))))
+  (let [buf (buffer.create {:listed true :scratch true})]
+    (-> buf
+        (: :rename! (string.format "*scratch-%d*" buf.bufnr))
+        (: :set! :filetype :fennel)
+        (: :set! :buftype :nofile)
+        (: :set-lines! 0 -1 scratch-lines)
+        (: :open #(vim.api.nvim_win_set_cursor 0 [5 0])))))
 
 (fn setup [_self]
   ;; emacs-style lisp evaluation prompt
@@ -140,9 +141,12 @@
   (map :<leader>jw vim.cmd.JournalWeekly "Open weekly journal entry")
   ;; lsp keymaps -- under the <leader>l namespace
   (group :<leader>l :lsp)
-  (map :<leader>lr vim.cmd.LspRestart "Restart server")
-  (map :<leader>ll vim.cmd.LspLog "Show server logs")
-  (map :<leader>li vim.cmd.LspInfo "Show LSP info")
+  (map :<leader>lr #(if (= (vim.fn.exists ":lsp") 2)
+                      (vim.cmd.lsp :restart)
+                      (vim.cmd.LspRestart)) "Restart server")
+  (map :<leader>ll #(vim.cmd.tabnew (vim.fn.fnameescape (vim.lsp.log.get_filename)))
+       "Show server logs")
+  (map :<leader>li #(vim.cmd.checkhealth :vim.lsp) "Show LSP info")
   ;; mark/tag keymaps -- under the <leader>m namespace
   (group :<leader>m :mark)
   (map :<leader>mn grapple-next-tag "Next mark")
@@ -179,7 +183,7 @@
   (map :<leader>tm toggle-colorscheme-mode "Toggle colorscheme mode")
   (map :<leader>tt toggle-neotest-summary "Toggle test summary")
   (map :<leader>tp vim.cmd.ParinferToggle "Toggle parinfer")
-  (map :<leader>tP vim.cmd.ParinferToggle! "Toggle parinfer globally")
+  (map :<leader>tP #(vim.cmd.ParinferToggle {:bang true}) "Toggle parinfer globally")
   (map :<leader>tr #(vim.cmd.set :relativenumber!)
        "Toggle relative line numbers")
   ;; keymaps for typst actions -- under the <leader>T namespace

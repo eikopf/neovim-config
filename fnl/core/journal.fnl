@@ -20,9 +20,10 @@
   (.. (string.format "%04d" year) (string.format "%02d" month)
       (string.format "%02d" day) ext))
 
-(λ weekly-entry-filename-on [{: year &as date}]
+(λ weekly-entry-filename-on [date]
   "Returns the filename of the weekly journal entry for the given date."
-  (let [week (time.week date)]
+  (let [year (time.week-year date)
+        week (time.week date)]
     (.. (string.format "%04d" year) :W (string.format "%02d" week) ext)))
 
 (λ quarterly-entry-filename-on [{: year &as date}]

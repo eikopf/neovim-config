@@ -33,8 +33,15 @@
   "Returns a table describing the current date. See `:help os.date` for details."
   (os.date :*t))
 
+(λ week-year [date]
+  "Returns the ISO week-year, which may differ from the calendar year near New Year."
+  (let [w (week date)]
+    (if (and (= date.month 1) (>= w 52)) (- date.year 1)
+        (and (= date.month 12) (= w 1)) (+ date.year 1)
+        date.year)))
+
 (λ now-utc []
   "Returns a table describing the current UTC date. See `:help os.date` for details."
   (os.date :!*t))
 
-{: round-month-to-quarter : weeks-in-year : quarter : week : now : now-utc}
+{: round-month-to-quarter : weeks-in-year : quarter : week : week-year : now : now-utc}

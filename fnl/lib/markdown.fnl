@@ -99,20 +99,26 @@
             (for [i first last]
               (table.insert archived (. lines i))))
           (case (io.open path :a)
-            file (do
-                   (file:write (.. (table.concat (archive-entry (os.date "%Y-%m-%d")
-                                                                source-name
-                                                                archived)
-                                                 "\n")
-                                   "\n"))
-                   (file:close)
-                   ;; remove ranges in reverse to keep earlier indices valid
-                   (for [i (length ranges) 1 -1]
-                     (let [{: first : last} (. ranges i)]
-                       (buf:set-lines! (- first 1) last [])))
-                   (vim.notify (string.format "archived %d item(s) to %s"
-                                              (length ranges) path)
-                               vim.log.levels.INFO))
+            file (let [(written write-error)
+                       (file:write (.. (table.concat (archive-entry (os.date "%Y-%m-%d")
+                                                                    source-name
+                                                                    archived)
+                                                     "\n")
+                                       "\n"))
+                       ;; Closing can fail while flushing buffered writes.
+                       (closed close-error) (file:close)]
+                   (if (and written closed)
+                       (do
+                         ;; remove ranges in reverse to keep earlier indices valid
+                         (for [i (length ranges) 1 -1]
+                           (let [{: first : last} (. ranges i)]
+                             (buf:set-lines! (- first 1) last [])))
+                         (vim.notify (string.format "archived %d item(s) to %s"
+                                                    (length ranges) path)
+                                     vim.log.levels.INFO))
+                       (vim.notify (.. "could not write archive file: " path ": "
+                                       (or write-error close-error "unknown error"))
+                                   vim.log.levels.ERROR)))
             _ (vim.notify (.. "could not open archive file: " path)
                           vim.log.levels.ERROR))))))
 
