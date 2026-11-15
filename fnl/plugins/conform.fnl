@@ -8,7 +8,7 @@
                    :lua [:stylua]
                    :nix [:nixfmt]
                    :ocaml [:ocamlformat]
-                   :python [:ruff]
+                   :python [:ruff_fix :ruff_format]
                    :rust [:rustfmt]
                    :typst [:typstyle]})
 

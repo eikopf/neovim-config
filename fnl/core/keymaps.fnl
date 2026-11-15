@@ -1,6 +1,6 @@
 ;; KEYMAPS
 
-(local {: group : map : map* : slot} (require :lib.keymap))
+(local {: group : map : slot} (require :lib.keymap))
 (local buffer (require :lib.buffer))
 (local md (require :lib.markdown))
 
@@ -26,21 +26,11 @@
   (vim.cmd.edit ".")
   (vim.notify (.. "set cwd to " (vim.fn.expand dir)) vim.log.levels.INFO))
 
-(λ toggle-neotest-summary []
-  "Toggles the `neotest` summary buffer."
-  (let [nt (require :neotest)]
-    (nt.summary.toggle)))
-
 (λ toggle-colorscheme-mode []
   "Toggles the value of `background` between `:light` and `:dark`."
   (set vim.opt.bg (case vim.opt.bg._value
                     :light :dark
                     :dark :light)))
-
-(λ toggle-typst-preview-follow-cursor []
-  "Toggles the value of `(typst-preview.get_follow_cursor)`."
-  (let [typst (require :typst-preview)]
-    (typst.set_follow_cursor (not (typst.get_follow_cursor)))))
 
 (λ toggle-completion []
   "Toggles the active completion engine."
@@ -88,18 +78,6 @@
   ;; extra movement bindings under ] and [
   (map "]h" #(vim.cmd.Gitsigns :next_hunk) "Next hunk")
   (map "[h" #(vim.cmd.Gitsigns :prev_hunk) "Next hunk")
-  ;; LLM keymaps -- under the <leader>a namespace
-  (group :<leader>a :ai)
-  (map :<leader>aa vim.cmd.ClaudeCodeDiffAccept "Accept diff")
-  (map :<leader>ab #(vim.cmd.ClaudeCodeAdd "%") "Add buffer to Claude")
-  (map :<leader>ac #(vim.cmd.ClaudeCode :--continue) "Continue Claude")
-  (map :<leader>ad vim.cmd.ClaudeCodeDiffDeny "Deny diff")
-  (map :<leader>af vim.cmd.ClaudeCodeFocus "Focus Claude")
-  (map :<leader>am vim.cmd.ClaudeCodeSelectModel "Select Claude model")
-  (map :<leader>ar #(vim.cmd.ClaudeCode :--resume) "Resume Claude")
-  (map :<leader>at vim.cmd.ClaudeCode "Toggle Claude")
-  (map* :v :<leader>as vim.cmd.ClaudeCodeSend
-        {:desc "Send selection to Claude"})
   ;; general code keymaps -- under the <leader>c namespace
   (group :<leader>c :code)
   (map :<leader>cd #(vim.cmd.Trouble :diagnostics) "Show local diagnostics")
@@ -155,7 +133,6 @@
   (map :<leader>mt #(vim.cmd.Grapple :toggle) "Toggle mark")
   ;; keymaps for opening operations -- under the <leader>o namespace
   (group :<leader>o :open)
-  (map :<leader>oa vim.cmd.ClaudeCode "Open Claude Code")
   (map :<leader>oc #(goto-dir-and-edit (vim.fn.stdpath :config)) "Open config")
   (map :<leader>oj #(vim.cmd :JournalOpen) "Open journal")
   (map :<leader>ol #(vim.cmd :Lazy) "Open lazy")
@@ -181,17 +158,10 @@
   (map :<leader>tf vim.cmd.FormatToggle "Toggle global format-on-save")
   (map :<leader>tl #(vim.cmd.set :number!) "Toggle line numbers")
   (map :<leader>tm toggle-colorscheme-mode "Toggle colorscheme mode")
-  (map :<leader>tt toggle-neotest-summary "Toggle test summary")
   (map :<leader>tp vim.cmd.ParinferToggle "Toggle parinfer")
   (map :<leader>tP #(vim.cmd.ParinferToggle {:bang true}) "Toggle parinfer globally")
   (map :<leader>tr #(vim.cmd.set :relativenumber!)
        "Toggle relative line numbers")
-  ;; keymaps for typst actions -- under the <leader>T namespace
-  (group :<leader>T :typst)
-  (map :<leader>Tc toggle-typst-preview-follow-cursor "Toggle cursor following")
-  (map :<leader>Tp vim.cmd.TypstPreviewToggle "Toggle document preview")
-  (map :<leader>Ts vim.cmd.TypstPreviewSyncCursor
-       "Sync preview with cursor position")
   ;; keymaps for window operations -- under the <leader>w namespace
   (group :<leader>w :window)
   (map :<leader>wh #(vim.cmd.wincmd :h) "Go left")
@@ -222,5 +192,4 @@
  : prompt-fennel-eval
  : scratch-lines
  : setup
- : toggle-colorscheme-mode
- : toggle-neotest-summary}
+ : toggle-colorscheme-mode}

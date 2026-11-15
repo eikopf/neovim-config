@@ -4,7 +4,6 @@
 
 (fn setup [_self]
   (extension! :ebnf :ebnf)
-  (extension! :jabber :jbr)
   (extension! :lalrpop :lalrpop)
   (extension! :gitignore :tokeignore)
   (extension! :pollen :pm)

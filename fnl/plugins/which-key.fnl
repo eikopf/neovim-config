@@ -4,7 +4,5 @@
  :lazy false
  ;; for keymaps to work, which-key needs to load as early as possible
  :priority 1000
- :init (fn []
-         (set vim.o.timeout true)
-         (set vim.o.timeoutlen 300))
+ :init (fn [] (set vim.o.timeout true))
  :opts {:win {:border :none} :icons {:mappings false}}}
